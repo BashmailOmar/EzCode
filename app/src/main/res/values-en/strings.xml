@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EzCode</string>
+    <string name="regiater_btn">Register</string>
+    <string name="login_btn">Login</string>
+    <string name="languageBtn">العربية</string>
+    <string name="top_ten">TOP 10</string>
+    <string name="python">PYTHON</string>
+    <string name="all">ALL</string>
+    <string name="js">JS</string>
+    <string name="java">JAVA</string>
+    <string name="points">Points</string>
+    <string name="username">Username</string>
+    <string name="place">Place</string>
+    <string name="enter_full_name">Omar Mohammed</string>
+    <string name="full_name">Full name:</string>
+    <string name="email">Email:</string>
+    <string name="enter_username">OmarBash</string>
+    <string name="enter_emai">omarbash@example.com</string>
+    <string name="age">Age:</string>
+    <string name="enter_age">22</string>
+    <string name="edu_lvl">Education level:</string>
+    <string name="select_lvl">Select level</string>
+    <string-array name="edu_list">
+        <item>Less than secondary</item>
+        <item>Secondary</item>
+        <item>Intermediate diploma</item>
+        <item>Bachelor and Above</item>
+    </string-array>
+
+    <string-array name="country_list">
+        <item>Saudi Arabia</item>
+        <item>Yemen</item>
+        <item>Tunisia</item>
+        <item>Egypt</item>
+        <item>Sudan</item>
+        <item>Somalia</item>
+        <item>Algeria</item>
+        <item>Morocco</item>
+        <item>Iraq</item>
+        <item>Syria</item>
+        <item>Libya</item>
+        <item>Jordan</item>
+        <item>Emirates</item>
+        <item>Lebanon</item>
+        <item>Mauritania</item>
+        <item>Kuwait</item>
+        <item>Oman</item>
+        <item>Qatar</item>
+        <item>Jubbuti</item>
+        <item>Bahrain</item>
+        <item>Union of Comoros</item>
+        <item>Palestine</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="gender_list">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string name="select_country">Country:</string>
+    <string name="select_gender">Gender:</string>
+    <string name="password">Password:</string>
+    <string name="re_password">Re-password:</string>
+    <string name="password_example">Aa123#</string>
+    <string name="have_account">Already have an account?</string>
+    <string name="terms_and_conditions">When you create an account, you accept the Terms and Conditions.</string>
+</resources>

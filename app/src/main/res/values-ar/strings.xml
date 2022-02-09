@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EzCode</string>
+    <string name="regiater_btn">تسجيل</string>
+    <string name="login_btn">تسجيل الدخول</string>
+    <string name="languageBtn">ENGLISH</string>
+    <string name="top_ten">أفضل 10</string>
+    <string name="java">جافا</string>
+    <string name="js">جافا سكربت</string>
+    <string name="all">الكل</string>
+    <string name="python">بايثون</string>
+    <string name="points">النقاط</string>
+    <string name="username">إسم المستخدم</string>
+    <string name="place">المركز</string>
+    <string name="enter_full_name">عمر محمد</string>
+    <string name="full_name">الاسم الكامل:</string>
+    <string name="email">البريد الإلكتروني:</string>
+    <string name="enter_username">OmarBash</string>
+    <string name="enter_emai">omarbash@example.com</string>
+    <string name="age">العمر:</string>
+    <string name="enter_age">22</string>
+    <string name="edu_lvl">المستوى التعليمي:</string>
+    <string name="select_lvl">اختر المستوى</string>
+    <string-array name="edu_list">
+        <item>اقل من الثانوي</item>
+        <item>ثانوي</item>
+        <item>دبلوم متوسط</item>
+        <item>بكالوريوس فأعلى</item>
+    </string-array>
+
+    <string-array name="country_list">
+        <item>المملكة العربية السعودية</item>
+        <item>اليمن</item>
+        <item>تونس</item>
+        <item>مصر</item>
+        <item>السودان</item>
+        <item>الصومال</item>
+        <item>الجزائر</item>
+        <item>المغرب</item>
+        <item>العراق</item>
+        <item>سوريا</item>
+        <item>ليبيا</item>
+        <item>الاردن</item>
+        <item>الامارات</item>
+        <item>لبنان</item>
+        <item>موريتانيا</item>
+        <item>الكويت</item>
+        <item>عمان</item>
+        <item>قطر</item>
+        <item>جيبوتي</item>
+        <item>البحرين</item>
+        <item>جزر القمر</item>
+        <item>فلسطين</item>
+        <item>اخرى</item>
+    </string-array>
+
+    <string-array name="gender_list">
+        <item>ذكر</item>
+        <item>انثى</item>
+    </string-array>
+    <string name="select_country">الدولة:</string>
+    <string name="select_gender">الجنس:</string>
+    <string name="password">كلمة المرور:</string>
+    <string name="re_password">إعادة كلمة المرور:</string>
+    <string name="password_example">Aa123#</string>
+    <string name="have_account">هل لديك حساب بالفعل؟</string>
+    <string name="terms_and_conditions">عندما تنشئ حسابًا ، فإنك تقبل الشروط والأحكام.</string>
+</resources>
