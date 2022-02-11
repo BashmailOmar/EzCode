@@ -47,7 +47,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/pick_avatar" />
+                    app:srcCompat="@drawable/def_avatar" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
@@ -70,6 +70,7 @@
                     android:autofillHints=""
                     android:background="@drawable/empty_field"
                     android:ems="10"
+                    android:gravity="center_vertical"
                     android:hint="@string/enter_full_name"
                     android:inputType="textPersonName"
                     android:paddingLeft="10dp"
@@ -89,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
                     android:paddingBottom="5dp"
-                    android:text="@string/username"
+                    android:text="@string/username_"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />
 
@@ -99,6 +100,7 @@
                     android:autofillHints=""
                     android:background="@drawable/empty_field"
                     android:ems="10"
+                    android:gravity="center_vertical"
                     android:hint="@string/enter_username"
                     android:inputType="textPersonName"
                     android:paddingLeft="10dp"
@@ -128,6 +130,7 @@
                     android:autofillHints=""
                     android:background="@drawable/empty_field"
                     android:ems="10"
+                    android:gravity="center_vertical"
                     android:hint="@string/enter_emai"
                     android:inputType="textEmailAddress"
                     android:paddingLeft="10dp"
@@ -157,6 +160,7 @@
                     android:autofillHints=""
                     android:background="@drawable/empty_field"
                     android:ems="10"
+                    android:gravity="center_vertical"
                     android:hint="@string/enter_age"
                     android:inputType="numberDecimal"
                     android:paddingLeft="10dp"
@@ -190,6 +194,7 @@
                         android:id="@+id/eduSpinner"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
+                        android:gravity="center_vertical"
                         android:textColor="@color/Background"
                         android:textSize="16sp"
                         tools:ignore="SpeakableTextPresentCheck" />
@@ -219,6 +224,7 @@
                         android:id="@+id/genderSpinner"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
+                        android:gravity="center_vertical"
                         android:textColor="@color/Background"
                         android:textSize="16sp"
                         tools:ignore="SpeakableTextPresentCheck" />
@@ -248,6 +254,7 @@
                         android:id="@+id/countrySpinner"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
+                        android:gravity="center_vertical"
                         android:textColor="@color/Background"
                         android:textSize="16sp"
                         tools:ignore="SpeakableTextPresentCheck" />
@@ -274,8 +281,9 @@
                     android:autofillHints=""
                     android:background="@drawable/empty_field"
                     android:ems="10"
+                    android:gravity="center_vertical"
                     android:hint="@string/password_example"
-                    android:inputType="textPassword"
+                    android:inputType="textVisiblePassword"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:textColor="#CC08203E"
@@ -304,13 +312,14 @@
                     android:autofillHints=""
                     android:background="@drawable/empty_field"
                     android:ems="10"
+                    android:gravity="center_vertical"
                     android:hint="@string/password_example"
+                    android:inputType="textVisiblePassword"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:textColor="#CC08203E"
                     android:textColorHint="#CC08203E"
-                    android:textSize="16sp"
-                    android:inputType="textPassword"/>
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout

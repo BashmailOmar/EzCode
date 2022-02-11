@@ -12,13 +12,13 @@
     <string name="points">النقاط</string>
     <string name="username">إسم المستخدم</string>
     <string name="place">المركز</string>
-    <string name="enter_full_name">عمر محمد</string>
+    <string name="enter_full_name">مثال: عمر محمد</string>
     <string name="full_name">الاسم الكامل:</string>
     <string name="email">البريد الإلكتروني:</string>
-    <string name="enter_username">OmarBash</string>
-    <string name="enter_emai">omarbash@example.com</string>
+    <string name="enter_username">مثال: OmarBash</string>
+    <string name="enter_emai">مثال: omarbash@example.com</string>
     <string name="age">العمر:</string>
-    <string name="enter_age">22</string>
+    <string name="enter_age">مثال: 22</string>
     <string name="edu_lvl">المستوى التعليمي:</string>
     <string name="select_lvl">اختر المستوى</string>
     <string-array name="edu_list">
@@ -62,7 +62,8 @@
     <string name="select_gender">الجنس:</string>
     <string name="password">كلمة المرور:</string>
     <string name="re_password">إعادة كلمة المرور:</string>
-    <string name="password_example">Aa123#</string>
     <string name="have_account">هل لديك حساب بالفعل؟</string>
     <string name="terms_and_conditions">عندما تنشئ حسابًا ، فإنك تقبل الشروط والأحكام.</string>
+    <string name="username_">إسم المستخدم:</string>
+    <string name="password_example">مثال: Aa123</string>
 </resources>

@@ -2,18 +2,25 @@ package com.arabcoderz.ezcode;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 public class RegisterActivity extends AppCompatActivity {
     Spinner eduSpinner, countrySpinner, genderSpinner;
-    EditText fullName,username,email,age,password,rePassword;
+    EditText fullName, username, email, age, password, rePassword;
     ArrayAdapter<CharSequence> eduAdapter;
     ArrayAdapter<CharSequence> countryAdapter;
     ArrayAdapter<CharSequence> genderAdapter;
@@ -25,7 +32,8 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         //onBackPressed();
         findViewById(R.id.backBtnRegister).setOnClickListener(view -> startActivity(new Intent(RegisterActivity.this, MainActivity.class)));
-        //هذي اشياء القائمة المنسدلة للمستوى التعليمي
+
+        //هذي اكواد القائمة المنسدلة
         eduSpinner = (Spinner) findViewById(R.id.eduSpinner);
         countrySpinner = (Spinner) findViewById(R.id.countrySpinner);
         genderSpinner = (Spinner) findViewById(R.id.genderSpinner);
@@ -80,5 +88,6 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
-    }
+    }//end onCreate
+
 }

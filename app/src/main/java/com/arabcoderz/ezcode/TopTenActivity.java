@@ -12,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -22,6 +23,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class TopTenActivity extends AppCompatActivity {
@@ -56,7 +58,7 @@ public class TopTenActivity extends AppCompatActivity {
                                 String username = resp.getString("user_username");
                                 String point = resp.getString("points");
                                 String img = resp.getString("user_img");
-                                listUsers.add(new ListPlaces(place, username, point,img));
+                                listUsers.add(new ListPlaces(place, username, point, img));
                                 TopTenActivity.this.listAllItem();
 
                             }
@@ -74,22 +76,34 @@ public class TopTenActivity extends AppCompatActivity {
         findViewById(R.id.javaBtnInTopBar).setOnClickListener(view -> {
             languageType = "javaplaces";
             url = "http://192.168.1.13/EzAppPHP/javaplaces.php";
-            recreate();
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(getIntent());
+            overridePendingTransition(0, 0);
         });//عند الضغط على كلمة جافا نغير الرابط ونوع اللغه البرمجية ومن ثم نحدث الصفحه وتطلع معانا القائمة الجديده
         findViewById(R.id.pythonBtnInTopBar).setOnClickListener(view -> {
             languageType = "pythonplaces";
             url = "http://192.168.1.13/EzAppPHP/pythonplaces.php";
-            recreate();
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(getIntent());
+            overridePendingTransition(0, 0);
         });//عند الضغط على كلمة بايثون نغير الرابط ونوع اللغه البرمجية ومن ثم نحدث الصفحه وتطلع معانا القائمه الجديده
         findViewById(R.id.jsBtnInTopBar).setOnClickListener(view -> {
             languageType = "jsplaces";
             url = "http://192.168.1.13/EzAppPHP/jsplaces.php";
-            recreate();
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(getIntent());
+            overridePendingTransition(0, 0);
         });//عند الضغط على كلمة جافاسكريبت نغير الرابط ونوع اللغه البرمجية ومن ثم نحدث الصفحه وتطلع معانا القائمة الجديده
         findViewById(R.id.allBtnInTopBar).setOnClickListener(view -> {
             languageType = "allplaces";
             url = "http://192.168.1.13/EzAppPHP/allplaces.php";
-            recreate();
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(getIntent());
+            overridePendingTransition(0, 0);
         });//عند الضغط على كلمة الكل نغير الرابط ونوع اللغه البرمجية ومن ثم نحدث الصفحه وتطلع معانا القائمه الجديده
 
         requestQueue.add(jsonObjectRequest);
@@ -134,7 +148,7 @@ public class TopTenActivity extends AppCompatActivity {
             place.setText(listA.get(position).place);
             username.setText(listA.get(position).username);
             point.setText(listA.get(position).point);
-            Picasso.get().load("http://192.168.1.13/EzAppPHP/img/"+listA.get(position).img+".png").into(img);
+            Picasso.get().load("http://192.168.1.13/EzAppPHP/img/" + listA.get(position).img + ".png").into(img);
             return view;
         }
     }
