@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.arabcoderz.ezcode">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EzCode"
         android:usesCleartextTraffic="true">
-        /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ذا كان مسبب مشكلة عدم جلب البيانات من قاعدة البيانات لي اللست فيو */
         <activity
             android:name=".TopTenActivity"
             android:exported="false" />

@@ -140,7 +140,21 @@ public class TopTenActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater layoutInflater = getLayoutInflater();
-            View view = layoutInflater.inflate(R.layout.row_users_places, null);
+            View view;
+            switch (position){
+                case 0:
+                    view = layoutInflater.inflate(R.layout.row_first_place, null);
+                    break;
+                case 1:
+                    view = layoutInflater.inflate(R.layout.row_second_place, null);
+                    break;
+                case 2:
+                    view = layoutInflater.inflate(R.layout.row_third_place, null);
+                    break;
+                default:
+                    view = layoutInflater.inflate(R.layout.row_users_places, null);
+            }
+
             TextView place = (TextView) view.findViewById(R.id.placeInRowPlaces);
             TextView username = (TextView) view.findViewById(R.id.usernameInRowPlaces);
             TextView point = (TextView) view.findViewById(R.id.pointsInRowPlaces);
@@ -149,6 +163,7 @@ public class TopTenActivity extends AppCompatActivity {
             username.setText(listA.get(position).username);
             point.setText(listA.get(position).point);
             Picasso.get().load("http://192.168.1.13/EzAppPHP/img/" + listA.get(position).img + ".png").into(img);
+
             return view;
         }
     }

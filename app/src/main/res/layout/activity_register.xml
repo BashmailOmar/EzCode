@@ -25,9 +25,11 @@
             app:srcCompat="@drawable/back_btn_light" />
 
     </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -303,8 +305,7 @@
                     android:paddingBottom="5dp"
                     android:text="@string/re_password"
                     android:textColor="#FFFFFF"
-                    android:textSize="16sp"
-                    />
+                    android:textSize="16sp" />
 
                 <EditText
                     android:layout_width="match_parent"
@@ -334,29 +335,30 @@
                     android:id="@+id/registerBtnRegisterPage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/white_btn"
                     android:gravity="center"
                     android:text="@string/regiater_btn"
-                    android:textSize="16sp"
                     android:textColor="@color/dark_blue"
-                    android:layout_marginBottom="10dp"/>
+                    android:textSize="16sp" />
+
                 <TextView
                     android:id="@+id/conditions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/terms_and_conditions"
-                    android:textColor="@color/dark_blue"
                     android:layout_marginBottom="10dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:text="@string/terms_and_conditions"
+                    android:textColor="@color/dark_blue" />
 
                 <TextView
                     android:id="@+id/haveAccount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/have_account"
-                    android:textColor="@color/white"
                     android:layout_marginBottom="30dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:text="@string/have_account"
+                    android:textColor="@color/white" />
             </LinearLayout>
 
         </LinearLayout>
