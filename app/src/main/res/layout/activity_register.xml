@@ -8,7 +8,6 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".RegisterActivity">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -67,11 +66,10 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/full_user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:autofillHints=""
                     android:background="@drawable/empty_field"
-                    android:ems="10"
                     android:gravity="center_vertical"
                     android:hint="@string/enter_full_name"
                     android:inputType="textPersonName"
@@ -97,11 +95,10 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:autofillHints=""
                     android:background="@drawable/empty_field"
-                    android:ems="10"
                     android:gravity="center_vertical"
                     android:hint="@string/enter_username"
                     android:inputType="textPersonName"
@@ -129,9 +126,8 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:autofillHints=""
+                    android:id="@+id/emil"
                     android:background="@drawable/empty_field"
-                    android:ems="10"
                     android:gravity="center_vertical"
                     android:hint="@string/enter_emai"
                     android:inputType="textEmailAddress"
@@ -156,15 +152,13 @@
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/Select_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:autofillHints=""
                     android:background="@drawable/empty_field"
-                    android:ems="10"
                     android:gravity="center_vertical"
                     android:hint="@string/enter_age"
-                    android:inputType="numberDecimal"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:textColor="#CC08203E"
@@ -278,11 +272,10 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:autofillHints=""
                     android:background="@drawable/empty_field"
-                    android:ems="10"
                     android:gravity="center_vertical"
                     android:hint="@string/password_example"
                     android:inputType="textVisiblePassword"
@@ -308,11 +301,11 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/Edit_Confirm_password"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:autofillHints=""
                     android:background="@drawable/empty_field"
-                    android:ems="10"
                     android:gravity="center_vertical"
                     android:hint="@string/password_example"
                     android:inputType="textVisiblePassword"
@@ -332,7 +325,7 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/registerBtnRegisterPage"
+                    android:id="@+id/but_snad_data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -364,4 +357,5 @@
         </LinearLayout>
 
     </ScrollView>
+
 </LinearLayout>

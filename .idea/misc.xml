@@ -32,10 +32,11 @@
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/row_second_place.xml" value="0.3227848101265823" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/row_third_place.xml" value="0.3227848101265823" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/row_users_places.xml" value="0.25" />
+        <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/layout/activity_register.xml" value="0.5" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

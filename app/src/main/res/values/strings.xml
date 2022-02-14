@@ -17,7 +17,7 @@
     <string name="enter_username">ex: OmarBash</string>
     <string name="enter_emai">ex: omarbash@example.com</string>
     <string name="age">Age:</string>
-    <string name="enter_age">ex: 22</string>
+    <string name="enter_age">ex: mm/dd/yyyy</string>
     <string name="edu_lvl">Education level:</string>
     <string name="select_lvl">Select level</string>
 
