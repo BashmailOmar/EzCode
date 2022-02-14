@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="30dp">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/pick_avatar"
                     android:layout_width="88dp"
                     android:layout_height="88dp"
@@ -271,19 +271,28 @@
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />
 
-                <EditText
-                    android:id="@+id/password"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/empty_field"
-                    android:gravity="center_vertical"
-                    android:hint="@string/password_example"
-                    android:inputType="textVisiblePassword"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    app:counterEnabled="true"
                     android:textColor="#CC08203E"
                     android:textColorHint="#CC08203E"
-                    android:textSize="16sp" />
+                    app:counterMaxLength="16"
+                    app:passwordToggleEnabled="true">
+                    <EditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/empty_field"
+                        android:gravity="center_vertical"
+                        android:hint="@string/password_example"
+                        android:inputType="textVisiblePassword"
+                        android:paddingLeft="10dp"
+                        android:maxLength="16"
+                        android:paddingRight="10dp"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -300,20 +309,28 @@
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />
 
-                <EditText
-                    android:id="@+id/Edit_Confirm_password"
-
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/empty_field"
-                    android:gravity="center_vertical"
-                    android:hint="@string/password_example"
-                    android:inputType="textVisiblePassword"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    app:counterEnabled="true"
                     android:textColor="#CC08203E"
                     android:textColorHint="#CC08203E"
-                    android:textSize="16sp" />
+                    app:counterMaxLength="16"
+                    app:passwordToggleEnabled="true">
+                    <EditText
+                        android:id="@+id/Edit_Confirm_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/empty_field"
+                        android:gravity="center_vertical"
+                        android:hint="@string/password_example"
+                        android:inputType="textVisiblePassword"
+                        android:paddingLeft="10dp"
+                        android:maxLength="16"
+                        android:paddingRight="10dp"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout

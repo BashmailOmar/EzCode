@@ -38,9 +38,9 @@ import java.util.Calendar;
 
 public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private Spinner eduSpinner, countrySpinner, genderSpinner;
-    ArrayAdapter<CharSequence> eduAdapter;
-    ArrayAdapter<CharSequence> countryAdapter;
-    ArrayAdapter<CharSequence> genderAdapter;
+    private ArrayAdapter<CharSequence> eduAdapter;
+    private ArrayAdapter<CharSequence> countryAdapter;
+    private ArrayAdapter<CharSequence> genderAdapter;
 
     private int pick = 100;
     private ImageView avatar_user;
@@ -53,7 +53,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     private final int year = calendar.get(Calendar.YEAR);
     private final int month = calendar.get(Calendar.MONTH);
     private final int day = calendar.get(Calendar.DAY_OF_MONTH);
-    private DatePickerDialog.OnDateSetListener setListener;
     private SharedPreferences shared_save;
 
     @Override
@@ -140,6 +139,12 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             showError(Edit_Confirm_password,"يجب كتابة نفس الباسورد يا حمار");
         }else if (date.isEmpty()){
             Toast.makeText(this, "حط التاريخ يا جحش", Toast.LENGTH_LONG).show();
+        } else if (edu.isEmpty()){
+            Toast.makeText(this, "*", Toast.LENGTH_LONG).show();
+        }else if (country.isEmpty()){
+            Toast.makeText(this, "*", Toast.LENGTH_LONG).show();
+        }else if (gender.isEmpty()){
+            Toast.makeText(this, "*", Toast.LENGTH_LONG).show();
         }
         else
         {
@@ -219,7 +224,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
     // طريقة اختيار التاريخ
     public void select_date() {
-
         DatePickerDialog datePickerDialog = new DatePickerDialog(RegisterActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
