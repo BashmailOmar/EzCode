@@ -70,9 +70,9 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         Text_select_Date = findViewById(R.id.Select_date);
         snad_data = findViewById(R.id.but_snad_data);
 
-        eduSpinner = (Spinner) findViewById(R.id.eduSpinner);
-        countrySpinner = (Spinner) findViewById(R.id.countrySpinner);
-        genderSpinner = (Spinner) findViewById(R.id.genderSpinner);
+        eduSpinner = findViewById(R.id.eduSpinner);
+        countrySpinner = findViewById(R.id.countrySpinner);
+        genderSpinner = findViewById(R.id.genderSpinner);
 
         eduAdapter = ArrayAdapter.createFromResource(this, R.array.edu_list, android.R.layout.simple_spinner_item);
         countryAdapter = ArrayAdapter.createFromResource(this, R.array.country_list, android.R.layout.simple_spinner_item);
@@ -181,6 +181,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             Send_Data_Register dataSend = new Send_Data_Register(full_user_name,user_name,user_email,user_password,encodimg,date,edu,country,gender,responseLisener); // ارسل البيانات
             RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
             queue.add(dataSend);
+            startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
         }
     }
 
@@ -257,6 +258,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
         edu = adapterView.getItemAtPosition(i).toString();
         country = adapterView.getItemAtPosition(i).toString();
         gender = adapterView.getItemAtPosition(i).toString();
