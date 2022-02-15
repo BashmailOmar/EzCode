@@ -13,6 +13,7 @@
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/info_second_bar.xml" value="0.1975" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/info_third_bar.xml" value="0.1975" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/info_users_bar.xml" value="0.15328947368421053" />
+        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/login_page.xml" value="0.294" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/logo_des.xml" value="0.1755" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/main_background.xml" value="0.2618421052631579" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/pick_avatar.xml" value="0.208" />
@@ -22,21 +23,21 @@
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/top_ten_background.xml" value="0.2618421052631579" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/white_btn.xml" value="0.15328947368421053" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/white_small_btn.xml" value="0.2618421052631579" />
-        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_login.xml" value="0.24276315789473685" />
+        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_main2.xml" value="0.3269230769230769" />
-        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_register.xml" value="0.33" />
+        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_register.xml" value="0.25" />
+        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_terms_and_conditions.xml" value="0.249185667752443" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_top_ten.xml" value="0.25" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/edu_list.xml" value="0.25164473684210525" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/row_first_place.xml" value="0.3269230769230769" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/row_second_place.xml" value="0.3227848101265823" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/row_third_place.xml" value="0.3227848101265823" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/row_users_places.xml" value="0.25" />
-        <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/layout/activity_register.xml" value="0.43703703703703706" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

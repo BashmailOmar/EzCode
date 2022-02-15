@@ -20,15 +20,16 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     Button languagesBtn;
-//    public static String MainLink = "http://192.168.1.13/EzCodePHP/";
-//    public static String Local_UserKey, Local_FullName, Local_UserName, Local_UserEmail, Local_UserAge, Local_UserEduLvl, Local_UserGender, Local_UserCountry;
-//    private SharedPreferences shared_getData;
+    public static String MainLink = "http://192.168.1.13/EzCodePHP/";
+    public static String Local_UserKey, Local_FullName, Local_UserName, Local_UserEmail, Local_UserAge, Local_UserEduLvl, Local_UserGender, Local_UserCountry;
+    private SharedPreferences shared_getData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        shared_getData = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        shared_getData = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+
         CheckInternetConnection cic = new CheckInternetConnection(getApplicationContext());
         if (!cic.isConnectingToInternet()) {
             Toast.makeText(MainActivity.this, "Not Connected to Internet", Toast.LENGTH_SHORT).show();
@@ -73,18 +74,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        Local_UserKey = shared_getData.getString("Local_UserKey", "").trim();
-//        Local_FullName = shared_getData.getString("Local_FullName", "").trim();
-//        Local_UserName = shared_getData.getString("Local_UserName", "").trim();
-//        Local_UserEmail = shared_getData.getString("Local_UserEmail", "").trim();
-//        Local_UserAge = shared_getData.getString("Local_UserAge", "").trim();
-//        Local_UserEduLvl = shared_getData.getString("Local_UserEduLvl", "").trim();
-//        Local_UserGender = shared_getData.getString("Local_UserGender", "").trim();
-//        Local_UserCountry = shared_getData.getString("Local_UserCountry", "").trim();
-//    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Local_UserKey = shared_getData.getString("Local_UserKey", "").trim();
+        Local_FullName = shared_getData.getString("Local_FullName", "").trim();
+        Local_UserName = shared_getData.getString("Local_UserName", "").trim();
+        Local_UserEmail = shared_getData.getString("Local_UserEmail", "").trim();
+        Local_UserAge = shared_getData.getString("Local_UserAge", "").trim();
+        Local_UserEduLvl = shared_getData.getString("Local_UserEduLvl", "").trim();
+        Local_UserGender = shared_getData.getString("Local_UserGender", "").trim();
+        Local_UserCountry = shared_getData.getString("Local_UserCountry", "").trim();
+    }
 
     private void setApplicationLocale(String locale) {
         Resources resources = getResources();

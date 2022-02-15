@@ -48,7 +48,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     private TextView Text_select_Date;
     Button snad_data;
     private String encodimg;
-    private String full_user_name, user_name, user_email, user_password, Confirm_password, date,edu,country, gender;
+
+    private String full_user_name, user_name, user_email, user_password, Confirm_password, date, edu, country, gender;
     private final Calendar calendar = Calendar.getInstance();
     private final int year = calendar.get(Calendar.YEAR);
     private final int month = calendar.get(Calendar.MONTH);
@@ -78,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         countryAdapter = ArrayAdapter.createFromResource(this, R.array.country_list, android.R.layout.simple_spinner_item);
         genderAdapter = ArrayAdapter.createFromResource(this, R.array.gender_list, android.R.layout.simple_spinner_item);
 
-        eduAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        eduAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -106,7 +107,24 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 Register();
             }
         });
-
+        findViewById(R.id.backBtnRegister).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+            }
+        });
+        findViewById(R.id.haveAccount).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+            }
+        });
+        findViewById(R.id.conditions).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(RegisterActivity.this, TermsAndConditionsActivity.class));
+            }
+        });
 
 
     }//end onCreate
@@ -123,31 +141,25 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         country = countrySpinner.getSelectedItem().toString();
         gender = genderSpinner.getSelectedItem().toString();
 
-        if (full_user_name.isEmpty()){
-            showError(Edit_full_name,"يجب كتابة اسمك الكامل");
-        }
-        else if (user_name.isEmpty() ||user_name.length() < 3){
-            showError(Edit_user_Name,"يجب ان يكون اسم المستخدم اكثر من 3 أحرف");
-        }
-        else if (user_email.isEmpty() || !user_email.contains("@")){
-            showError(Edit_email,"الرجاء كتابة الايمل بالصيغه الصحيح");
-        }
-        else if (user_password.isEmpty() || user_password.length() < 8){
-            showError(Edit_password,"اكثر من 8");
-        }
-        else if (Confirm_password.isEmpty() || !Confirm_password.equals(user_password)){
-            showError(Edit_Confirm_password,"يجب كتابة نفس الباسورد يا حمار");
-        }else if (date.isEmpty()){
+        if (full_user_name.isEmpty()) {
+            showError(Edit_full_name, "يجب كتابة اسمك الكامل");
+        } else if (user_name.isEmpty() || user_name.length() < 3) {
+            showError(Edit_user_Name, "يجب ان يكون اسم المستخدم اكثر من 3 أحرف");
+        } else if (user_email.isEmpty() || !user_email.contains("@")) {
+            showError(Edit_email, "الرجاء كتابة الايمل بالصيغه الصحيح");
+        } else if (user_password.isEmpty() || user_password.length() < 8) {
+            showError(Edit_password, "اكثر من 8");
+        } else if (Confirm_password.isEmpty() || !Confirm_password.equals(user_password)) {
+            showError(Edit_Confirm_password, "يجب كتابة نفس الباسورد يا حمار");
+        } else if (date.isEmpty()) {
             Toast.makeText(this, "حط التاريخ يا جحش", Toast.LENGTH_LONG).show();
-        } else if (edu.isEmpty()){
+        } else if (edu.isEmpty()) {
             Toast.makeText(this, "*", Toast.LENGTH_LONG).show();
-        }else if (country.isEmpty()){
+        } else if (country.isEmpty()) {
             Toast.makeText(this, "*", Toast.LENGTH_LONG).show();
-        }else if (gender.isEmpty()){
+        } else if (gender.isEmpty()) {
             Toast.makeText(this, "*", Toast.LENGTH_LONG).show();
-        }
-        else
-        {
+        } else {
             Bitmap bitmap = ((BitmapDrawable) avatar_user.getDrawable()).getBitmap(); //يخذ الصوره الموجوده داخل image_View
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(); // خاص بحفظ البيانات في نظام الجافا
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream); // عمليت ضفط اقدر اتحكم في جودة الصور عن طريق تغير رقم 100 اذا قل الرقم كانت الصورة سيئة
@@ -166,22 +178,22 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
                         // Log.d("UserKey================>",UserKey);
 
-                        if (success.contains("ok")){
+                        if (success.contains("ok")) {
                             Toast.makeText(RegisterActivity.this, "تم تسجيلك بنجاح", Toast.LENGTH_LONG).show(); //اظهار النص من صفحة php
                             //SharedPreferences.Editor editor = shared_save.edit();
-                        }else {
+                        } else {
                             Toast.makeText(RegisterActivity.this, "عذرا حدث خطأ لم يتم إرسال البيانات", Toast.LENGTH_SHORT).show();
                             snad_data.setEnabled(true);
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             };
-            Send_Data_Register dataSend = new Send_Data_Register(full_user_name,user_name,user_email,user_password,encodimg,date,edu,country,gender,responseLisener); // ارسل البيانات
+            Send_Data_Register dataSend = new Send_Data_Register(full_user_name, user_name, user_email, user_password, encodimg, date, edu, country, gender, responseLisener); // ارسل البيانات
             RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
             queue.add(dataSend);
-            startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
+            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
         }
     }
 
@@ -223,19 +235,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         }
     }
 
-    // طريقة اختيار التاريخ
-    public void select_date() {
-        DatePickerDialog datePickerDialog = new DatePickerDialog(RegisterActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                date = month + "/" + day + "/" + year;
-                Text_select_Date.setText(date);
-            }
-        }, year, month, day);
-        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
-        datePickerDialog.show();
-    }
-
     // طريقة فتح مستعرض الصور
     public void photo_viewer() {
         Intent intent = new Intent();
@@ -254,6 +253,18 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         }
     }
 
+    // طريقة اختيار التاريخ
+    public void select_date() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(RegisterActivity.this, android.R.style.Theme_Holo_Light_Panel, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                date = (month + 1) + "/" + day + "/" + year;
+                Text_select_Date.setText(date);
+            }
+        }, year, month, day);
+        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
+        datePickerDialog.show();
+    }
 
 
     @Override
