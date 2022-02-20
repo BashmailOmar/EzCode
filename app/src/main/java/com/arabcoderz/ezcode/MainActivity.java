@@ -21,7 +21,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     Button languagesBtn;
     public static String MainLink = "http://192.168.1.13/EzCodePHP/";
-    public static String Local_UserKey, Local_FullName, Local_UserName, Local_UserEmail, Local_UserAge, Local_UserEduLvl, Local_UserGender, Local_UserCountry;
+    public static String Local_FullName, Local_UserName, Local_UserEmail, Local_UserAge, Local_UserEduLvl, Local_UserGender, Local_UserCountry;
     private SharedPreferences shared_getData;
 
     @Override
@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Local_UserKey = shared_getData.getString("Local_UserKey", "").trim();
         Local_FullName = shared_getData.getString("Local_FullName", "").trim();
         Local_UserName = shared_getData.getString("Local_UserName", "").trim();
         Local_UserEmail = shared_getData.getString("Local_UserEmail", "").trim();

@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -46,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     private ImageView avatar_user;
     private EditText Edit_full_name, Edit_user_Name, Edit_email, Edit_password, Edit_Confirm_password;
     private TextView Text_select_Date;
-    Button snad_data;
+    Button send_data;
     private String encodimg;
 
     private String full_user_name, user_name, user_email, user_password, Confirm_password, date, edu, country, gender;
@@ -56,10 +57,13 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     private final int day = calendar.get(Calendar.DAY_OF_MONTH);
     private SharedPreferences shared_save;
 
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        progressDialog = new ProgressDialog(this);
 
         avatar_user = findViewById(R.id.pick_avatar);
         avatar_user.setImageResource(R.drawable.def_avatar);
@@ -69,8 +73,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         Edit_password = findViewById(R.id.password);
         Edit_Confirm_password = findViewById(R.id.Edit_Confirm_password);
         Text_select_Date = findViewById(R.id.Select_date);
-        snad_data = findViewById(R.id.but_snad_data);
-
+        send_data = findViewById(R.id.but_snad_data);
         eduSpinner = findViewById(R.id.eduSpinner);
         countrySpinner = findViewById(R.id.countrySpinner);
         genderSpinner = findViewById(R.id.genderSpinner);
@@ -101,7 +104,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             }
         });
 
-        snad_data.setOnClickListener(new View.OnClickListener() {
+        send_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Register();
@@ -165,7 +168,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream); // عمليت ضفط اقدر اتحكم في جودة الصور عن طريق تغير رقم 100 اذا قل الرقم كانت الصورة سيئة
             encodimg = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT); // تحويل الصوره الى نظام Base64 و String
 
-            snad_data.setEnabled(false);
+            send_data.setEnabled(false);
 
             Response.Listener<String> responseLisener = new Response.Listener<String>() {
                 @Override
@@ -183,13 +186,16 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                             //SharedPreferences.Editor editor = shared_save.edit();
                         } else {
                             Toast.makeText(RegisterActivity.this, "عذرا حدث خطأ لم يتم إرسال البيانات", Toast.LENGTH_SHORT).show();
-                            snad_data.setEnabled(true);
+                            send_data.setEnabled(true);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             };
+            progressDialog.setMessage("انتظر ارسال البيانات");
+            progressDialog.setCancelable(true);
+            progressDialog.show();
             Send_Data_Register dataSend = new Send_Data_Register(full_user_name, user_name, user_email, user_password, encodimg, date, edu, country, gender, responseLisener); // ارسل البيانات
             RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
             queue.add(dataSend);
