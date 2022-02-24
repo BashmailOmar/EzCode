@@ -17,6 +17,24 @@
         android:theme="@style/Theme.EzCode"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".UserMoreActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserArticlesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserChallengesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserNewsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserHomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".TermsAndConditionsActivity"
             android:exported="false" />
         <activity

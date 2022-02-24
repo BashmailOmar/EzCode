@@ -19,7 +19,6 @@ public class data_check extends StringRequest {
         MapData = new HashMap<>();
         MapData.put("username", username);
         MapData.put("password", password);
-
     }
 
     @Override

@@ -30,7 +30,6 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
     private EditText etUsername, etPassword;
     private String username = "", password = "";
-    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         etUsername = findViewById(R.id.login_user_name);
         etPassword = findViewById(R.id.login_password);
-        progressDialog = new ProgressDialog(this);
 
         findViewById(R.id.backBtnLogin).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +60,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Login();
+                System.out.print("login button clicked");
             }
+
         });
     }
 
@@ -70,9 +70,8 @@ public class LoginActivity extends AppCompatActivity {
         username = etUsername.getText().toString().trim();
         password = etPassword.getText().toString().trim();
 
-        progressDialog.setMessage("انتظر ارسال البيانات");
-        progressDialog.setCancelable(true);
-        progressDialog.show();
+        //هنا نحط شروط لاسم المستخدم وكلمة المرور
+
 
         Response.Listener<String> respListener = new Response.Listener<String>() {
             @Override
@@ -80,12 +79,11 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean success = jsonResponse.getBoolean("success");
+
                     if (success) {
                         Toast.makeText(LoginActivity.this, "Login success", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
                         startActivity(intent);
-
-
                     } else {
                         Toast.makeText(LoginActivity.this, "login not success", Toast.LENGTH_SHORT).show();
                     }
@@ -100,6 +98,5 @@ public class LoginActivity extends AppCompatActivity {
         data_check data_check = new data_check(username, password, respListener);
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
         queue.add(data_check);
-        progressDialog.hide();
     }
 }

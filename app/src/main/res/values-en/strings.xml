@@ -72,4 +72,10 @@
     <string name="terms_info">A privacy policy is required to run lead generation ads on Facebook or Instagram. A privacy policy tells people what you will do with their information, and can be useful for building trust with your potential and existing customers, who are more likely to share information with you based on the information described in your policy. Therefore, it is important that the Privacy Policy is accurate and not misleading.  Some of the topics to be considered in the Privacy Policy include:  What types of information do you collect? How do you use this information? Do you share this information with any affiliates or third parties? Can customers review or delete the information you collect about them? How do you respond to legal requests? How do you notify your customers when there is a change in privacy practices? How do your customers communicate with you about any questions they have? What is the effective date of the privacy policy? Consider posting the Privacy Policy in a place where it is easy for users to find it, such as the footer of the website or the settings menu of the mobile app. You should also check your local laws to see if you should post the Privacy Policy in a particular location or in a particular way.  When you create an instant lead form, you will be prompted to add a link to the Privacy Policy in the Privacy section. The Privacy Policy cannot be linked directly to a PDF, image or direct download.  Learn more About lead generation ads About the terms and security of lead generation ads Lead Generation Ads Recommendations and Requirements</string>
     <string name="dont_have_account">No account? Create one!</string>
     <string name="forget_password">Forget password?</string>
+    <string name="home">Home</string>
+    <string name="news">News</string>
+    <string name="challenges">Challenges</string>
+    <string name="articles">Articles</string>
+    <string name="more">More</string>
+    <string name="welcome">"Welcome, "</string>
 </resources>

@@ -9,4 +9,8 @@
     <color name="Background">#DEDEDE</color>
     <color name="purple_700">#08203E</color>
     <color name="purple_200">#08203E</color>
+    <color name="background_des">#5A6F8E</color>
+    <color name="icony_des">#2FEAA8</color>
+
+
 </resources>
