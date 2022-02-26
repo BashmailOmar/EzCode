@@ -78,4 +78,6 @@
     <string name="articles">Articles</string>
     <string name="more">More</string>
     <string name="welcome">"Welcome, "</string>
+    <string name="hello">Hello,</string>
+    <string name="home_points">Points:</string>
 </resources>

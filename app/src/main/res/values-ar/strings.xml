@@ -78,4 +78,6 @@
     <string name="articles">المقالات</string>
     <string name="more">المزيد</string>
     <string name="welcome">"مرحبا, "</string>
+    <string name="hello">مرحبا,</string>
+    <string name="home_points">النقاط:</string>
 </resources>
