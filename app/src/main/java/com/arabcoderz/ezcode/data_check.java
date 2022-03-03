@@ -9,7 +9,7 @@ import java.util.Map;
 public class data_check extends StringRequest {
 
 
-    private static final String url = "http://192.168.1.13/EzAppPHP/data_check.php";
+    private static final String url = "http://192.168.8.100/myProjectAndroind/Login.php";
     private Map<String, String> MapData; //
 
 

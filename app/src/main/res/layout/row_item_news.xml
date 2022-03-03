@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_View_news"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="5dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_news"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/block_news"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/title_news"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:background="@drawable/title_news"
+            />
+    </LinearLayout>
+
+  <androidx.appcompat.widget.LinearLayoutCompat
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="312dp"
+      android:layout_marginTop="170dp">
+      <TextView
+          android:id="@+id/date_news"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textAlignment="viewEnd"
+          android:textColor="@color/white" />
+  </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.cardview.widget.CardView>
