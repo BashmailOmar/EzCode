@@ -40,7 +40,7 @@ public class TopTenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_ten);
         if (url == null) {
-            url = "http://192.168.1.13/EzAppPHP/allplaces.php";
+            url = MainActivity.MainLink + "allplaces.php";
             languageType = "allplaces";
         }//نتحقق من الرابط ان لم تكن لديه قيمه ف نعطيه القيمه الظاهره امامك لجلب مراكز المستخدمين
         //نتحقق من نوع اللغه ان لم تكن لديها قيمه ف نعطيها القيمه الظاهره امامك لجلب مراكز المستخدمين
@@ -75,7 +75,7 @@ public class TopTenActivity extends AppCompatActivity {
         });
         findViewById(R.id.javaBtnInTopBar).setOnClickListener(view -> {
             languageType = "javaplaces";
-            url = "http://192.168.1.13/EzAppPHP/javaplaces.php";
+            url = MainActivity.MainLink + "javaplaces.php";
             finish();
             overridePendingTransition(0, 0);
             startActivity(getIntent());
@@ -83,7 +83,7 @@ public class TopTenActivity extends AppCompatActivity {
         });//عند الضغط على كلمة جافا نغير الرابط ونوع اللغه البرمجية ومن ثم نحدث الصفحه وتطلع معانا القائمة الجديده
         findViewById(R.id.pythonBtnInTopBar).setOnClickListener(view -> {
             languageType = "pythonplaces";
-            url = "http://192.168.1.13/EzAppPHP/pythonplaces.php";
+            url = MainActivity.MainLink + "pythonplaces.php";
             finish();
             overridePendingTransition(0, 0);
             startActivity(getIntent());
@@ -91,7 +91,7 @@ public class TopTenActivity extends AppCompatActivity {
         });//عند الضغط على كلمة بايثون نغير الرابط ونوع اللغه البرمجية ومن ثم نحدث الصفحه وتطلع معانا القائمه الجديده
         findViewById(R.id.jsBtnInTopBar).setOnClickListener(view -> {
             languageType = "jsplaces";
-            url = "http://192.168.1.13/EzAppPHP/jsplaces.php";
+            url = MainActivity.MainLink + "jsplaces.php";
             finish();
             overridePendingTransition(0, 0);
             startActivity(getIntent());
@@ -99,7 +99,7 @@ public class TopTenActivity extends AppCompatActivity {
         });//عند الضغط على كلمة جافاسكريبت نغير الرابط ونوع اللغه البرمجية ومن ثم نحدث الصفحه وتطلع معانا القائمة الجديده
         findViewById(R.id.allBtnInTopBar).setOnClickListener(view -> {
             languageType = "allplaces";
-            url = "http://192.168.1.13/EzAppPHP/allplaces.php";
+            url = MainActivity.MainLink + "allplaces.php";
             finish();
             overridePendingTransition(0, 0);
             startActivity(getIntent());
@@ -162,7 +162,7 @@ public class TopTenActivity extends AppCompatActivity {
             place.setText(listA.get(position).place);
             username.setText(listA.get(position).username);
             point.setText(listA.get(position).point);
-            Picasso.get().load("http://192.168.1.13/EzAppPHP/img/" + listA.get(position).img + ".png").into(img);
+            Picasso.get().load(MainActivity.MainLink + "img/" + listA.get(position).img + ".png").into(img);
 
             return view;
         }

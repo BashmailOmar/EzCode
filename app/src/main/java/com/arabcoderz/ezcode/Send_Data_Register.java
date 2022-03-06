@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class Send_Data_Register extends StringRequest {
 
-    private  static final String url = "http://192.168.8.100/myProjectAndroind/try9.php";
+    private  static final String url = MainActivity.MainLink + "try9.php";
     private Map<String, String> MapData; // متغير لإرسال البيانات
 
     public Send_Data_Register(String full_user_name, String user_name,String email,
