@@ -16,8 +16,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/backgrund_articles_add">
 
+            <ImageView
+                android:id="@+id/But-add-articles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="354dp"
+                android:background="@drawable/ic_add_articles" />
         </LinearLayout>
 
     </ScrollView>

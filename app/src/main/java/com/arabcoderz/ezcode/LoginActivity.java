@@ -31,12 +31,20 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etUsername, etPassword;
     private String username = "", password = "";
 
+    private SharedPreferences shared_getData;
+    private SharedPreferences.Editor editor;
+    private static  String KEY_PREF_NAME = "userKEY";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         etUsername = findViewById(R.id.login_user_name);
         etPassword = findViewById(R.id.login_password);
+
+        AutoLogin();
 
         findViewById(R.id.backBtnLogin).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
+
         findViewById(R.id.login_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,14 +73,28 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
+    }//onCreate
+
+
+    private void AutoLogin(){
+            shared_getData = getSharedPreferences(KEY_PREF_NAME,Context.MODE_PRIVATE);
+            etUsername.setText(shared_getData.getString("enterUser",""));
+            etPassword.setText(shared_getData.getString("enterPassword",""));
+            Login();
     }
 
+
+
     void Login() {
+        SharedPreferences sharedPreferences = getSharedPreferences(KEY_PREF_NAME,MODE_PRIVATE);
         username = etUsername.getText().toString().trim();
         password = etPassword.getText().toString().trim();
 
-        //هنا نحط شروط لاسم المستخدم وكلمة المرور
-
+        shared_getData = getSharedPreferences(KEY_PREF_NAME,Context.MODE_PRIVATE);
+        editor= shared_getData.edit();
+        editor.putString("enterUser",username);
+        editor.putString("enterPassword",password);
+        editor.apply();
 
         Response.Listener<String> respListener = new Response.Listener<String>() {
             @Override
@@ -81,20 +104,18 @@ public class LoginActivity extends AppCompatActivity {
                     boolean success = jsonResponse.getBoolean("success");
 
                     if (success) {
-                        Toast.makeText(LoginActivity.this, "Login success", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "login success", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
                         startActivity(intent);
                     } else {
                         Toast.makeText(LoginActivity.this, "login not success", Toast.LENGTH_SHORT).show();
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
 
         };
-
         data_check data_check = new data_check(username, password, respListener);
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
         queue.add(data_check);

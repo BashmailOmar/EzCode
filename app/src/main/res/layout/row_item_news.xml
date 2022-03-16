@@ -26,11 +26,10 @@
             android:id="@+id/title_news"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:textColor="#ffffff"
-            android:gravity="center"
-            android:textSize="20sp"
             android:background="@drawable/title_news"
-            />
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
     </LinearLayout>
 
   <androidx.appcompat.widget.LinearLayoutCompat

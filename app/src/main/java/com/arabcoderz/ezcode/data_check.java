@@ -9,7 +9,7 @@ import java.util.Map;
 public class data_check extends StringRequest {
 
 
-    private static final String url = MainActivity.MainLink + "Login.php";
+    private static final String url = MainActivity.MainLink + "login.php";
     private Map<String, String> MapData; //
 
 

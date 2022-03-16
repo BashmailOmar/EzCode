@@ -9,11 +9,11 @@ import java.util.Map;
 
 public class Send_Data_Register extends StringRequest {
 
-    private  static final String url = MainActivity.MainLink + "try9.php";
+    private  static final String url = MainActivity.MainLink + "register.php";
     private Map<String, String> MapData; // متغير لإرسال البيانات
 
     public Send_Data_Register(String full_user_name, String user_name,String email,
-                              String password,String ImgCode,String date,String edu,String country,String gender,
+                              String password,String ImgCode,String edu,String country,String gender,String date,
                               Response.Listener<String> listener){
         super(Request.Method.POST,url,listener,null);
         MapData = new HashMap<>();
@@ -22,10 +22,10 @@ public class Send_Data_Register extends StringRequest {
         MapData.put("email",email);
         MapData.put("password",password);
         MapData.put("ImgCode",ImgCode);
-        MapData.put("date",date);
         MapData.put("edu",edu);
         MapData.put("country",country);
         MapData.put("gender",gender);
+        MapData.put("date",date);
     }
     @Override
     public Map<String, String> getParams() {

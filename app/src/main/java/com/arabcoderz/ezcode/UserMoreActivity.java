@@ -4,17 +4,29 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class UserMoreActivity extends AppCompatActivity {
 
+    private SharedPreferences shared_getData;
+    private SharedPreferences.Editor editor;
+    private static  String KEY_PREF_NAME = "userKEY";
+
+    private Button But_Logout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_more);
+
+        But_Logout = findViewById(R.id.But_LogOut);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationBar);
         bottomNavigationView.setSelectedItemId(R.id.more);
@@ -44,8 +56,17 @@ public class UserMoreActivity extends AppCompatActivity {
                 return false;
             }
         });
+        But_Logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editor = shared_getData.edit();
+                editor.clear();
+                editor.commit();
+                finish();
+                Toast.makeText(UserMoreActivity.this, "logout successfully", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
-
 
 
 }

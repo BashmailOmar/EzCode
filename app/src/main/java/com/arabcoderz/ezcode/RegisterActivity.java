@@ -8,6 +8,7 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -55,7 +56,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     private final int year = calendar.get(Calendar.YEAR);
     private final int month = calendar.get(Calendar.MONTH);
     private final int day = calendar.get(Calendar.DAY_OF_MONTH);
-    private SharedPreferences shared_save;
 
     private ProgressDialog progressDialog;
 
@@ -145,17 +145,17 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         gender = genderSpinner.getSelectedItem().toString();
 
         if (full_user_name.isEmpty()) {
-            showError(Edit_full_name, "يجب كتابة اسمك الكامل");
+            showError(Edit_full_name, "write your full name");
         } else if (user_name.isEmpty() || user_name.length() < 3) {
-            showError(Edit_user_Name, "يجب ان يكون اسم المستخدم اكثر من 3 أحرف");
+            showError(Edit_user_Name, "Username more 3 characters");
         } else if (user_email.isEmpty() || !user_email.contains("@")) {
-            showError(Edit_email, "الرجاء كتابة الايمل بالصيغه الصحيح");
+            showError(Edit_email, " write the email format");
         } else if (user_password.isEmpty() || user_password.length() < 8) {
-            showError(Edit_password, "اكثر من 8");
+            showError(Edit_password, "more than 8");
         } else if (Confirm_password.isEmpty() || !Confirm_password.equals(user_password)) {
-            showError(Edit_Confirm_password, "يجب كتابة نفس الباسورد يا حمار");
+            showError(Edit_Confirm_password, "The same password must be entered");
         } else if (date.isEmpty()) {
-            Toast.makeText(this, "حط التاريخ يا جحش", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "put the date", Toast.LENGTH_LONG).show();
         } else if (edu.isEmpty()) {
             Toast.makeText(this, "*", Toast.LENGTH_LONG).show();
         } else if (country.isEmpty()) {
@@ -183,7 +183,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
                         if (success.contains("ok")) {
                             Toast.makeText(RegisterActivity.this, "تم تسجيلك بنجاح", Toast.LENGTH_LONG).show(); //اظهار النص من صفحة php
-                            //SharedPreferences.Editor editor = shared_save.edit();
                         } else {
                             Toast.makeText(RegisterActivity.this, "عذرا حدث خطأ لم يتم إرسال البيانات", Toast.LENGTH_SHORT).show();
                             send_data.setEnabled(true);
@@ -196,7 +195,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             progressDialog.setMessage("انتظر ارسال البيانات");
             progressDialog.setCancelable(true);
             progressDialog.show();
-            Send_Data_Register dataSend = new Send_Data_Register(full_user_name, user_name, user_email, user_password, encodimg, date, edu, country, gender, responseLisener); // ارسل البيانات
+            Send_Data_Register dataSend = new Send_Data_Register(full_user_name, user_name, user_email, user_password, encodimg, edu, country, gender, date, responseLisener); // ارسل البيانات
             RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
             queue.add(dataSend);
             startActivity(new Intent(RegisterActivity.this, LoginActivity.class));

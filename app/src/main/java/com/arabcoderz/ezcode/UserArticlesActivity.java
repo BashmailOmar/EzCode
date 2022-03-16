@@ -6,10 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class UserArticlesActivity extends AppCompatActivity {
+
+    private ImageView addArticlesUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,17 @@ public class UserArticlesActivity extends AppCompatActivity {
                 }
                 return false;
             }
-        });
-    }
+        }); //end BottomNavigationView
+
+        addArticlesUser = findViewById(R.id.But_add_articles);
+        addArticlesUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(UserArticlesActivity.this,addArticles.class));
+            }
+        });// end addArticlesUser >> setOnClickListener
+
+
+
+    }//end onCreate
 }
