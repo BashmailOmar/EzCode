@@ -2,27 +2,16 @@ package com.arabcoderz.ezcode;
 
 public class List_Item {
     private int id;
-    private String title; //articles value
-    private String link;
-    private String img_link; //articles value
-    private String date;
-    private String userName; // articles value
+    private String title; //articles value nad // news value
+    private String link;  // news value
+    private String img_link;  // news value and //articles value
 
 
-
-    public List_Item(int id, String title, String link, String img_link, String date) {
+    public List_Item(int id, String title, String link, String img_link) {
         this.id = id;
         this.title = title;
         this.link = link;
         this.img_link = img_link;
-        this.date = date;
-    }
-
-    public void articles(String title,String img_link,String userName){
-        this.title = title;
-        this.img_link = img_link;
-        this.userName = userName;
-        this.date = date;
     }
 
     public int getId() {
@@ -55,22 +44,6 @@ public class List_Item {
 
     public void setImg_link(String img_link) {
         this.img_link = img_link;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 }
 

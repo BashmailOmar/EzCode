@@ -80,4 +80,5 @@
     <string name="welcome">"Welcome, "</string>
     <string name="hello">Hello,</string>
     <string name="home_points">Points:</string>
+    <string name="see_all">See all</string>
 </resources>

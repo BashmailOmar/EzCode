@@ -2,6 +2,7 @@ package com.arabcoderz.ezcode;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +11,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserArticlesActivity extends AppCompatActivity {
 
     private ImageView addArticlesUser;
+    private List<List_Article> listArticles = new ArrayList<>();
+    private GridLayoutManager gridLayoutManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +72,7 @@ public class UserArticlesActivity extends AppCompatActivity {
                 startActivity(new Intent(UserArticlesActivity.this,addArticles.class));
             }
         });// end addArticlesUser >> setOnClickListener
-
-
-
     }//end onCreate
+
+
 }

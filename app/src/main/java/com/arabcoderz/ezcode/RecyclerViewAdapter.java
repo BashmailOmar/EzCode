@@ -43,7 +43,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         MenuItemViewHolder menuItemHolder = (MenuItemViewHolder) holder;
 
         menuItemHolder.textView.setText(List_Item.get(position).getTitle());
-        menuItemHolder.date_view.setText(List_Item.get(position).getDate());
 
         Picasso.get().load(List_Item.get(position).getImg_link()).into(menuItemHolder.imageView);
 
@@ -84,14 +83,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private CardView cardView;
         private ImageView imageView;
         private TextView textView;
-        private TextView date_view;
 
         public MenuItemViewHolder(View view) {
             super(view);
             cardView = (CardView) view.findViewById(R.id.card_View_news);
             imageView = (ImageView) view.findViewById(R.id.img_news);
             textView = (TextView) view.findViewById(R.id.title_news);
-            date_view = (TextView) view.findViewById(R.id.date_news);
         }
     }
 

@@ -44,6 +44,10 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     private ArrayAdapter<CharSequence> countryAdapter;
     private ArrayAdapter<CharSequence> genderAdapter;
 
+    private SharedPreferences shared_getData;
+    private SharedPreferences.Editor editor;
+    private static final String KEY_PREF_NAME = "userKEY";
+
     private int pick = 100;
     private ImageView avatar_user;
     private EditText Edit_full_name, Edit_user_Name, Edit_email, Edit_password, Edit_Confirm_password;
@@ -143,6 +147,12 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         edu = eduSpinner.getSelectedItem().toString();
         country = countrySpinner.getSelectedItem().toString();
         gender = genderSpinner.getSelectedItem().toString();
+
+        shared_getData = getSharedPreferences(KEY_PREF_NAME,Context.MODE_PRIVATE);
+        editor= shared_getData.edit();
+        editor.putString("enterUser",user_name);
+        editor.putString("enterPassword",user_password);
+        editor.apply();
 
         if (full_user_name.isEmpty()) {
             showError(Edit_full_name, "write your full name");

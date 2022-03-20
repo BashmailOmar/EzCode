@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private SharedPreferences shared_getData;
     private SharedPreferences.Editor editor;
-    private static  String KEY_PREF_NAME = "userKEY";
+    private static final String KEY_PREF_NAME = "userKEY";
 
 
     @Override
@@ -86,7 +86,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
     void Login() {
-        SharedPreferences sharedPreferences = getSharedPreferences(KEY_PREF_NAME,MODE_PRIVATE);
         username = etUsername.getText().toString().trim();
         password = etPassword.getText().toString().trim();
 

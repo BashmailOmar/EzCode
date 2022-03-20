@@ -3,6 +3,7 @@ package com.arabcoderz.ezcode;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -59,11 +60,14 @@ public class UserMoreActivity extends AppCompatActivity {
         But_Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editor = shared_getData.edit();
+                shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
+                editor= shared_getData.edit();
                 editor.clear();
-                editor.commit();
+                editor.apply();
+                Toast.makeText(UserMoreActivity.this, "logout success", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(UserMoreActivity.this, MainActivity.class);
+                startActivity(intent);
                 finish();
-                Toast.makeText(UserMoreActivity.this, "logout successfully", Toast.LENGTH_SHORT).show();
             }
         });
     }
