@@ -93,7 +93,7 @@ public class UserNewsActivity extends AppCompatActivity {
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                MainActivity.MainLink + "news.php?limit=" + limit, //MainActivity.MainLink+"news.php?limit="
+                MainActivity.MainLink + "news.php?limit=" + limit,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

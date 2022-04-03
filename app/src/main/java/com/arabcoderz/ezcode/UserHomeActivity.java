@@ -29,7 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class UserHomeActivity extends AppCompatActivity {
-    static String newsUrl = MainLink + "news.php";
+    static String newsUrl = MainLink + "newsHome.php";
     static String challengesUrl = MainLink + "challenges.php";
     static String articlesUrl = MainLink + "articles.php";
 
@@ -69,10 +69,12 @@ public class UserHomeActivity extends AppCompatActivity {
                             JSONArray jsonArray = response.getJSONArray("allnews");
                             JSONObject resp = jsonArray.getJSONObject(0);
                             String title = resp.getString("news_title");
-                            String img = resp.getString("news_img");
+                            String img = resp.getString("news_image");
+
                             link = resp.getString("news_link");
                             firstNewsTextView.setText(title);
-                           Picasso.get().load(MainLink + "image/" + img + ".jpg").into(NewsImageView);
+                            Picasso.get().load(img).into(NewsImageView);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
