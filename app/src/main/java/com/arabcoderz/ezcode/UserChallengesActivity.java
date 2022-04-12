@@ -2,6 +2,8 @@ package com.arabcoderz.ezcode;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +11,15 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserChallengesActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private RecyclerViewAdapterChallenges recyclerView_dAdapter;
+    private List<List_Item> listItems = new ArrayList<>();
+    private GridLayoutManager gridLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
