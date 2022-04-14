@@ -154,25 +154,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         editor.putString("enterPassword",user_password);
         editor.apply();
 
-        if (full_user_name.isEmpty()) {
-            showError(Edit_full_name, "write your full name");
-        } else if (user_name.isEmpty() || user_name.length() < 3) {
-            showError(Edit_user_Name, "Username more 3 characters");
-        } else if (user_email.isEmpty() || !user_email.contains("@")) {
-            showError(Edit_email, " write the email format");
-        } else if (user_password.isEmpty() || user_password.length() < 8) {
-            showError(Edit_password, "more than 8");
-        } else if (Confirm_password.isEmpty() || !Confirm_password.equals(user_password)) {
-            showError(Edit_Confirm_password, "The same password must be entered");
-        } else if (date.isEmpty()) {
-            Toast.makeText(this, "put the date", Toast.LENGTH_LONG).show();
-        } else if (edu.isEmpty()) {
-            Toast.makeText(this, "*", Toast.LENGTH_LONG).show();
-        } else if (country.isEmpty()) {
-            Toast.makeText(this, "*", Toast.LENGTH_LONG).show();
-        } else if (gender.isEmpty()) {
-            Toast.makeText(this, "*", Toast.LENGTH_LONG).show();
-        } else {
+
             Bitmap bitmap = ((BitmapDrawable) avatar_user.getDrawable()).getBitmap(); //يخذ الصوره الموجوده داخل image_View
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(); // خاص بحفظ البيانات في نظام الجافا
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream); // عمليت ضفط اقدر اتحكم في جودة الصور عن طريق تغير رقم 100 اذا قل الرقم كانت الصورة سيئة
@@ -191,9 +173,9 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
                         // Log.d("UserKey================>",UserKey);
 
-                        if (success.contains("ok")) {
+                        if (success.contains("Reg_ok")) {
                             Toast.makeText(RegisterActivity.this, "تم تسجيلك بنجاح", Toast.LENGTH_LONG).show(); //اظهار النص من صفحة php
-                        } else {
+                        } else if(success.contains("Error")) {
                             Toast.makeText(RegisterActivity.this, "عذرا حدث خطأ لم يتم إرسال البيانات", Toast.LENGTH_SHORT).show();
                             send_data.setEnabled(true);
                         }
@@ -202,14 +184,12 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                     }
                 }
             };
-            progressDialog.setMessage("انتظر ارسال البيانات");
-            progressDialog.setCancelable(true);
-            progressDialog.show();
+
             Send_Data_Register dataSend = new Send_Data_Register(full_user_name, user_name, user_email, user_password, encodimg, edu, country, gender, date, responseLisener); // ارسل البيانات
             RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
             queue.add(dataSend);
-            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-        }
+           // startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+
     }
 
 
