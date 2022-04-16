@@ -1,5 +1,6 @@
 package com.arabcoderz.ezcode;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -20,7 +21,6 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private int previousPosition = 0;
-
     private List<List_Item> List_Item;
     private Context context;
 
@@ -28,6 +28,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         List_Item = list_Item;
         this.context = context;
     }
+
+
 
     @NonNull
     @Override
@@ -37,12 +39,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return new MenuItemViewHolder(menu1);
     }
 
+    @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         MenuItemViewHolder menuItemHolder = (MenuItemViewHolder) holder;
 
-        menuItemHolder.textView.setText(List_Item.get(position).getTitle());
+        menuItemHolder.textViewTitel.setText(List_Item.get(position).getTitle());
 
         Picasso.get().load(List_Item.get(position).getImg_link()).into(menuItemHolder.imageView);
 
@@ -54,7 +57,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 context.startActivity(intent);
             }
         });
-        menuItemHolder.textView.setOnClickListener(new View.OnClickListener() {
+        menuItemHolder.textViewTitel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(List_Item.get(position).getLink()));
@@ -82,13 +85,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     protected class MenuItemViewHolder extends RecyclerView.ViewHolder {
         private CardView cardView;
         private ImageView imageView;
-        private TextView textView;
+        private TextView textViewTitel;
 
         public MenuItemViewHolder(View view) {
             super(view);
-            cardView = (CardView) view.findViewById(R.id.card_View_news);
-            imageView = (ImageView) view.findViewById(R.id.img_news);
-            textView = (TextView) view.findViewById(R.id.title_news);
+            cardView =  view.findViewById(R.id.card_View_news);
+            imageView = view.findViewById(R.id.img_news);
+            textViewTitel =  view.findViewById(R.id.title_news);
         }
     }
 

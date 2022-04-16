@@ -7,9 +7,9 @@ public class List_challenges {
     private String challenge_programming_language;
     private String challenge_level;
     private String challenge_answer;
-    private int challenge_points;
+    private String challenge_points;
 
-    public List_challenges(int id, String challenge_title, String challenge_content, String challenge_programming_language, String challenge_level, String challenge_answer, int challenge_points) {
+    public List_challenges(int id, String challenge_title, String challenge_content, String challenge_programming_language, String challenge_level, String challenge_answer, String challenge_points) {
         this.id = id;
         this.challenge_title = challenge_title;
         this.challenge_content = challenge_content;
@@ -67,11 +67,11 @@ public class List_challenges {
         this.challenge_answer = challenge_answer;
     }
 
-    public int getChallenge_points() {
+    public String getChallenge_points() {
         return challenge_points;
     }
 
-    public void setChallenge_points(int challenge_points) {
+    public void setChallenge_points(String challenge_points) {
         this.challenge_points = challenge_points;
     }
 }

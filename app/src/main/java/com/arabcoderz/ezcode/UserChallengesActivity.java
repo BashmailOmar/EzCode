@@ -9,7 +9,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +27,8 @@ import java.util.List;
 public class UserChallengesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private RecyclerViewAdapterChallenges recyclerView_dAdapter;
-    private List<List_Item> listItems = new ArrayList<>();
+    private RecyclerViewAdapterChallenges viewAdapterChallenges;
+    private List<List_challenges> List_Challeng = new ArrayList<>();
     private GridLayoutManager gridLayoutManager;
 
     @Override
@@ -54,5 +64,73 @@ public class UserChallengesActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        recyclerView = findViewById(R.id.m_RecyclerView_Challenge);
+        recyclerView.setHasFixedSize(true);
+
+        gridLayoutManager = new GridLayoutManager(this,1);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
+        viewAdapterChallenges = new RecyclerViewAdapterChallenges(List_Challeng, this);
+        recyclerView.setAdapter(viewAdapterChallenges);
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+
+                if (gridLayoutManager.findLastCompletelyVisibleItemPosition() == List_Challeng.size() - 1) {
+                    GetAllChallenges(List_Challeng.get(List_Challeng.size()-1).getId());
+                }
+
+            }
+        });
+
+        GetAllChallenges(0);
+
+    }//end onCreate
+
+    private void GetAllChallenges(int limit) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                MainActivity.MainLink + "ViewAllChallenges.php?limit=" + limit,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            JSONObject jsonResponse = jsonArray.getJSONObject(0);
+                            JSONArray jsonArray_usersS = jsonResponse.getJSONArray("show_challenges");
+
+                            for (int i = 0; i < jsonArray_usersS.length(); i++) {
+                                JSONObject responsS = jsonArray_usersS.getJSONObject(i);
+
+                                int id = responsS.getInt("challenge_id");
+                                String title = responsS.getString("challenge_title_en");
+                                String content = responsS.getString("challenge_content");
+                                String language = responsS.getString("challenge_programming_language");
+                                String level = responsS.getString("challenge_level");
+                                String answer = responsS.getString("challenge_answer");
+                                String points = responsS.getString("challenge_points");
+
+                                List_Challeng.add(new List_challenges(id, title, content,language,level,answer,points));
+                            }
+                            viewAdapterChallenges.notifyDataSetChanged();
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(stringRequest);
+        stringRequest.setShouldCache(false);
     }
+
 }

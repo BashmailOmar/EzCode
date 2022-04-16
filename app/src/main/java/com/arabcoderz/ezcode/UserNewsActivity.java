@@ -79,17 +79,17 @@ public class UserNewsActivity extends AppCompatActivity {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 
                 if (gridLayoutManager.findLastCompletelyVisibleItemPosition() == listItems.size() - 1) {
-                    Get_All_Users(listItems.get(listItems.size()-1).getId());
+                    Get_All_News(listItems.get(listItems.size()-1).getId());
                 }
 
             }
         });
 
-        Get_All_Users(0);
+        Get_All_News(0);
 
     }//end on Create
 
-    public void Get_All_Users(int limit) {
+    private void Get_All_News(int limit) {
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
