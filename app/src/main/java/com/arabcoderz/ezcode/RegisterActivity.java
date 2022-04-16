@@ -148,12 +148,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         country = countrySpinner.getSelectedItem().toString();
         gender = genderSpinner.getSelectedItem().toString();
 
-        shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
-        editor = shared_getData.edit();
-        editor.putString("enterUser", user_name);
-        editor.putString("enterPassword", user_password);
-        editor.apply();
-
         if (full_user_name.isEmpty()) {
             showError(Edit_full_name, "write your full name");
         } else if (user_name.isEmpty() || user_name.length() < 3) {
@@ -187,9 +181,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                         JSONArray jsonArray = new JSONArray(response);
                         JSONObject jsonObject = jsonArray.getJSONObject(0);
                         String success = jsonObject.getString("success");
-                        //   String UserKey = jsonObject.getString("UserKey");
-
-                        // Log.d("UserKey================>",UserKey);
 
                         if (success.contains("Reg_ok")) {
                             Toast.makeText(RegisterActivity.this, "تم تسجيلك بنجاح", Toast.LENGTH_LONG).show(); //اظهار النص من صفحة php
@@ -202,6 +193,11 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                     }
                 }
             };
+            shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
+            editor = shared_getData.edit();
+            editor.putString("enterUser", user_name);
+            editor.putString("enterPassword", user_password);
+            editor.apply();
             Send_Data_Register dataSend = new Send_Data_Register(full_user_name, user_name, user_email, user_password, encodimg, edu, country, gender, date, responseLisener); // ارسل البيانات
             RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
             queue.add(dataSend);
