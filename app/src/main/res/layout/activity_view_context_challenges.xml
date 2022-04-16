@@ -6,4 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ViewContextChallenges">
 
+    <TextView
+        android:id="@+id/contextViewCha"
+        android:layout_width="0dp"
+        android:layout_height="627dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="13dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

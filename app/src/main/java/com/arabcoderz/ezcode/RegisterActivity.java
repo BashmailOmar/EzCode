@@ -52,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     private ImageView avatar_user;
     private EditText Edit_full_name, Edit_user_Name, Edit_email, Edit_password, Edit_Confirm_password;
     private TextView Text_select_Date;
-    Button send_data;
+    private Button send_data;
     private String encodimg;
 
     private String full_user_name, user_name, user_email, user_password, Confirm_password, date, edu, country, gender;

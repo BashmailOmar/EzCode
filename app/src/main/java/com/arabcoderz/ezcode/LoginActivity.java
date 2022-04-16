@@ -89,11 +89,6 @@ public class LoginActivity extends AppCompatActivity {
         username = etUsername.getText().toString().trim();
         password = etPassword.getText().toString().trim();
 
-        shared_getData = getSharedPreferences(KEY_PREF_NAME,Context.MODE_PRIVATE);
-        editor= shared_getData.edit();
-        editor.putString("enterUser",username);
-        editor.putString("enterPassword",password);
-        editor.apply();
 
         Response.Listener<String> respListener = new Response.Listener<String>() {
             @Override
@@ -115,6 +110,11 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         };
+        shared_getData = getSharedPreferences(KEY_PREF_NAME,Context.MODE_PRIVATE);
+        editor= shared_getData.edit();
+        editor.putString("enterUser",username);
+        editor.putString("enterPassword",password);
+        editor.apply();
         data_check data_check = new data_check(username, password, respListener);
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
         queue.add(data_check);
