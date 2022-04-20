@@ -23,6 +23,7 @@ public class RecyclerViewAdapterChallenges extends RecyclerView.Adapter<Recycler
     private int previousPosition = 0;
     private List<List_challenges> List_Context;
     private Context context;
+    private static int index;
 
     public RecyclerViewAdapterChallenges(List<List_challenges> list_Context, Context context) {
         List_Context = list_Context;
@@ -51,6 +52,7 @@ public class RecyclerViewAdapterChallenges extends RecyclerView.Adapter<Recycler
             @Override
             public void onClick(View view) {
                 context.startActivity(new Intent(context,ViewContextChallenges.class));
+                index = List_Context.get(position).getId();
             }
         });
 

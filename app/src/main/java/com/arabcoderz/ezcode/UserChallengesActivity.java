@@ -106,13 +106,11 @@ public class UserChallengesActivity extends AppCompatActivity {
 
                                 int id = responsS.getInt("challenge_id");
                                 String title = responsS.getString("challenge_title_en");
-                                String content = responsS.getString("challenge_content");
                                 String language = responsS.getString("challenge_programming_language");
                                 String level = responsS.getString("challenge_level");
-                                String answer = responsS.getString("challenge_answer");
                                 String points = responsS.getString("challenge_points");
 
-                                List_Challeng.add(new List_challenges(id, title, content,language,level,answer,points));
+                                List_Challeng.add(new List_challenges(id, title,language,level,points));
                             }
                             viewAdapterChallenges.notifyDataSetChanged();
 
