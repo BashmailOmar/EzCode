@@ -82,5 +82,6 @@
     <string name="home_points">Points:</string>
     <string name="see_all">See all</string>
     <string name="challenges_title_xml">challenges</string>
+    <string name="solve_challenges">Solve challenges</string>
 
 </resources>

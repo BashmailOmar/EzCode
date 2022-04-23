@@ -9,21 +9,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
-public class RecyclerViewAdapterChallenges extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class RecyclerViewAdapterChallenges extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private int previousPosition = 0;
     private List<List_challenges> List_Context;
-    private Context context;
-    private static int index;
+    public static Context context;
+    public static int index;
 
     public RecyclerViewAdapterChallenges(List<List_challenges> list_Context, Context context) {
         List_Context = list_Context;
@@ -51,6 +59,7 @@ public class RecyclerViewAdapterChallenges extends RecyclerView.Adapter<Recycler
         menuItemHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 context.startActivity(new Intent(context,ViewContextChallenges.class));
                 index = List_Context.get(position).getId();
             }

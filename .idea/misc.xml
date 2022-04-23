@@ -35,10 +35,12 @@
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/row_third_place.xml" value="0.3227848101265823" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/row_users_places.xml" value="0.25" />
         <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/drawable/backgrund_articles_add.xml" value="0.242" />
+        <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/drawable/backgrund_solve_challenges.xml" value="0.2585" />
         <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/drawable/block_date.xml" value="0.271" />
         <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/drawable/block_news.xml" value="0.271" />
         <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/drawable/block_title.xml" value="0.271" />
         <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/drawable/content.xml" value="0.2445" />
+        <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/drawable/custom_edittext_underline.xml" value="0.2425" />
         <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/drawable/ic_add_articles.xml" value="0.242" />
         <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/drawable/ic_code.xml" value="0.271" />
         <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/drawable/ic_more.xml" value="0.271" />
@@ -56,7 +58,7 @@
         <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/layout/activity_user_more.xml" value="0.2932877297990594" />
         <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/layout/activity_user_news.xml" value="0.25" />
         <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/layout/activity_view_articles.xml" value="0.33" />
-        <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/layout/activity_view_context_challenges.xml" value="0.2932877297990594" />
+        <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/layout/activity_view_context_challenges.xml" value="0.33" />
         <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/layout/row_first_place.xml" value="0.3572916666666667" />
         <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/layout/row_item_challenges.xml" value="0.2932877297990594" />
         <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/layout/row_item_news.xml" value="0.33" />
