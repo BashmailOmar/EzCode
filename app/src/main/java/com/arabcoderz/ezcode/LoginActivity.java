@@ -77,8 +77,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void AutoLogin(){
-            shared_getData = getSharedPreferences(KEY_PREF_NAME,Context.MODE_PRIVATE);
-            etUsername.setText(shared_getData.getString("enterUser",""));
+            shared_getData = getSharedPreferences(KEY_PREF_NAME,Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
+            etUsername.setText(shared_getData.getString("enterUser","")); // طريقة استدعاء القيمة عن طريقة المفتاح
             etPassword.setText(shared_getData.getString("enterPassword",""));
             Login();
     }
