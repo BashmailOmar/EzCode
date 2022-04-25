@@ -27,7 +27,6 @@ public class ViewContextChallenges extends AppCompatActivity {
     private TextView viewQuestion;
     private EditText userAnswer;
     public static String answer,point,programming_language;
-    public static int idChallenge = RecyclerViewAdapterChallenges.index;
 
     private SharedPreferences shared_getData;
     private static final String KEY_PREF_NAME = "userKEY";
@@ -50,7 +49,7 @@ public class ViewContextChallenges extends AppCompatActivity {
             }
         });
 
-    }
+    } //  end showQuestion
 
     public void showQuestion(int id){
 
@@ -88,7 +87,7 @@ public class ViewContextChallenges extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
-    }
+    }// end showQuestion
 
     private void checkAnswer(){
         String user = userAnswer.getText().toString();
@@ -98,8 +97,10 @@ public class ViewContextChallenges extends AppCompatActivity {
         }else {
             Toast.makeText(this, "try again", Toast.LENGTH_LONG).show();
         }
-    }
+    }//end checkAnswer
+
     private void sendAnswer(){
+         int idChallenge = RecyclerViewAdapterChallenges.index;
         Response.Listener<String> responseLisener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -109,7 +110,7 @@ public class ViewContextChallenges extends AppCompatActivity {
                     String success = jsonObject.getString("success");
 
                     if (success.contains("Reg_ok")) {
-                        Toast.makeText(ViewContextChallenges.this, "تم", Toast.LENGTH_LONG).show(); //اظهار النص من صفحة php
+                        Toast.makeText(ViewContextChallenges.this, "good answer", Toast.LENGTH_LONG).show();
                     } else if (success.contains("Error")) {
                         Toast.makeText(ViewContextChallenges.this, "عذرا حدث خطأ لم يتم إرسال البيانات", Toast.LENGTH_SHORT).show();
                     }
@@ -119,9 +120,9 @@ public class ViewContextChallenges extends AppCompatActivity {
             }
         };
         shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE); // اسم الملف الذي يحتوي المعلومات
-        String userName = shared_getData.getString("enterUser","");
+        String userName = shared_getData.getString("enterUser",""); // استدعاء القيم عن طريقة المفتاح
         String img = shared_getData.getString("enterImgCode","");
-        Data_send_challenge send_challenge = new Data_send_challenge(userName,idChallenge,programming_language,point,img,responseLisener);
+        Data_send_challenge send_challenge = new Data_send_challenge(userName,idChallenge,programming_language,point,img,responseLisener); // ارسال القيم الى صفحة التواصل بين السيرفر و التطبيق
         RequestQueue queue = Volley.newRequestQueue(ViewContextChallenges.this);
         queue.add(send_challenge);
     }//end sendAnswer
