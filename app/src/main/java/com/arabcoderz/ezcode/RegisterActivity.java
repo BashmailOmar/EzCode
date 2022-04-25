@@ -195,8 +195,9 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             };
             shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
             editor = shared_getData.edit();
-            editor.putString("enterUser", user_name);
+            editor.putString("enterUser", user_name); // تخزين القيمة في مفتاح
             editor.putString("enterPassword", user_password);
+            editor.putString("enterImgCode", encodimg);
             editor.apply();
             Send_Data_Register dataSend = new Send_Data_Register(full_user_name, user_name, user_email, user_password, encodimg, edu, country, gender, date, responseLisener); // ارسل البيانات
             RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
