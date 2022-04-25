@@ -1,65 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".addArticles"
+    android:background="@color/background_des"
     android:orientation="vertical"
-    android:background="@color/background_des">
+    tools:context=".addArticles">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/backgrund_articles_add">
-        <ImageView
-            android:id="@+id/butBackArticles"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="10dp"
-            app:srcCompat="@drawable/back_btn_light" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/articles"
-            android:layout_marginStart="132dp"
-            android:textSize="19sp"
-            android:textColor="@color/white"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            />
-    </LinearLayout>
+        android:background="@drawable/backgrund_articles_add"
+        android:orientation="horizontal">
 
 
         <LinearLayout
-            android:layout_marginTop="10dp"
-            android:layout_width="380dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="10dp">
 
-            <EditText
-                android:id="@+id/input_title_article"
+            <ImageView
+                android:id="@+id/butBackArticles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/write_title_articles"
-                android:ems="15"
-                android:hint="Article title"
-                android:inputType="textPersonName"
-                android:textAlignment="center"
-                tools:ignore="TouchTargetSizeCheck" />
+                app:srcCompat="@drawable/back_btn_light" />
         </LinearLayout>
 
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_article"
+                android:textColor="@color/white"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+
+        <EditText
+            android:id="@+id/input_title_article"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/write_title_articles"
+            android:ems="15"
+            android:hint="@string/article_title"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+/>
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="380dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
             android:orientation="vertical">
 
             <ScrollView
@@ -67,31 +82,36 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/content"
+                android:background="@drawable/write_title_articles"
                 android:orientation="vertical">
 
                 <EditText
+                    android:background="#00000000"
                     android:id="@+id/article_content"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:ems="18"
-                    android:inputType="textPersonName"
+                    android:gravity="center"
+                    android:inputType="textMultiLine"
+                    android:lines="10"
+                    android:minLines="10"
                     tools:ignore="TouchTargetSizeCheck" />
 
             </ScrollView>
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_marginTop="15dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="15dp"
                 android:orientation="vertical">
 
                 <Button
                     android:id="@+id/addArticle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Add Article" />
+                    android:background="@drawable/white_small_btn"
+                    android:text="@string/add_article" />
             </LinearLayout>
 
         </LinearLayout>

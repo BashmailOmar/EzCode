@@ -31,35 +31,41 @@ import org.json.JSONObject;
 public class UserHomeActivity extends AppCompatActivity {
     static String newsUrl = MainLink + "newsHome.php";
     static String challengesUrl = MainLink + "challenges.php";
-    static String articlesUrl = MainLink + "articles.php";
+    static String articlesUrl = MainLink + "articlesHome.php";
 
     private SharedPreferences shared_getData;
     private static final String KEY_PREF_NAME = "userKEY";
 
     String link;
-    TextView firstNewsTextView, firstArticleTextView, firstChallengesTitle,firstChallengesPoints,firstChallengesLevel,firstChallengesLanguage,homeUserName;
-    ImageView NewsImageView,ArticlesImageView;
+    TextView firstNewsTextView, firstChallengesTitle,firstChallengesPoints,firstChallengesLevel,firstChallengesLanguage,homeUserName,articleTextViewWriter,articleTextViewDate,articleTextViewTitle,articleTextViewContent;
+    ImageView NewsImageView;
     RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_home);
+        //---------------------------------------------------------
+
         requestQueue = Volley.newRequestQueue(this);
         firstNewsTextView = findViewById(R.id.title_news);
         NewsImageView = findViewById(R.id.img_news);
-
+        //---------------------------------------------------------
         homeUserName = findViewById(R.id.homeUserName);
         shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
         homeUserName.setText(shared_getData.getString("enterUser",""));
+        //---------------------------------------------------------
 
         firstChallengesTitle = findViewById(R.id.challengeTitle);
         firstChallengesPoints= findViewById(R.id.challengePoints);
         firstChallengesLevel= findViewById(R.id.challengeLvl);
         firstChallengesLanguage= findViewById(R.id.challengeLang);
-
-        firstArticleTextView = findViewById(R.id.tvArticle);
-        ArticlesImageView = findViewById(R.id.imgArticle);
+        //---------------------------------------------------------
+        articleTextViewWriter = findViewById(R.id.article_writer);
+        articleTextViewDate = findViewById(R.id.article_date);
+        articleTextViewTitle = findViewById(R.id.article_title);
+        articleTextViewContent = findViewById(R.id.article_content);
+        //---------------------------------------------------------
 
         JsonObjectRequest jsonObjectRequestNews = new JsonObjectRequest(Request.Method.GET, newsUrl, null,
                 new Response.Listener<JSONObject>() {
@@ -110,10 +116,14 @@ public class UserHomeActivity extends AppCompatActivity {
                             JSONArray jsonArray = response.getJSONArray("allarticles");
                             JSONObject resp = jsonArray.getJSONObject(0);
                             String id = resp.getString("article_id");
+                            String writer = resp.getString("article_writer");
+                            String date = resp.getString("article_date");
                             String title = resp.getString("article_title");
-                            String img = resp.getString("article_img");
-                            firstArticleTextView.setText(title);
-                            Picasso.get().load(MainLink + "articlesImages/" + img + ".png").into(ArticlesImageView);
+                            String content = resp.getString("article_content");
+                            articleTextViewWriter.setText(writer);
+                            articleTextViewDate.setText(date);
+                            articleTextViewTitle.setText(title);
+                            articleTextViewContent.setText(content);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

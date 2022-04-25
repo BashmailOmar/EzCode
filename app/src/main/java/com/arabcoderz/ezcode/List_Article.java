@@ -1,13 +1,13 @@
 package com.arabcoderz.ezcode;
 
 public class List_Article {
-    private String id;
+    private int id;
     private String title;
     private String content;
     private String writer;
     private String article_date;
 
-    public List_Article(String id, String title, String content, String writer, String article_date) {
+    public List_Article(int id, String title, String content, String writer, String article_date) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -15,11 +15,11 @@ public class List_Article {
         this.article_date = article_date;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -47,7 +47,7 @@ public class List_Article {
         this.writer = writer;
     }
 
-    public String getDateAr() {
+    public String getDate() {
         return article_date;
     }
 

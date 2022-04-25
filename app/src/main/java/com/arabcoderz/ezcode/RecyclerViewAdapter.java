@@ -50,21 +50,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         Picasso.get().load(List_Item.get(position).getImg_link()).into(menuItemHolder.imageView);
 
 
-        menuItemHolder.imageView.setOnClickListener(new View.OnClickListener() {
+        menuItemHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(List_Item.get(position).getLink()));
                 context.startActivity(intent);
             }
         });
-        menuItemHolder.textViewTitel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(List_Item.get(position).getLink()));
-                context.startActivity(intent);
-            }
-        });
-
 
         if (position > previousPosition) { //scrolling DOWN
             AnimationUtil.animate(menuItemHolder, true);

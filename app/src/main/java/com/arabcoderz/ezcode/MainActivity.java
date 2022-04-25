@@ -20,7 +20,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     Button languagesBtn;
-    public static String MainLink = "http://192.168.8.100/EzCodePHP/"; //192.168.8.100  //192.168.1.13
+    public static String MainLink = "http://192.168.1.13/EzCodePHP/"; //192.168.8.100  //192.168.1.13
     public static String Local_FullName, Local_UserName, Local_UserEmail, Local_UserAge, Local_UserEduLvl, Local_UserGender, Local_UserCountry;
 
     private SharedPreferences shared_getData;
@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         shared_getData = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
 
 

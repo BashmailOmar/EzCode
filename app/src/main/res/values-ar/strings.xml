@@ -81,4 +81,7 @@
     <string name="hello">مرحبا,</string>
     <string name="home_points">النقاط:</string>
     <string name="see_all">مشاهدة الكل</string>
+    <string name="add_comment">أضف تعليق ..</string>
+    <string name="add_article">أضف مقال</string>
+    <string name="article_title">عنوان المقال</string>
 </resources>

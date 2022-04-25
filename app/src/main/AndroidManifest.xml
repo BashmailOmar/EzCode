@@ -17,6 +17,9 @@
         android:theme="@style/Theme.EzCode"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ArticleContentActivity"
+            android:exported="false" />
+        <activity
             android:name=".ViewContextChallenges"
             android:exported="false" />
         <activity

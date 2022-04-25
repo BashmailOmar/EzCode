@@ -81,4 +81,7 @@
     <string name="hello">Hello,</string>
     <string name="home_points">Points:</string>
     <string name="see_all">See all</string>
+    <string name="add_comment">Add coment ..</string>
+    <string name="add_article">Add article</string>
+    <string name="article_title">Article title</string>
 </resources>

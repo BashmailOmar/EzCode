@@ -65,7 +65,7 @@ public class UserNewsActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView = findViewById(R.id.m_RecyclerView);
+        recyclerView = findViewById(R.id.news_RecyclerView);
         recyclerView.setHasFixedSize(true);
 
         gridLayoutManager = new GridLayoutManager(this,1);

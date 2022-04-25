@@ -8,8 +8,6 @@
     android:layout_width="364dp"
     android:layout_height="150dp"
     android:layout_marginBottom="5dp"
-    android:layout_marginLeft="25dp"
-    android:layout_marginRight="25dp"
     android:layout_marginTop="5dp"
     android:orientation="vertical">
 
@@ -17,7 +15,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -32,11 +30,9 @@
             android:id="@+id/title_news"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:padding="5dp"
             android:background="@color/purple_200"
             android:gravity="center"
             android:textColor="@color/white" />
     </LinearLayout>
-
-
-
 </androidx.cardview.widget.CardView>

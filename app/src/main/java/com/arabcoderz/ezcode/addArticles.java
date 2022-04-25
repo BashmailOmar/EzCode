@@ -3,12 +3,12 @@ package com.arabcoderz.ezcode;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -20,39 +20,43 @@ import org.json.JSONObject;
 
 public class addArticles extends AppCompatActivity {
 
-    private EditText Edit_title , Edit_content;
+    private EditText Edit_title, Edit_content;
     private Button But_add_article;
 
-    private String Str_title , Str_content , userName;
+    private String Str_title, Str_content, userName;
 
     private SharedPreferences shared_getData;
-    private static  String KEY_PREF_NAME = "userKEY";
+    private static String KEY_PREF_NAME = "userKEY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_articles);
-
         Edit_title = findViewById(R.id.input_title_article);
         Edit_content = findViewById(R.id.article_content);
-
         But_add_article = findViewById(R.id.addArticle);
-
         But_add_article.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 newArticle();
+                startActivity(new Intent(addArticles.this, UserArticlesActivity.class));
+            }
+        });
+        findViewById(R.id.butBackArticles).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(addArticles.this, UserArticlesActivity.class));
             }
         });
 
     }
 
-    private void newArticle(){
+    private void newArticle() {
         Str_title = Edit_title.getText().toString();
         Str_content = Edit_content.getText().toString();
 
-        shared_getData = getSharedPreferences(KEY_PREF_NAME,Context.MODE_PRIVATE);
-        userName = shared_getData.getString("enterUser","no data");
+        shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
+        userName = shared_getData.getString("enterUser", "no data");
 
 
         Response.Listener<String> responseLisener = new Response.Listener<String>() {
@@ -74,7 +78,7 @@ public class addArticles extends AppCompatActivity {
                 }
             }
         };
-        send_articles send_articles = new send_articles(Str_title,Str_content,userName,responseLisener);
+        send_articles send_articles = new send_articles(Str_title, Str_content, userName, responseLisener);
         RequestQueue queue = Volley.newRequestQueue(addArticles.this);
         queue.add(send_articles);
     }

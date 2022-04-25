@@ -83,5 +83,8 @@
     <string name="see_all">See all</string>
     <string name="challenges_title_xml">challenges</string>
     <string name="solve_challenges">Solve challenges</string>
+    <string name="add_comment">Add coment ..</string>
+    <string name="add_article">Add article</string>
+    <string name="article_title">Article title</string>
 
 </resources>
