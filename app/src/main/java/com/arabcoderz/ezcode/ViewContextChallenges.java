@@ -3,6 +3,7 @@ package com.arabcoderz.ezcode;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -111,6 +112,8 @@ public class ViewContextChallenges extends AppCompatActivity {
 
                     if (success.contains("Reg_ok")) {
                         Toast.makeText(ViewContextChallenges.this, "good answer", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(ViewContextChallenges.this, UserChallengesActivity.class);
+                        startActivity(intent);
                     } else if (success.contains("Error")) {
                         Toast.makeText(ViewContextChallenges.this, "عذرا حدث خطأ لم يتم إرسال البيانات", Toast.LENGTH_SHORT).show();
                     }
