@@ -6,7 +6,7 @@ public class ListPlaces {
     public String point;
     public String img;
 
-    public ListPlaces(String place, String username, String point,String img) {
+    public ListPlaces(String place, String username, String point, String img) {
         this.place = place;
         this.username = username;
         this.point = point;

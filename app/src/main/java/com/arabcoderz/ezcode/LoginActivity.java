@@ -89,7 +89,6 @@ public class LoginActivity extends AppCompatActivity {
         username = etUsername.getText().toString().trim();
         password = etPassword.getText().toString().trim();
 
-
         Response.Listener<String> respListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

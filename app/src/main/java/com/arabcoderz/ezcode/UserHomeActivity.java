@@ -134,13 +134,12 @@ public class UserHomeActivity extends AppCompatActivity {
         requestQueue.add(jsonObjectRequestArticles);
 
 
-        findViewById(R.id.NewsCard).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.article_writer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)));
             }
         });
-
         findViewById(R.id.allNewsCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

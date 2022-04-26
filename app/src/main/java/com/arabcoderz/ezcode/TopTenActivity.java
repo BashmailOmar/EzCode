@@ -114,7 +114,6 @@ public class TopTenActivity extends AppCompatActivity {
         listAdpter lA = new listAdpter(listUsers);
         listView.setAdapter(lA);
     }
-
     class listAdpter extends BaseAdapter {
         ArrayList<ListPlaces> listA = new ArrayList<ListPlaces>();
 
