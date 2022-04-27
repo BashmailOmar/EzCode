@@ -84,4 +84,8 @@
     <string name="add_comment">أضف تعليق ..</string>
     <string name="add_article">أضف مقال</string>
     <string name="article_title">عنوان المقال</string>
+    <string name="account">الحساب</string>
+    <string name="rank">التصنيف</string>
+    <string name="stats">إحصائيات</string>
+    <string name="signout">تسجيل الخروج</string>
 </resources>

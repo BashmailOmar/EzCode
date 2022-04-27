@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.124" />
+        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/account_avatar.xml" value="0.286" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/add_something.xml" value="0.152" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/article_content_background.xml" value="0.194" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/back_btn.xml" value="0.221" />
@@ -11,6 +12,7 @@
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/backgrund_articles_add.xml" value="0.2505" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/coustom_top_bar.xml" value="0.2618421052631579" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/empty_field.xml" value="0.221" />
+        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.194" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/ic_launcher_background.xml" value="0.124" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/info_first_bar.xml" value="0.294" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/info_second_bar.xml" value="0.1975" />
@@ -23,15 +25,17 @@
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/register_background.xml" value="0.221" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/select_language_background.xml" value="0.25928338762214986" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/sign_up_btn.xml" value="0.2618421052631579" />
+        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/signout.xml" value="0.194" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/small_send_button.xml" value="0.289" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/title_article_content.xml" value="0.194" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/top_ten_background.xml" value="0.2618421052631579" />
+        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/useable_block.xml" value="0.194" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/white_btn.xml" value="0.15328947368421053" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/white_small_btn.xml" value="0.2618421052631579" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/write_title_articles.xml" value="0.197" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/writer_article_content.xml" value="0.194" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_add_articles.xml" value="0.33" />
-        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_article_content.xml" value="0.31666666666666665" />
+        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_article_content.xml" value="0.3984375" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_main2.xml" value="0.3269230769230769" />
@@ -40,6 +44,7 @@
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_top_ten.xml" value="0.25" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_user_articles.xml" value="0.33" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_user_home.xml" value="0.33" />
+        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_user_more.xml" value="0.31666666666666665" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_user_news.xml" value="0.33" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/articles_list_item.xml" value="0.384375" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/comment_card.xml" value="0.33" />
@@ -51,6 +56,7 @@
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/row_second_place.xml" value="0.3227848101265823" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/row_third_place.xml" value="0.3227848101265823" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/row_users_places.xml" value="0.25" />
+        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/menu/menu_navigation.xml" value="0.3984375" />
         <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/drawable/backgrund_articles_add.xml" value="0.242" />
         <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/drawable/block_date.xml" value="0.271" />
         <entry key="..\:/projectAndroidStudio/EzCode/app/src/main/res/drawable/block_news.xml" value="0.271" />

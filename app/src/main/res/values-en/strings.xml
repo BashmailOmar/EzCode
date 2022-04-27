@@ -84,4 +84,8 @@
     <string name="add_comment">Add coment ..</string>
     <string name="add_article">Add article</string>
     <string name="article_title">Article title</string>
+    <string name="account">Account</string>
+    <string name="rank">Rank</string>
+    <string name="stats">Stats</string>
+    <string name="signout">Sign out</string>
 </resources>

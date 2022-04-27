@@ -20,15 +20,23 @@ public class UserMoreActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private static  String KEY_PREF_NAME = "userKEY";
 
-    private Button But_Logout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_more);
-
-        But_Logout = findViewById(R.id.But_LogOut);
-
+        findViewById(R.id.But_LogOut).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
+                editor= shared_getData.edit();
+                editor.clear();
+                editor.apply();
+                Toast.makeText(UserMoreActivity.this, "logout success", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(UserMoreActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationBar);
         bottomNavigationView.setSelectedItemId(R.id.more);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -57,20 +65,5 @@ public class UserMoreActivity extends AppCompatActivity {
                 return false;
             }
         });
-        But_Logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
-                editor= shared_getData.edit();
-                editor.clear();
-                editor.apply();
-                Toast.makeText(UserMoreActivity.this, "logout success", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(UserMoreActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
     }
-
-
 }
