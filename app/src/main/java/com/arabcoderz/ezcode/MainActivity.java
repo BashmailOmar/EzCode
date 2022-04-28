@@ -1,9 +1,6 @@
 package com.arabcoderz.ezcode;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -19,7 +16,8 @@ import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
-    Button languagesBtn;
+    Button langButton;
+    static String langStr;
     public static String MainLink = "http://192.168.1.13/EzCodePHP/"; //192.168.8.100  //192.168.1.13
     public static String Local_FullName, Local_UserName, Local_UserEmail, Local_UserAge, Local_UserEduLvl, Local_UserGender, Local_UserCountry;
 
@@ -30,51 +28,46 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        shared_getData = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
-
+        shared_getData = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
         CheckInternetConnection cic = new CheckInternetConnection(getApplicationContext());
         if (!cic.isConnectingToInternet()) {
             Toast.makeText(MainActivity.this, "Not Connected to Internet", Toast.LENGTH_SHORT).show();
         }//هنا استدعينا الميثود اللي تحقق من اتصال التطبيق بالانترنت وراح تظهر رساله اذا لم يكن هنالك اتصال بالانترنت
-
         findViewById(R.id.loginBtnMainPage).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });//هنا سوينا كليك لسنر للزر اللي يودينا لصفحة تسجيل الدخول
-
         findViewById(R.id.registerBtnMainPage).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, RegisterActivity.class));
             }
         });//هنا سوينا كليك لسنر للزر اللي يودينا لصفحة تسجيل الدخول
-
         findViewById(R.id.topTenBtnMainPage).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, TopTenActivity.class));
             }
         });//هنا سوينا كليك لسنر للزر اللي يودينا لصفحة تسجيل الدخول
-
-        languagesBtn = (Button) findViewById(R.id.changeLanguageBtn);
-        languagesBtn.setOnClickListener(new View.OnClickListener() {
+        langButton = findViewById(R.id.changeLanguageBtn);
+        langButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ((languagesBtn.getText().toString()).equals("العربية")) {//هنا ناخذ اللي مكتوب ف اللزر اذا كان مكتوب اللغه العربية يغير التطبيق للغه العربية واذا كان غير كذا يتحول للغه الانجليزيه
-                    setApplicationLocale("ar");
+                if (langButton.getText().toString().equals("ENGLISH")) {//هنا ناخذ اللي مكتوب ف اللزر اذا كان مكتوب اللغه العربية يغير التطبيق للغه العربية واذا كان غير كذا يتحول للغه الانجليزيه
+                    setApplicationLocale("");
                 } else {
-                    setApplicationLocale("en");
+                    setApplicationLocale("ar");
+                    langStr="ar";
                 }
                 finish();
-                overridePendingTransition(0, 0);
+                overridePendingTransition(5, 0);
                 startActivity(getIntent());
-                overridePendingTransition(0, 0);
+                overridePendingTransition(0, 5);
             }//هنا راح نغير اللغه بعدين نسوي اعادة انشاء الاكتفتي عشان يبان التغيير اللي سويناه حق اللغه
         });
-
     }
 
     @Override
@@ -89,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         Local_UserCountry = shared_getData.getString("Local_UserCountry", "").trim();
     }
 
-    private void setApplicationLocale(String locale) {
+    void setApplicationLocale(String locale) {
         Resources resources = getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();
         Configuration config = resources.getConfiguration();

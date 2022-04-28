@@ -90,5 +90,6 @@
     <string name="rank">Rank</string>
     <string name="stats">Stats</string>
     <string name="signout">Sign out</string>
+    <string name="favorite_articles">Fav Articles</string>
 
 </resources>

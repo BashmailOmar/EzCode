@@ -88,4 +88,5 @@
     <string name="rank">التصنيف</string>
     <string name="stats">إحصائيات</string>
     <string name="signout">تسجيل الخروج</string>
+    <string name="favorite_articles">المقالات المفضلة</string>
 </resources>
