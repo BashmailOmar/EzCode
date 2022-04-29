@@ -33,33 +33,28 @@ public class UserHomeActivity extends AppCompatActivity {
     static String challengesUrl = MainLink + "challenges.php";
     static String articlesUrl = MainLink + "articlesHome.php";
 
-    private SharedPreferences shared_getData;
-    private static final String KEY_PREF_NAME = "userKEY";
+//    private SharedPreferences shared_getData;
+//    private static String KEY_PREF_NAME = "userKEY";
 
     String link;
-    TextView firstNewsTextView, firstChallengesTitle,firstChallengesPoints,firstChallengesLevel,firstChallengesLanguage,homeUserName,articleTextViewWriter,articleTextViewDate,articleTextViewTitle,articleTextViewContent;
+    TextView firstNewsTextView, firstChallengesTitle, firstChallengesPoints, firstChallengesLevel, firstChallengesLanguage, homeUserName, articleTextViewWriter, articleTextViewDate, articleTextViewTitle, articleTextViewContent;
     ImageView NewsImageView;
     RequestQueue requestQueue;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_home);
         //---------------------------------------------------------
-
         requestQueue = Volley.newRequestQueue(this);
         firstNewsTextView = findViewById(R.id.title_news);
         NewsImageView = findViewById(R.id.img_news);
         //---------------------------------------------------------
-        homeUserName = findViewById(R.id.homeUserName);
-        shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
-        homeUserName.setText(shared_getData.getString("enterUser",""));
-        //---------------------------------------------------------
-
         firstChallengesTitle = findViewById(R.id.challengeTitle);
-        firstChallengesPoints= findViewById(R.id.challengePoints);
-        firstChallengesLevel= findViewById(R.id.challengeLvl);
-        firstChallengesLanguage= findViewById(R.id.challengeLang);
+        firstChallengesPoints = findViewById(R.id.challengePoints);
+        firstChallengesLevel = findViewById(R.id.challengeLvl);
+        firstChallengesLanguage = findViewById(R.id.challengeLang);
         //---------------------------------------------------------
         articleTextViewWriter = findViewById(R.id.article_writer);
         articleTextViewDate = findViewById(R.id.article_date);
@@ -108,14 +103,15 @@ public class UserHomeActivity extends AppCompatActivity {
                     }
                 }, error -> Log.e("VOLLEY", "ERROR"));//جلب بيانات التحديات
 
-        JsonObjectRequest jsonObjectRequestArticles= new JsonObjectRequest(Request.Method.GET, articlesUrl, null,
+        JsonObjectRequest jsonObjectRequestArticles = new JsonObjectRequest(Request.Method.GET, articlesUrl, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray jsonArray = response.getJSONArray("allarticles");
                             JSONObject resp = jsonArray.getJSONObject(0);
-                            String id = resp.getString("article_id");
+                            String idd = resp.getString("article_id");
+                            id = Integer.valueOf(idd);
                             String writer = resp.getString("article_writer");
                             String date = resp.getString("article_date");
                             String title = resp.getString("article_title");
@@ -134,7 +130,7 @@ public class UserHomeActivity extends AppCompatActivity {
         requestQueue.add(jsonObjectRequestArticles);
 
 
-        findViewById(R.id.article_writer).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.NewsCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)));
@@ -151,6 +147,14 @@ public class UserHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(UserHomeActivity.this, UserChallengesActivity.class));
+                overridePendingTransition(0, 0);
+            }
+        });
+        findViewById(R.id.card_View_article).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArticlesRecyclerViewAdapter.id = id;
+                startActivity(new Intent(UserHomeActivity.this, ArticleContentActivity.class));
                 overridePendingTransition(0, 0);
             }
         });

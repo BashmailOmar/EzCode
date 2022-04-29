@@ -52,7 +52,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/logo_des" />
+                    app:srcCompat="@drawable/logo_figma" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -95,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
                     android:paddingBottom="5dp"
-                    android:text="@string/re_password"
+                    android:text="@string/password"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />
 

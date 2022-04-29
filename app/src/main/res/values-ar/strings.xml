@@ -89,4 +89,5 @@
     <string name="stats">إحصائيات</string>
     <string name="signout">تسجيل الخروج</string>
     <string name="favorite_articles">المقالات المفضلة</string>
+    <string name="loading">الرجاء الإنتظار ...</string>
 </resources>

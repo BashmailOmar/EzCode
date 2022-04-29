@@ -37,7 +37,7 @@ public class ArticleContentActivity extends AppCompatActivity {
     static String commentURL = MainLink + "showComments.php";
 
     private SharedPreferences shared_getData;
-    private static final String KEY_PREF_NAME = "userKEY";
+    private static final String KEY_PREF_NAME = "userData";
 
     TextView articleTextViewWriter, articleTextViewTitle, articleTextViewContent;
     EditText articleEditTextComment;
@@ -112,7 +112,7 @@ public class ArticleContentActivity extends AppCompatActivity {
     void sendComments() {
         strComment = articleEditTextComment.getText().toString();
         shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
-        senderUsername = shared_getData.getString("enterUser", "no data");
+        senderUsername = shared_getData.getString("username", "no data");
 
         Response.Listener<String> responseLisener = new Response.Listener<String>() {
             @Override

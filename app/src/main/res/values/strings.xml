@@ -91,5 +91,6 @@
     <string name="stats">Stats</string>
     <string name="signout">Sign out</string>
     <string name="favorite_articles">Fav Articles</string>
+    <string name="loading">Loading ...</string>
 
 </resources>

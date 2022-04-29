@@ -1,6 +1,8 @@
 package com.arabcoderz.ezcode;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -19,17 +21,17 @@ public class MainActivity extends AppCompatActivity {
     Button langButton;
     static String langStr;
     public static String MainLink = "http://192.168.1.13/EzCodePHP/"; //192.168.8.100  //192.168.1.13
-    public static String Local_FullName, Local_UserName, Local_UserEmail, Local_UserAge, Local_UserEduLvl, Local_UserGender, Local_UserCountry;
 
     private SharedPreferences shared_getData;
+    private SharedPreferences.Editor editor;
     public static final String SHARED_PREF_NAME = "userData";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        shared_getData = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
-
+        shared_getData = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        editor = shared_getData.edit();
         CheckInternetConnection cic = new CheckInternetConnection(getApplicationContext());
         if (!cic.isConnectingToInternet()) {
             Toast.makeText(MainActivity.this, "Not Connected to Internet", Toast.LENGTH_SHORT).show();
@@ -58,28 +60,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (langButton.getText().toString().equals("ENGLISH")) {//هنا ناخذ اللي مكتوب ف اللزر اذا كان مكتوب اللغه العربية يغير التطبيق للغه العربية واذا كان غير كذا يتحول للغه الانجليزيه
                     setApplicationLocale("");
+                    langStr="";
+
+
                 } else {
                     setApplicationLocale("ar");
                     langStr="ar";
                 }
+                editor.putString("language", langStr);
+                editor.apply();
                 finish();
                 overridePendingTransition(5, 0);
                 startActivity(getIntent());
                 overridePendingTransition(0, 5);
             }//هنا راح نغير اللغه بعدين نسوي اعادة انشاء الاكتفتي عشان يبان التغيير اللي سويناه حق اللغه
         });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Local_FullName = shared_getData.getString("Local_FullName", "").trim();
-        Local_UserName = shared_getData.getString("Local_UserName", "").trim();
-        Local_UserEmail = shared_getData.getString("Local_UserEmail", "").trim();
-        Local_UserAge = shared_getData.getString("Local_UserAge", "").trim();
-        Local_UserEduLvl = shared_getData.getString("Local_UserEduLvl", "").trim();
-        Local_UserGender = shared_getData.getString("Local_UserGender", "").trim();
-        Local_UserCountry = shared_getData.getString("Local_UserCountry", "").trim();
     }
 
     void setApplicationLocale(String locale) {
@@ -93,4 +88,5 @@ public class MainActivity extends AppCompatActivity {
         }
         resources.updateConfiguration(config, dm);
     }//هذي الميثود اللي نستخدمها عشان نغير لغة التطبيق
+
 }

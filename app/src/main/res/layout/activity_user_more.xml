@@ -30,7 +30,7 @@
                     app:cardBackgroundColor="@color/whito"
                     app:cardCornerRadius="75dp"
                     app:cardElevation="8dp"
-                    app:layout_constraintBottom_toTopOf="@+id/textView5"
+                    app:layout_constraintBottom_toTopOf="@+id/fullnameMorePage"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -41,19 +41,19 @@
                         android:background="@color/dark_blue"/>
                 </androidx.cardview.widget.CardView>
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/fullnameMorePage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Omar Bashmail"
                     android:textColor="@color/dark_blue"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/textView7"
+                    app:layout_constraintBottom_toTopOf="@+id/usernameMorePage"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintStart_toStartOf="parent" />
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/usernameMorePage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="44dp"
@@ -69,6 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_marginTop="30dp"
                 android:gravity="center">
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -153,6 +154,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <LinearLayout
+                        android:id="@+id/langButtonMore"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -164,6 +166,7 @@
                             android:background="@drawable/ic_baseline_language_24"
                             />
                         <TextView
+                            android:id="@+id/langButtonTextMore"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/dark_blue"

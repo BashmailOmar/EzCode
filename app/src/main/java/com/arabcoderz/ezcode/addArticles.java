@@ -26,7 +26,7 @@ public class addArticles extends AppCompatActivity {
     private String Str_title, Str_content, userName;
 
     private SharedPreferences shared_getData;
-    private static String KEY_PREF_NAME = "userKEY";
+    private static String KEY_PREF_NAME = "userData";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class addArticles extends AppCompatActivity {
         Str_content = Edit_content.getText().toString();
 
         shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
-        userName = shared_getData.getString("enterUser", "no data");
+        userName = shared_getData.getString("username", "no data");
 
 
         Response.Listener<String> responseLisener = new Response.Listener<String>() {

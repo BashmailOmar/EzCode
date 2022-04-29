@@ -30,7 +30,7 @@ public class ViewContextChallenges extends AppCompatActivity {
     public static String answer,point,programming_language;
 
     private SharedPreferences shared_getData;
-    private static final String KEY_PREF_NAME = "userKEY";
+    private static final String KEY_PREF_NAME = "userData";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

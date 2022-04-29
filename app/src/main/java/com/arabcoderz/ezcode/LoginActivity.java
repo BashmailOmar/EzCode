@@ -17,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -33,19 +34,16 @@ public class LoginActivity extends AppCompatActivity {
 
     private SharedPreferences shared_getData;
     private SharedPreferences.Editor editor;
-    private static final String KEY_PREF_NAME = "userKEY";
-
+    private static final String KEY_PREF_NAME = "userData";
+    RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         etUsername = findViewById(R.id.login_user_name);
         etPassword = findViewById(R.id.login_password);
-
         AutoLogin();
-
         findViewById(R.id.backBtnLogin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
-
         findViewById(R.id.login_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,19 +73,16 @@ public class LoginActivity extends AppCompatActivity {
     }//onCreate
 
 
-    private void AutoLogin(){
-            shared_getData = getSharedPreferences(KEY_PREF_NAME,Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
-            etUsername.setText(shared_getData.getString("enterUser","")); // طريقة استدعاء القيمة عن طريقة المفتاح
-            etPassword.setText(shared_getData.getString("enterPassword",""));
-            Login();
+    private void AutoLogin() {
+        shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
+        etUsername.setText(shared_getData.getString("username", "")); // طريقة استدعاء القيمة عن طريقة المفتاح
+        etPassword.setText(shared_getData.getString("password", ""));
+        Login();
     }
-
-
 
     void Login() {
         username = etUsername.getText().toString().trim();
         password = etPassword.getText().toString().trim();
-
         Response.Listener<String> respListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -109,13 +103,46 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         };
-        shared_getData = getSharedPreferences(KEY_PREF_NAME,Context.MODE_PRIVATE);
-        editor= shared_getData.edit();
-        editor.putString("enterUser",username);
-        editor.putString("enterPassword",password);
-        editor.apply();
         data_check data_check = new data_check(username, password, respListener);
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
         queue.add(data_check);
+        GetUserInfo(username);
+    }
+
+    void GetUserInfo(String username) {
+        String accountInfoUrl = "http://192.168.1.13/EzCodePHP/account_info.php";
+        requestQueue = Volley.newRequestQueue(this);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, accountInfoUrl, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
+                            editor = shared_getData.edit();
+                            JSONArray jsonArray = response.getJSONArray("allaccounts");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject resp = jsonArray.getJSONObject(i);
+                                if (resp.getString("account_username").equals(username)) {
+                                    editor.putString("id", resp.getString("account_id"));
+                                    editor.putString("fullname", resp.getString("account_fullname"));
+                                    editor.putString("username", username);
+                                    editor.putString("email", resp.getString("account_email"));
+                                    editor.putString("password", password);
+                                    editor.putString("imgCode", resp.getString("account_avatar_code"));
+                                    editor.putString("education", resp.getString("account_education"));
+                                    editor.putString("country", resp.getString("account_country"));
+                                    editor.putString("gender", resp.getString("account_gender"));
+                                    editor.putString("birthday", resp.getString("account_registration_date"));
+                                    editor.putString("registerDate", resp.getString("register_date"));
+                                    editor.putString("language", MainActivity.langStr);
+                                }
+                            }
+                            editor.apply();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, error -> Log.e("VOLLEY", "ERROR"));//جلب بيانات المقالات
+        requestQueue.add(jsonObjectRequest);
     }
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="411dp"
+    android:height="731dp"
+    android:viewportWidth="411"
+    android:viewportHeight="731">
+    <group>
+        <path
+            android:fillColor="#FF5A6F8E"
+            android:pathData="M0 0H411V731H0z"/>
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M52 139c0-5.52 4.48-10 10-10h288c5.52 0 10 4.48 10 10v483c0 5.52-4.48 10-10 10h-288c-5.52 0-10-4.48-10-10z"/>
+        <path
+            android:fillColor="#FF08203E"
+            android:pathData="M509 39c5.52 0 10 4.48 10 10l0 160c0 5.52-4.48 10-10 10l-221 0c-5.52 0-10-4.48-10-10l0-160c0-5.52 4.48-10 10-10z"/>
+        <path
+            android:fillColor="#FF08203E"
+            android:pathData="M129 567c5.52 0 10 4.48 10 10l0 160c0 5.52-4.48 10-10 10l-221 0c-5.52 0-10-4.48-10-10l0-160c0-5.52 4.48-10 10-10z"/>
+        <path
+            android:fillColor="#FF08203E"
+            android:pathData="M249-116c5.52 0 10 4.48 10 10l0 160c0 5.52-4.48 10-10 10l-221 0c-5.52 0-10-4.48-10-10l0-160c0-5.52 4.48-10 10-10z"/>
+        <path
+            android:fillColor="#FF08203E"
+            android:pathData="M531 684c5.52 0 10 4.48 10 10l0 160c0 5.52-4.48 10-10 10l-221 0c-5.52 0-10-4.48-10-10l0-160c0-5.52 4.48-10 10-10z"/>
+    </group>
+</vector>
