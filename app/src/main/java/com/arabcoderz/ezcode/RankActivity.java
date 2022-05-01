@@ -1,8 +1,12 @@
 package com.arabcoderz.ezcode;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +20,9 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
@@ -25,50 +31,52 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class TopTenActivity extends AppCompatActivity {
+public class RankActivity extends AppCompatActivity {
     static String url;
-    //تم وضعها ستاتك لكي نستطيع تثبيت تغير القيمه بعد تحديث الصفحه
     public String place;
-    RequestQueue requestQueue;
     ListView listPlaces;
     ArrayList<ListPlaces> listUsers = new ArrayList<>();
+    private SharedPreferences shared_getData;
+    private SharedPreferences.Editor editor;
+    private static String KEY_PREF_NAME = "userData";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_top_ten);
+        setContentView(R.layout.activity_rank);
+        shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
+        findViewById(R.id.backBtnRank).setOnClickListener(view -> {
+            startActivity(new Intent(RankActivity.this, UserMoreActivity.class));
+            url = null;
+        });
         if (url == null) {
             url = MainActivity.MainLink + "all_places.php";
         }//نتحقق من الرابط ان لم تكن لديه قيمه ف نعطيه القيمه الظاهره امامك لجلب مراكز المستخدمين
-        //نتحقق من نوع اللغه ان لم تكن لديها قيمه ف نعطيها القيمه الظاهره امامك لجلب مراكز المستخدمين
-        listPlaces = (ListView) findViewById(R.id.placesListTopTen);
-        findViewById(R.id.backBtnTopTen).setOnClickListener(view -> {
-            startActivity(new Intent(TopTenActivity.this, MainActivity.class));
-            url = null;
-        });
-        findViewById(R.id.javaBtnInTopBar).setOnClickListener(view -> {
+        listPlaces = (ListView) findViewById(R.id.placesListRank);
+        findViewById(R.id.javaBtnInTopBarRank).setOnClickListener(view -> {
             url = MainActivity.MainLink + "java_places.php";
             finish();
             overridePendingTransition(0, 0);
             startActivity(getIntent());
             overridePendingTransition(0, 0);
         });//عند الضغط على كلمة جافا نغير الرابط ونوع اللغه البرمجية ومن ثم نحدث الصفحه وتطلع معانا القائمة الجديده
-        findViewById(R.id.pythonBtnInTopBar).setOnClickListener(view -> {
+        findViewById(R.id.pythonBtnInTopBarRank).setOnClickListener(view -> {
             url = MainActivity.MainLink + "python_places.php";
             finish();
             overridePendingTransition(0, 0);
             startActivity(getIntent());
             overridePendingTransition(0, 0);
         });//عند الضغط على كلمة بايثون نغير الرابط ونوع اللغه البرمجية ومن ثم نحدث الصفحه وتطلع معانا القائمه الجديده
-        findViewById(R.id.jsBtnInTopBar).setOnClickListener(view -> {
-            url = MainActivity.MainLink + "javascript_places.php";
+        findViewById(R.id.jsBtnInTopBarRank).setOnClickListener(view -> {
+            url = MainActivity.MainLink + "js_places.php";
             finish();
             overridePendingTransition(0, 0);
             startActivity(getIntent());
             overridePendingTransition(0, 0);
         });//عند الضغط على كلمة جافاسكريبت نغير الرابط ونوع اللغه البرمجية ومن ثم نحدث الصفحه وتطلع معانا القائمة الجديده
-        findViewById(R.id.allBtnInTopBar).setOnClickListener(view -> {
+        findViewById(R.id.allBtnInTopBarRank).setOnClickListener(view -> {
             url = MainActivity.MainLink + "all_places.php";
             finish();
             overridePendingTransition(0, 0);
@@ -94,7 +102,7 @@ public class TopTenActivity extends AppCompatActivity {
                                 String point = resp.getString("points");
                                 String img = resp.getString("account_avatar_code");
                                 listUsers.add(new ListPlaces(place, username, point, img));
-                                TopTenActivity.this.listAllItem();
+                                RankActivity.this.listAllItem();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -108,7 +116,7 @@ public class TopTenActivity extends AppCompatActivity {
         listAdpter lA = new listAdpter(listUsers);
         listPlaces.setAdapter(lA);
     }
-    //هذي الميثودات خاصه بالادابتر. احنى مسوين بلوك معين واحد ونقعد نستدعيه ف القائمه لكل مستخدم
+
     class listAdpter extends BaseAdapter {
         ArrayList<ListPlaces> listA = new ArrayList<ListPlaces>();
 
@@ -135,7 +143,9 @@ public class TopTenActivity extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater layoutInflater = getLayoutInflater();
             View view;
-            if (position > 2) {
+            if ((listA.get(position).username).equals(shared_getData.getString("username", ""))) {
+                view = layoutInflater.inflate(R.layout.row_my_place, null);
+            } else if (position > 2) {
                 view = layoutInflater.inflate(R.layout.row_users_places, null);
             } else if (position == 0) {
                 view = layoutInflater.inflate(R.layout.row_first_place, null);

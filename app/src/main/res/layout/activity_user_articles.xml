@@ -48,6 +48,7 @@
                 android:layout_gravity="center_horizontal"
                 android:scrollbars="vertical"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
         </LinearLayout>
 
     </ScrollView>
@@ -84,6 +85,5 @@
         app:menu="@menu/menu_navigation">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
-
 
 </RelativeLayout>

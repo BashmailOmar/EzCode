@@ -3,28 +3,20 @@ package com.arabcoderz.ezcode;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
 public class ArticlesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private int previousPosition = 0;
-
     private List<List_Article> List_Article;
     private Context context;
-    static public int id;
+    static public int articleId;
 
     public ArticlesRecyclerViewAdapter(List<List_Article> list_article, Context context) {
         List_Article = list_article;
@@ -51,7 +43,7 @@ public class ArticlesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             @Override
             public void onClick(View v) {
                 //here we will navigate to the article content page
-                id = List_Article.get(position).getId();
+                articleId = List_Article.get(position).getId();
                 context.startActivity(new Intent(context, ArticleContentActivity.class));
             }
         });//----------------------------------------------------------------------------------------
@@ -59,9 +51,7 @@ public class ArticlesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
         if (position > previousPosition) { //scrolling DOWN
             AnimationUtil.animate(menuItemHolder, true);
-
         } else { // scrolling UP
-
             AnimationUtil.animate(menuItemHolder, false);
         }
         previousPosition = position;

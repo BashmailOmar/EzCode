@@ -13,6 +13,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.Locale;
@@ -20,6 +21,7 @@ import java.util.Locale;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.squareup.picasso.Picasso;
 
 public class UserMoreActivity extends AppCompatActivity {
 
@@ -27,6 +29,7 @@ public class UserMoreActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private static String KEY_PREF_NAME = "userData";
     TextView langButtonTextMore, fullnameTextView, usernameTextView;
+    ImageView avatarImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,9 @@ public class UserMoreActivity extends AppCompatActivity {
         editor = shared_getData.edit();
         fullnameTextView = findViewById(R.id.fullnameMorePage);
         usernameTextView = findViewById(R.id.usernameMorePage);
+        avatarImage = findViewById(R.id.avatar_in_account);
+        String imgCode = shared_getData.getString("imgCode", "");
+        Picasso.get().load(MainActivity.MainLink + "avatar/" + imgCode).into(avatarImage);
         fullnameTextView.setText(shared_getData.getString("fullname", ""));
         usernameTextView.setText(shared_getData.getString("username", ""));
         langButtonTextMore = findViewById(R.id.langButtonTextMore);
@@ -57,10 +63,10 @@ public class UserMoreActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (langButtonTextMore.getText().toString().equals("ENGLISH")) {
                     setApplicationLocale("");
-                    MainActivity.langStr="";
+                    MainActivity.langStr = "";
                 } else {
                     setApplicationLocale("ar");
-                    MainActivity.langStr="ar";
+                    MainActivity.langStr = "ar";
                 }
                 editor.putString("language", MainActivity.langStr);
                 editor.apply();
@@ -70,6 +76,12 @@ public class UserMoreActivity extends AppCompatActivity {
                 overridePendingTransition(0, 5);
             }
 
+        });
+        findViewById(R.id.rankButtonMore).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(UserMoreActivity.this, RankActivity.class));
+            }
         });
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationBar);
         bottomNavigationView.setSelectedItemId(R.id.more);
@@ -100,7 +112,6 @@ public class UserMoreActivity extends AppCompatActivity {
             }
         });
     }
-
     void setApplicationLocale(String locale) {
         Resources resources = getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();
@@ -112,5 +123,4 @@ public class UserMoreActivity extends AppCompatActivity {
         }
         resources.updateConfiguration(config, dm);
     }//هذي الميثود اللي نستخدمها عشان نغير لغة التطبيق
-
 }

@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,11 +32,11 @@ public class UserArticlesActivity extends AppCompatActivity {
     public List<List_Article> listArticle = new ArrayList<>();
     private GridLayoutManager gridLayoutManager;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_articles);
+
         findViewById(R.id.But_add_articles).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,18 +84,15 @@ public class UserArticlesActivity extends AppCompatActivity {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-
                 if (gridLayoutManager.findLastCompletelyVisibleItemPosition() == listArticle.size() - 1) {
                     getAllArticles(listArticle.get(listArticle.size() - 1).getId());
                 }
-
             }
         });
         getAllArticles(0);
     }//end onCreate
 
     public void getAllArticles(int limit) {
-
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 MainActivity.MainLink + "articles.php?limit=" + limit,
@@ -115,7 +111,6 @@ public class UserArticlesActivity extends AppCompatActivity {
                                 String content = responsS.getString("article_content");
                                 String writer = responsS.getString("article_writer");
                                 String date = responsS.getString("article_date");
-
                                 listArticle.add(new List_Article(id, title, content, writer, date));
                             }
                             recyclerView_dAdapter.notifyDataSetChanged();

@@ -103,10 +103,10 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         };
+        GetUserInfo(username);
         data_check data_check = new data_check(username, password, respListener);
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
         queue.add(data_check);
-        GetUserInfo(username);
     }
 
     void GetUserInfo(String username) {

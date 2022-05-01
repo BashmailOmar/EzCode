@@ -84,9 +84,7 @@ public class UserNewsActivity extends AppCompatActivity {
 
             }
         });
-
         Get_All_News(0);
-
     }//end on Create
 
     private void Get_All_News(int limit) {
@@ -104,12 +102,10 @@ public class UserNewsActivity extends AppCompatActivity {
 
                             for (int i = 0; i < jsonArray_usersS.length(); i++) {
                                 JSONObject responsS = jsonArray_usersS.getJSONObject(i);
-
                                 int id = responsS.getInt("news_id");
                                 String title = responsS.getString("news_title");
                                 String link = responsS.getString("news_link");
                                 String img_link = responsS.getString("news_image");
-
                                 listItems.add(new List_Item(id, title,link ,img_link));
                             }
                             recyclerView_dAdapter.notifyDataSetChanged();

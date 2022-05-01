@@ -38,7 +38,7 @@
                         android:id="@+id/avatar_in_account"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/dark_blue"/>
+                        />
                 </androidx.cardview.widget.CardView>
                 <TextView
                     android:id="@+id/fullnameMorePage"
@@ -80,6 +80,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:id="@+id/rankButtonMore"
                         android:orientation="vertical"
                         android:background="@drawable/useable_block">
                         <ImageView

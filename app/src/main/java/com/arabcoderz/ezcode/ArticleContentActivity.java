@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +23,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -92,7 +90,7 @@ public class ArticleContentActivity extends AppCompatActivity {
                                 JSONObject resp = jsonArray.getJSONObject(i);
                                 String id = resp.getString("article_id");
 //                                intID[0] = Integer.valueOf(id);
-                                if (ArticlesRecyclerViewAdapter.id == Integer.valueOf(id)) {
+                                if (ArticlesRecyclerViewAdapter.articleId == Integer.valueOf(id)) {
                                     String writer = resp.getString("article_writer");
                                     String title = resp.getString("article_title");
                                     String content = resp.getString("article_content");
@@ -133,7 +131,7 @@ public class ArticleContentActivity extends AppCompatActivity {
                 }
             }
         };
-        SendComment send_comment = new SendComment(String.valueOf(ArticlesRecyclerViewAdapter.id), senderUsername, strComment, responseLisener);
+        SendComment send_comment = new SendComment(String.valueOf(ArticlesRecyclerViewAdapter.articleId), senderUsername, strComment, responseLisener);
         RequestQueue queue = Volley.newRequestQueue(ArticleContentActivity.this);
         queue.add(send_comment);
         finish();
@@ -152,7 +150,7 @@ public class ArticleContentActivity extends AppCompatActivity {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject resp = jsonArray.getJSONObject(i);
                                 String articleId = resp.getString("article_id");
-                                if(ArticlesRecyclerViewAdapter.id == Integer.valueOf(articleId)) {
+                                if(ArticlesRecyclerViewAdapter.articleId == Integer.valueOf(articleId)) {
                                     String writer = resp.getString("comment_writer");
                                     String date = resp.getString("comment_date");
                                     String content = resp.getString("comment_content");
