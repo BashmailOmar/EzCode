@@ -105,6 +105,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:id="@+id/accountButtonMore"
                         android:orientation="vertical"
                         android:background="@drawable/useable_block">
                         <ImageView
@@ -199,7 +200,7 @@
                             android:textColor="@color/dark_blue"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            android:text="@string/favorite_articles"
+                            android:text="@string/my_articles"
                             />
                     </LinearLayout>
                     <Space

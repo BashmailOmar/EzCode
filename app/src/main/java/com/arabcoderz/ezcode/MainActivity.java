@@ -19,9 +19,8 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     Button langButton;
-    static String langStr;
+    static String langStr = "";
     public static String MainLink = "http://192.168.1.13/EzCodePHP/"; //192.168.8.100  //192.168.1.13
-
     private SharedPreferences shared_getData;
     private SharedPreferences.Editor editor;
     public static final String SHARED_PREF_NAME = "userData";
@@ -32,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         shared_getData = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = shared_getData.edit();
+        langStr = shared_getData.getString("language", "");
         CheckInternetConnection cic = new CheckInternetConnection(getApplicationContext());
         if (!cic.isConnectingToInternet()) {
             Toast.makeText(MainActivity.this, "Not Connected to Internet", Toast.LENGTH_SHORT).show();
@@ -60,12 +60,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (langButton.getText().toString().equals("ENGLISH")) {//هنا ناخذ اللي مكتوب ف اللزر اذا كان مكتوب اللغه العربية يغير التطبيق للغه العربية واذا كان غير كذا يتحول للغه الانجليزيه
                     setApplicationLocale("");
-                    langStr="";
+                    langStr = "";
 
 
                 } else {
                     setApplicationLocale("ar");
-                    langStr="ar";
+                    langStr = "ar";
                 }
                 editor.putString("language", langStr);
                 editor.apply();

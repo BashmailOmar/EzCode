@@ -88,6 +88,9 @@
     <string name="rank">التصنيف</string>
     <string name="stats">إحصائيات</string>
     <string name="signout">تسجيل الخروج</string>
-    <string name="favorite_articles">المقالات المفضلة</string>
+    <string name="my_articles">المقالات المفضلة</string>
     <string name="loading">الرجاء الإنتظار ...</string>
+    <string name="update_info">تحديث بياناتك</string>
+    <string name="account_confirm">ملاحظة: يجب أن تضع في اعتبارك أن (المستوى التعليمي ، الجنس ، البلد) ربما تمت إعادة تعيينه. بعد ذلك يمكنك تحديث ملف التعريف الخاص بك.</string>
+    <string name="logout">هل انت متأكد انك تريد تسجيل الخروج؟</string>
 </resources>

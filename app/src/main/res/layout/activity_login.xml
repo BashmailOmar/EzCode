@@ -138,6 +138,7 @@
                     android:gravity="center"
                     android:text="@string/login_btn"
                     android:textColor="@color/dark_blue"
+                    android:textStyle="bold"
                     android:textSize="16sp" />
 
                 <TextView
@@ -145,6 +146,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:gravity="center"
+                    android:textStyle="bold"
                     android:text="@string/forget_password"
                     android:textColor="@color/white" />
 
@@ -155,7 +157,8 @@
                     android:gravity="center"
                     android:minWidth="200dp"
                     android:text="@string/dont_have_account"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textStyle="bold"/>
             </LinearLayout>
 
         </LinearLayout>

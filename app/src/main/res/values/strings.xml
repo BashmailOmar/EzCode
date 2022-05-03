@@ -90,7 +90,10 @@
     <string name="rank">Rank</string>
     <string name="stats">Stats</string>
     <string name="signout">Sign out</string>
-    <string name="favorite_articles">Fav Articles</string>
+    <string name="my_articles">Fav Articles</string>
     <string name="loading">Loading ...</string>
+    <string name="update_info">Update your info</string>
+    <string name="account_confirm">Note: You should keep in mind that (educational level, gender, country) may have been reset. After that you can update your profile.</string>
+    <string name="logout">Are you sure you want to log out?</string>
 
 </resources>

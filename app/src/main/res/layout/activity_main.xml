@@ -46,7 +46,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/white_small_btn"
                 android:text="@string/regiater_btn"
-                android:textSize="16sp" />
+                android:textColor="@color/dark_blue"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <Space
                 android:id="@+id/space"
@@ -59,7 +61,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/white_small_btn"
                 android:text="@string/login_btn"
-                android:textSize="16sp" />
+                android:textColor="@color/dark_blue"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,7 +80,9 @@
                 android:background="@drawable/white_btn"
                 android:gravity="center"
                 android:text="@string/top_ten"
-                android:textSize="16sp" />
+                android:textColor="@color/dark_blue"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -92,7 +98,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/white_small_btn"
                 android:text="@string/languageBtn"
-                android:textSize="16sp" />
+                android:textColor="@color/dark_blue"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

@@ -17,6 +17,9 @@
         android:theme="@style/Theme.EzCode"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".RankActivity"
             android:exported="false" />
         <activity

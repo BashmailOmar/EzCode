@@ -68,10 +68,8 @@ public class LoginActivity extends AppCompatActivity {
                 Login();
                 System.out.print("login button clicked");
             }
-
         });
     }//onCreate
-
 
     private void AutoLogin() {
         shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
@@ -93,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (success) {
                         Toast.makeText(LoginActivity.this, "login success", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
+                        GetUserInfo(username);
                         startActivity(intent);
                     } else {
                         Toast.makeText(LoginActivity.this, "login not success", Toast.LENGTH_SHORT).show();
@@ -103,14 +102,13 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         };
-        GetUserInfo(username);
         data_check data_check = new data_check(username, password, respListener);
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
         queue.add(data_check);
     }
 
     void GetUserInfo(String username) {
-        String accountInfoUrl = "http://192.168.1.13/EzCodePHP/account_info.php";
+        String accountInfoUrl = "http://192.168.1.13/EzCodePHP/account_info.php?username=" + username;
         requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, accountInfoUrl, null,
                 new Response.Listener<JSONObject>() {
@@ -120,24 +118,22 @@ public class LoginActivity extends AppCompatActivity {
                             shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
                             editor = shared_getData.edit();
                             JSONArray jsonArray = response.getJSONArray("allaccounts");
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject resp = jsonArray.getJSONObject(i);
-                                if (resp.getString("account_username").equals(username)) {
-                                    editor.putString("id", resp.getString("account_id"));
-                                    editor.putString("fullname", resp.getString("account_fullname"));
-                                    editor.putString("username", username);
-                                    editor.putString("email", resp.getString("account_email"));
-                                    editor.putString("password", password);
-                                    editor.putString("imgCode", resp.getString("account_avatar_code"));
-                                    editor.putString("education", resp.getString("account_education"));
-                                    editor.putString("country", resp.getString("account_country"));
-                                    editor.putString("gender", resp.getString("account_gender"));
-                                    editor.putString("birthday", resp.getString("account_registration_date"));
-                                    editor.putString("registerDate", resp.getString("register_date"));
-                                    editor.putString("language", MainActivity.langStr);
-                                }
+                            JSONObject resp = jsonArray.getJSONObject(0);
+                            if (resp.getString("account_username").equals(username)) {
+                                editor.putString("id", resp.getString("account_id"));
+                                editor.putString("fullname", resp.getString("account_fullname"));
+                                editor.putString("username", username);
+                                editor.putString("email", resp.getString("account_email"));
+                                editor.putString("password", password);
+                                editor.putString("imgCode", resp.getString("account_avatar_code"));
+                                editor.putString("education", resp.getString("account_education"));
+                                editor.putString("country", resp.getString("account_country"));
+                                editor.putString("gender", resp.getString("account_gender"));
+                                editor.putString("birthday", resp.getString("account_registration_date"));
+                                editor.putString("registerDate", resp.getString("register_date"));
+                                editor.putString("language", MainActivity.langStr);
+                                editor.apply();
                             }
-                            editor.apply();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

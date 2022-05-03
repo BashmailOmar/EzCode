@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
     private SharedPreferences shared_getData;
     private SharedPreferences.Editor editor;
-    private static final String KEY_PREF_NAME = "userKEY";
+    private static final String KEY_PREF_NAME = "userData";
 
     private int pick = 100;
     private ImageView avatar_user;
@@ -61,13 +61,10 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     private final int month = calendar.get(Calendar.MONTH);
     private final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-    private ProgressDialog progressDialog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        progressDialog = new ProgressDialog(this);
 
         avatar_user = findViewById(R.id.pick_avatar);
         avatar_user.setImageResource(R.drawable.def_avatar);
@@ -100,14 +97,12 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 permission_photo();
             }
         });
-
         Text_select_Date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 select_date();
             }
         });
-
         send_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,7 +130,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
 
     }//end onCreate
-
 
     private void Register() {
         full_user_name = Edit_full_name.getText().toString();
@@ -172,7 +166,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream); // عمليت ضفط اقدر اتحكم في جودة الصور عن طريق تغير رقم 100 اذا قل الرقم كانت الصورة سيئة
             encodimg = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT); // تحويل الصوره الى نظام Base64 و String
 
-            send_data.setEnabled(false);
+//            send_data.setEnabled(false);
 
             Response.Listener<String> responseLisener = new Response.Listener<String>() {
                 @Override
@@ -181,12 +175,22 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                         JSONArray jsonArray = new JSONArray(response);
                         JSONObject jsonObject = jsonArray.getJSONObject(0);
                         String success = jsonObject.getString("success");
-
-                        if (success.contains("Reg_ok")) {
+                        if (success.contains("pass")) {
                             Toast.makeText(RegisterActivity.this, "تم تسجيلك بنجاح", Toast.LENGTH_LONG).show(); //اظهار النص من صفحة php
-                        } else if (success.contains("Error")) {
-                            Toast.makeText(RegisterActivity.this, "عذرا حدث خطأ لم يتم إرسال البيانات", Toast.LENGTH_SHORT).show();
-                            send_data.setEnabled(true);
+                            editor = shared_getData.edit();
+                            editor.putString("username", user_name); // تخزين القيمة في مفتاح
+                            editor.putString("password", user_password);
+                            editor.putString("imgCode", encodimg);
+                            editor.putString("fullname", full_user_name);
+                            editor.putString("email", user_email);
+                            editor.putString("education", edu);
+                            editor.putString("country", country);
+                            editor.putString("gender", gender);
+                            editor.apply();
+                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "عذرا حدث خطأ لم يتم إرسال البيانات", Toast.LENGTH_LONG).show();
+//                            send_data.setEnabled(true);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -194,31 +198,17 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 }
             };
             shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
-            editor = shared_getData.edit();
-            editor.putString("username", user_name); // تخزين القيمة في مفتاح
-            editor.putString("password", user_password);
-            editor.putString("imgCode", encodimg);
-            editor.putString("fullname", full_user_name);
-            editor.putString("email", user_email);
-            editor.putString("education", edu);
-            editor.putString("country", country);
-            editor.putString("gender", gender);
-            editor.apply();
             Send_Data_Register dataSend = new Send_Data_Register(full_user_name, user_name, user_email, user_password, encodimg, edu, country, gender, date, responseLisener); // ارسل البيانات
             RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
             queue.add(dataSend);
-            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-
         }
     }
-
 
     //اظهار رسالة
     private void showError(EditText input, String text) {
         input.setError(text);
         input.requestFocus();
     }
-
 
     //طلب اذن الوصول الى الصور
     public void permission_photo() {
@@ -281,17 +271,13 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         datePickerDialog.show();
     }
 
-
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
         edu = adapterView.getItemAtPosition(i).toString();
         country = adapterView.getItemAtPosition(i).toString();
         gender = adapterView.getItemAtPosition(i).toString();
     }
 
     @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
+    public void onPointerCaptureChanged(boolean hasCapture) {}
 }

@@ -1,9 +1,11 @@
 package com.arabcoderz.ezcode;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -30,32 +32,56 @@ public class UserMoreActivity extends AppCompatActivity {
     private static String KEY_PREF_NAME = "userData";
     TextView langButtonTextMore, fullnameTextView, usernameTextView;
     ImageView avatarImage;
+    private AlertDialog.Builder builder;
+    private String msg, yes, no;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_more);
+        builder = new AlertDialog.Builder(this);
         shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
         editor = shared_getData.edit();
         fullnameTextView = findViewById(R.id.fullnameMorePage);
         usernameTextView = findViewById(R.id.usernameMorePage);
         avatarImage = findViewById(R.id.avatar_in_account);
-        String imgCode = shared_getData.getString("imgCode", "");
-        Picasso.get().load(MainActivity.MainLink + "avatar/" + imgCode).into(avatarImage);
+        Picasso.get().load(MainActivity.MainLink + "avatar/" + shared_getData.getString("imgCode", "")).into(avatarImage);
         fullnameTextView.setText(shared_getData.getString("fullname", ""));
         usernameTextView.setText(shared_getData.getString("username", ""));
         langButtonTextMore = findViewById(R.id.langButtonTextMore);
+        if (MainActivity.langStr.equals("ar")) {
+            msg = "هل انت متأكد انك تريد تسجيل الخروج؟";
+            yes = "نعم";
+            no = "لا";
+        } else {
+            msg = "Are you sure you want to log out?";
+            yes = "Yes";
+            no = "No";
+        }
         findViewById(R.id.But_LogOut).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
-                editor = shared_getData.edit();
-                editor.clear();
-                editor.apply();
-                Toast.makeText(UserMoreActivity.this, "logout success", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(UserMoreActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                builder.setMessage(msg)
+                        .setCancelable(true)
+                        .setPositiveButton(yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
+                                editor = shared_getData.edit();
+                                editor.clear();
+                                editor.apply();
+                                Toast.makeText(UserMoreActivity.this, "logout success", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(UserMoreActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton(no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                            }
+                        }).show();
+
             }
         });
         findViewById(R.id.langButtonMore).setOnClickListener(new View.OnClickListener() {
@@ -81,6 +107,12 @@ public class UserMoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(UserMoreActivity.this, RankActivity.class));
+            }
+        });
+        findViewById(R.id.accountButtonMore).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(UserMoreActivity.this, AccountActivity.class));
             }
         });
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationBar);
@@ -112,6 +144,7 @@ public class UserMoreActivity extends AppCompatActivity {
             }
         });
     }
+
     void setApplicationLocale(String locale) {
         Resources resources = getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();
