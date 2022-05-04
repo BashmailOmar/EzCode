@@ -127,6 +127,7 @@
                         android:layout_width="25dp"
                         android:layout_height="1dp"/>
                     <LinearLayout
+                        android:id="@+id/statsButtonMore"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -178,12 +179,11 @@
                             />
 
                     </LinearLayout>
-
                     <Space
                         android:layout_width="25dp"
                         android:layout_height="1dp"/>
                     <LinearLayout
-                        android:id="@+id/favoriteArticles"
+                        android:id="@+id/myArticles"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"

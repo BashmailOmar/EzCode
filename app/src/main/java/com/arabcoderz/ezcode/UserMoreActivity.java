@@ -58,6 +58,12 @@ public class UserMoreActivity extends AppCompatActivity {
             yes = "Yes";
             no = "No";
         }
+        findViewById(R.id.statsButtonMore).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(UserMoreActivity.this,StatsActivity.class));
+            }
+        });
         findViewById(R.id.But_LogOut).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,6 +88,12 @@ public class UserMoreActivity extends AppCompatActivity {
                             }
                         }).show();
 
+            }
+        });
+        findViewById(R.id.myArticles).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(UserMoreActivity.this, MyArticlesActivity.class));
             }
         });
         findViewById(R.id.langButtonMore).setOnClickListener(new View.OnClickListener() {

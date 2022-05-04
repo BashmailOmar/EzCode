@@ -39,7 +39,6 @@ public class RankActivity extends AppCompatActivity {
     ListView listPlaces;
     ArrayList<ListPlaces> listUsers = new ArrayList<>();
     private SharedPreferences shared_getData;
-    private SharedPreferences.Editor editor;
     private static String KEY_PREF_NAME = "userData";
 
     @Override

@@ -48,7 +48,6 @@ public class ArticlesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             }
         });//----------------------------------------------------------------------------------------
 
-
         if (position > previousPosition) { //scrolling DOWN
             AnimationUtil.animate(menuItemHolder, true);
         } else { // scrolling UP

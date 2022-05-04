@@ -17,6 +17,12 @@
         android:theme="@style/Theme.EzCode"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".StatsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyArticlesActivity"
+            android:exported="false" />
+        <activity
             android:name=".AccountActivity"
             android:exported="false" />
         <activity

@@ -18,7 +18,6 @@ import java.util.Locale;
 public class SplashActivity extends AppCompatActivity {
     private SharedPreferences shared_getData;
     private static final String KEY_PREF_NAME = "userData";
-    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +30,12 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 try {
                     sleep(3000);
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent;
+                    if(shared_getData.getString("username","").equals("")){
+                        intent = new Intent(getApplicationContext(), MainActivity.class);
+                    }else{
+                        intent = new Intent(getApplicationContext(), UserHomeActivity.class);
+                    }
                     startActivity(intent);
                     finish();
                 } catch (InterruptedException e) {
