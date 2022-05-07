@@ -127,7 +127,6 @@ public class UserHomeActivity extends AppCompatActivity {
         requestQueue.add(jsonObjectRequestChallenges);
         requestQueue.add(jsonObjectRequestArticles);
 
-
         findViewById(R.id.NewsCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

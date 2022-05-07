@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.content.res.Configuration;
@@ -22,8 +23,17 @@ import java.util.Locale;
 
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class UserMoreActivity extends AppCompatActivity {
 
@@ -35,12 +45,14 @@ public class UserMoreActivity extends AppCompatActivity {
     private AlertDialog.Builder builder;
     private String msg, yes, no;
 
+    RequestQueue requestQueue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_more);
+        shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
         builder = new AlertDialog.Builder(this);
-        shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
         editor = shared_getData.edit();
         fullnameTextView = findViewById(R.id.fullnameMorePage);
         usernameTextView = findViewById(R.id.usernameMorePage);
@@ -61,7 +73,7 @@ public class UserMoreActivity extends AppCompatActivity {
         findViewById(R.id.statsButtonMore).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UserMoreActivity.this,StatsActivity.class));
+                startActivity(new Intent(UserMoreActivity.this, StatsActivity.class));
             }
         });
         findViewById(R.id.But_LogOut).setOnClickListener(new View.OnClickListener() {
@@ -72,7 +84,6 @@ public class UserMoreActivity extends AppCompatActivity {
                         .setPositiveButton(yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
                                 editor = shared_getData.edit();
                                 editor.clear();
                                 editor.apply();
@@ -155,6 +166,9 @@ public class UserMoreActivity extends AppCompatActivity {
                 return false;
             }
         });
+        getEducationInfo("account_education");
+        getGenderInfo("account_gender");
+        getCountryInfo("account_country");
     }
 
     void setApplicationLocale(String locale) {
@@ -168,4 +182,120 @@ public class UserMoreActivity extends AppCompatActivity {
         }
         resources.updateConfiguration(config, dm);
     }//هذي الميثود اللي نستخدمها عشان نغير لغة التطبيق
+
+    void getEducationInfo(String something) {
+        String url = MainActivity.MainLink + "stats.php?something=" + something;
+        requestQueue = Volley.newRequestQueue(this);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            editor = shared_getData.edit();
+                            JSONArray jsonArray = response.getJSONArray("query");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject resp = jsonArray.getJSONObject(i);
+                                String edu = resp.getString("account_education");
+                                switch (edu) {
+                                    case "Less than secondary":
+                                        editor.putString("less_than_secondary", resp.getString("number"));
+                                        break;
+                                    case "Secondary":
+                                        editor.putString("secondary", resp.getString("number"));
+                                        break;
+                                    case "Intermediate diploma":
+                                        editor.putString("intermediate_diploma", resp.getString("number"));
+                                        break;
+                                    case "Bachelor and Above":
+                                        editor.putString("bachelor_and_above", resp.getString("number"));
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                editor.apply();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, error -> Log.e("VOLLEY", "ERROR"));//جلب بيانات المقالات
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    void getGenderInfo(String something) {
+        String url = MainActivity.MainLink + "stats.php?something=" + something;
+        requestQueue = Volley.newRequestQueue(this);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            editor = shared_getData.edit();
+                            JSONArray jsonArray = response.getJSONArray("query");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject resp = jsonArray.getJSONObject(i);
+                                String gen = resp.getString("account_gender");
+                                switch (gen) {
+                                    case "Male":
+                                        editor.putString("male", resp.getString("number"));
+                                        break;
+                                    case "Female":
+                                        editor.putString("female", resp.getString("number"));
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                editor.apply();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, error -> Log.e("VOLLEY", "ERROR"));//جلب بيانات المقالات
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    void getCountryInfo(String something) {
+        String url = MainActivity.MainLink + "country_stats.php?something=" + something;
+        requestQueue = Volley.newRequestQueue(this);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            editor = shared_getData.edit();
+                            JSONArray jsonArray = response.getJSONArray("query");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject resp = jsonArray.getJSONObject(i);
+                                switch (i) {
+                                    case 0:
+                                        editor.putString("firstcountry_name", resp.getString("account_country"));
+                                        editor.putString("firstcountry_number", resp.getString("number"));
+                                        break;
+                                    case 1:
+                                        editor.putString("secondcountry_name", resp.getString("account_country"));
+                                        editor.putString("secondcountry_number", resp.getString("number"));
+                                        break;
+                                    case 2:
+                                        editor.putString("thirdcountry_name", resp.getString("account_country"));
+                                        editor.putString("thirdcountry_number", resp.getString("number"));
+                                        break;
+                                    case 3:
+                                        editor.putString("forthcountry_name", resp.getString("account_country"));
+                                        editor.putString("forthcountry_number", resp.getString("number"));
+                                        break;
+                                    default:
+                                        editor.putString("othercountry_number", resp.getString("number"));
+                                        break;
+                                }
+                                editor.apply();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, error -> Log.e("VOLLEY", "ERROR"));//جلب بيانات المقالات
+        requestQueue.add(jsonObjectRequest);
+    }
+
 }

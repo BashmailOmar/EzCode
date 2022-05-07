@@ -24,16 +24,18 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
-        setApplicationLocale(shared_getData.getString("language",""));
+        MainActivity.langStr = shared_getData.getString("language", "");
+        Toast.makeText(this, MainActivity.langStr, Toast.LENGTH_SHORT).show();
+        setApplicationLocale(MainActivity.langStr);
         Thread thread = new Thread() {
             @Override
             public void run() {
                 try {
                     sleep(3000);
                     Intent intent;
-                    if(shared_getData.getString("username","").equals("")){
+                    if (shared_getData.getString("username", "").equals("")) {
                         intent = new Intent(getApplicationContext(), MainActivity.class);
-                    }else{
+                    } else {
                         intent = new Intent(getApplicationContext(), UserHomeActivity.class);
                     }
                     startActivity(intent);

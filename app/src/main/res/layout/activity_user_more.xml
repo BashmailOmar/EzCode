@@ -48,22 +48,36 @@
                     android:textColor="@color/dark_blue"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/usernameMorePage"
+                    app:layout_constraintBottom_toTopOf="@+id/linerMorePage"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintStart_toStartOf="parent" />
-                <TextView
-                    android:id="@+id/usernameMorePage"
+                <LinearLayout
+                    android:id="@+id/linerMorePage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="44dp"
-                    android:text="bashmailomar"
-                    android:textColor="@color/whito"
-                    android:textSize="16sp"
+                    android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.502"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="\@"
+                        android:textColor="@color/whito"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:id="@+id/usernameMorePage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="44dp"
+                        android:text="bashmailomar"
+                        android:textColor="@color/whito"
+                        android:textSize="16sp"
+                        />
+                </LinearLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
             <LinearLayout
                 android:layout_width="match_parent"

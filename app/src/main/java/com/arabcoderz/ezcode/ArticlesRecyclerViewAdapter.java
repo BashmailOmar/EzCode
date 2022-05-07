@@ -23,6 +23,11 @@ public class ArticlesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         this.context = context;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
