@@ -108,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     void GetUserInfo(String username) {
-        String accountInfoUrl = "http://192.168.1.13/EzCodePHP/account_info.php?username=" + username;
+        String accountInfoUrl = "https://ezcode404.000webhostapp.com/account_info.php?username=" + username;
         requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, accountInfoUrl, null,
                 new Response.Listener<JSONObject>() {

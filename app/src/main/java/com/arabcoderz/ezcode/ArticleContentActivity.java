@@ -167,8 +167,7 @@ public class ArticleContentActivity extends AppCompatActivity {
     void sendComments() {
         strComment = articleEditTextComment.getText().toString();
         shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
-        senderUsername = shared_getData.getString("username", "no data");
-
+        senderUsername = shared_getData.getString("username", "");
         Response.Listener<String> responseLisener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

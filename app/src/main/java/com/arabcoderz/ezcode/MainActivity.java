@@ -20,7 +20,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     Button langButton;
     static String langStr = "";
-    public static String MainLink = "http://192.168.1.13/EzCodePHP/"; //192.168.8.100  //192.168.1.13
+    public static String MainLink = "https://ezcode404.000webhostapp.com/"; //192.168.8.100  //192.168.1.13
     private SharedPreferences shared_getData;
     private SharedPreferences.Editor editor;
     public static final String SHARED_PREF_NAME = "userData";

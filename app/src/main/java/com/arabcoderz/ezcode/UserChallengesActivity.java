@@ -35,7 +35,6 @@ public class UserChallengesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_challenges);
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationBar);
         bottomNavigationView.setSelectedItemId(R.id.challenges);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -64,31 +63,22 @@ public class UserChallengesActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         recyclerView = findViewById(R.id.m_RecyclerView_Challenge);
         recyclerView.setHasFixedSize(true);
-
         gridLayoutManager = new GridLayoutManager(this,1);
         recyclerView.setLayoutManager(gridLayoutManager);
-
         viewAdapterChallenges = new RecyclerViewAdapterChallenges(List_Challeng, this);
         recyclerView.setAdapter(viewAdapterChallenges);
-
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-
                 if (gridLayoutManager.findLastCompletelyVisibleItemPosition() == List_Challeng.size() - 1) {
                     GetAllChallenges(List_Challeng.get(List_Challeng.size()-1).getId());
                 }
-
             }
         });
-
         GetAllChallenges(0);
-
     }//end onCreate
-
     private void GetAllChallenges(int limit) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
@@ -130,5 +120,4 @@ public class UserChallengesActivity extends AppCompatActivity {
         queue.add(stringRequest);
         stringRequest.setShouldCache(false);
     }
-
 }
