@@ -127,8 +127,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 startActivity(new Intent(RegisterActivity.this, TermsAndConditionsActivity.class));
             }
         });
-
-
     }//end onCreate
 
     private void Register() {

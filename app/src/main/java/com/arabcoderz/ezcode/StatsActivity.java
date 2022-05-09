@@ -176,6 +176,7 @@ public class StatsActivity extends AppCompatActivity {
         int conNum3 = Integer.parseInt(shared_getData.getString("thirdcountry_number", ""));
         int conNum4 = Integer.parseInt(shared_getData.getString("forthcountry_number", ""));
         int conNum5 = Integer.parseInt(shared_getData.getString("othercountry_number", ""));
+
         ArrayList<PieEntry> PieChart = new ArrayList<>();
         PieChart.add(new PieEntry(conNum1, conName1));
         PieChart.add(new PieEntry(conNum2, conName2));

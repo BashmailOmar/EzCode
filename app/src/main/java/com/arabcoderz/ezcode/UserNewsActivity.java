@@ -99,7 +99,6 @@ public class UserNewsActivity extends AppCompatActivity {
                             JSONArray jsonArray = new JSONArray(response);
                             JSONObject jsonResponse = jsonArray.getJSONObject(0);
                             JSONArray jsonArray_usersS = jsonResponse.getJSONArray("All_News");
-
                             for (int i = 0; i < jsonArray_usersS.length(); i++) {
                                 JSONObject responsS = jsonArray_usersS.getJSONObject(i);
                                 int id = responsS.getInt("news_id");
@@ -109,8 +108,6 @@ public class UserNewsActivity extends AppCompatActivity {
                                 listItems.add(new List_Item(id, title,link ,img_link));
                             }
                             recyclerView_dAdapter.notifyDataSetChanged();
-
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

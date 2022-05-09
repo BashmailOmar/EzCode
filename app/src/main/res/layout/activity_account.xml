@@ -149,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
                     android:paddingBottom="5dp"
-                    android:text="@string/age"
+                    android:text="@string/birthday"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />
 

@@ -3,6 +3,7 @@ package com.arabcoderz.ezcode;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,14 +53,12 @@ public class ArticlesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 context.startActivity(new Intent(context, ArticleContentActivity.class));
             }
         });//----------------------------------------------------------------------------------------
-
         if (position > previousPosition) { //scrolling DOWN
             AnimationUtil.animate(menuItemHolder, true);
         } else { // scrolling UP
             AnimationUtil.animate(menuItemHolder, false);
         }
         previousPosition = position;
-
     }
 
     @Override

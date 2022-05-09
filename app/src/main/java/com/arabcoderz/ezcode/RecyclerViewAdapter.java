@@ -19,7 +19,6 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     private int previousPosition = 0;
     private List<List_Item> List_Item;
     private Context context;
@@ -44,12 +43,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         MenuItemViewHolder menuItemHolder = (MenuItemViewHolder) holder;
-
         menuItemHolder.textViewTitel.setText(List_Item.get(position).getTitle());
-
         Picasso.get().load(List_Item.get(position).getImg_link()).into(menuItemHolder.imageView);
-
-
         menuItemHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +61,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             AnimationUtil.animate(menuItemHolder, false);
         }
         previousPosition = position;
-
     }
 
     @Override

@@ -52,7 +52,40 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:id="@+id/itIsMe"
+                android:layout_marginVertical="5dp"
+                android:visibility="gone">
 
+                <Button
+                    android:id="@+id/deleteMyArticle"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:textColor="@color/dark_blue"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:text="@string/delete_my_article"
+                    android:background="@drawable/white_small_btn"
+                    tools:ignore="SpeakableTextPresentCheck" />
+                <Space
+                    android:layout_width="30dp"
+                    android:layout_height="1dp"/>
+
+                <Button
+                    android:id="@+id/editMyArticle"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:textColor="@color/dark_blue"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:text="@string/edit_my_article"
+                    android:background="@drawable/white_small_btn"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -96,7 +129,6 @@
                     android:textColor="@color/whito"
                     android:textSize="17sp" />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -132,7 +164,6 @@
 
 
             </LinearLayout>
-
             <ListView
                 android:id="@+id/articleComments"
                 android:layout_width="match_parent"

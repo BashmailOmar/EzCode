@@ -98,7 +98,6 @@ public class UserMoreActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                             }
                         }).show();
-
             }
         });
         findViewById(R.id.myArticles).setOnClickListener(new View.OnClickListener() {
@@ -265,8 +264,10 @@ public class UserMoreActivity extends AppCompatActivity {
                         try {
                             editor = shared_getData.edit();
                             JSONArray jsonArray = response.getJSONArray("query");
+                            int allN=0;
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject resp = jsonArray.getJSONObject(i);
+
                                 switch (i) {
                                     case 0:
                                         editor.putString("firstcountry_name", resp.getString("account_country"));
@@ -285,9 +286,12 @@ public class UserMoreActivity extends AppCompatActivity {
                                         editor.putString("forthcountry_number", resp.getString("number"));
                                         break;
                                     default:
-                                        editor.putString("othercountry_number", resp.getString("number"));
+                                        int n = Integer.parseInt(resp.getString("number"));
+                                        allN = allN + n;
+                                        editor.putString("othercountry_number", String.valueOf(allN));
                                         break;
                                 }
+
                                 editor.apply();
                             }
                         } catch (JSONException e) {

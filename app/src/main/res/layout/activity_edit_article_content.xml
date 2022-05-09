@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_des"
     android:orientation="vertical"
-    tools:context=".addArticles">
+    tools:context=".EditArticleContent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:padding="10dp">
 
             <ImageView
-                android:id="@+id/butBackArticles"
+                android:id="@+id/butBackContent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/back_btn_light" />
@@ -36,14 +36,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/add_article"
+                android:text="@string/edit_my_article"
                 android:textColor="@color/white"
                 android:textSize="19sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="380dp"
@@ -52,7 +51,7 @@
         android:layout_marginTop="10dp">
 
         <EditText
-            android:id="@+id/input_title_article"
+            android:id="@+id/edit_title_article"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -62,7 +61,6 @@
             android:maxLines="3"
             android:textAlignment="center" />
     </LinearLayout>
-
 
     <ScrollView
         android:layout_width="380dp"
@@ -76,7 +74,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/article_content"
+                android:id="@+id/edit_article_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/write_title_articles"
@@ -94,18 +92,17 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/addArticle"
+                    android:id="@+id/editArticle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/dark_blue"
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:background="@drawable/white_small_btn"
-                    android:text="@string/add_article" />
+                    android:text="@string/edit_my_article" />
             </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
-
 </LinearLayout>

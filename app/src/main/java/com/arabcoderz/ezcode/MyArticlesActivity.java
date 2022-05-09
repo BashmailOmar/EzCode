@@ -37,6 +37,7 @@ public class MyArticlesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_articles);
         shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
+
         findViewById(R.id.backBtnMyArticles).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,8 +88,6 @@ public class MyArticlesActivity extends AppCompatActivity {
                                 }
                             }
                             recyclerView_dAdapter.notifyDataSetChanged();
-
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

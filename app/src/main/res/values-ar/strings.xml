@@ -17,7 +17,7 @@
     <string name="email">البريد الإلكتروني:</string>
     <string name="enter_username">مثال: OmarBash</string>
     <string name="enter_emai">مثال: omarbash@example.com</string>
-    <string name="age">العمر:</string>
+    <string name="birthday">تاريخ الميلاد:</string>
     <string name="enter_age">مثال: mm/dd/yyyy</string>
     <string name="edu_lvl">المستوى التعليمي:</string>
     <string name="select_lvl">اختر المستوى</string>
@@ -27,7 +27,6 @@
         <item>دبلوم متوسط</item>
         <item>بكالوريوس فأعلى</item>
     </string-array>
-
     <string-array name="country_list">
         <item>المملكة العربية السعودية</item>
         <item>اليمن</item>
@@ -53,7 +52,6 @@
         <item>فلسطين</item>
         <item>اخرى</item>
     </string-array>
-
     <string-array name="gender_list">
         <item>ذكر</item>
         <item>انثى</item>
@@ -93,4 +91,9 @@
     <string name="update_info">تحديث بياناتك</string>
     <string name="account_confirm">ملاحظة: يجب أن تضع في اعتبارك أن (المستوى التعليمي ، الجنس ، البلد) قد تمت إعادة تعيينها. بعد ذلك يمكنك تحديث ملف التعريف الخاص بك.</string>
     <string name="logout">هل انت متأكد انك تريد تسجيل الخروج؟</string>
+    <string name="delete_my_article">حذف</string>
+    <string name="edit_my_article">تعديل</string>
+    <string name="challenges_title_xml">التحديات</string>
+    <string name="solve_challenges">التحديات</string>
+
 </resources>

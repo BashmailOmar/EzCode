@@ -15,6 +15,5 @@ public class AnimationUtil {
         animatorTranslateY.setDuration(1000);
         animatorSet.playTogether(animatorTranslateY);
 //        animatorSet.start();
-
     }
 }
