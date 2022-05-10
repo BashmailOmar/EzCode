@@ -95,5 +95,7 @@
     <string name="edit_my_article">تعديل</string>
     <string name="challenges_title_xml">التحديات</string>
     <string name="solve_challenges">التحديات</string>
+    <string name="send">إرسال</string>
+    <string name="write_answer">إكتب اجابتك</string>
 
 </resources>

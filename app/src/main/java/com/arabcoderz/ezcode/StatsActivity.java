@@ -29,12 +29,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class StatsActivity extends AppCompatActivity {
-    String eduStr;
-    PieChart agePieCharts, eduPieCharts, genderPieCharts, countryPieCharts;
+
+    PieChart eduPieCharts, genderPieCharts, countryPieCharts;
     String age, ageDescription, eduDescription, genderDescription, countryDescription,
-            eduLv1, eduLv2, eduLv3, eduLv4, male, female,
-            country1, country2, country3, country4, country5, country6, country7, country8, country9, country10, country11, country12,
-            country13, country14, country15, country16, country17, country18, country19, country20, country21, country22, country23;
+            eduLv1, eduLv2, eduLv3, eduLv4, male, female;
     final int[] myColors = {
             Color.rgb(0, 139, 139),
             Color.rgb(100, 149, 237),
@@ -96,33 +94,31 @@ public class StatsActivity extends AppCompatActivity {
             //*----------------------------*
         }
         //--------------------------------------------------------------
-        agePieCharts = findViewById(R.id.agePieChart);
         eduPieCharts = findViewById(R.id.eduPieChart);
         genderPieCharts = findViewById(R.id.genderPieChart);
         countryPieCharts = findViewById(R.id.countryPieChart);
         //--------------------------------------------------------------
         //--------------------------------------------------------------
-        getAgeInfo();
         getEduInfo();
         getGenderInfo();
         getCountryInfo();
     }
-    void getAgeInfo() {
-        ArrayList<PieEntry> PieChart = new ArrayList<>();
-        PieChart.add(new PieEntry(1028, age + " < 18"));
-        PieChart.add(new PieEntry(1741, "17 < " + age + " < 28"));
-        PieChart.add(new PieEntry(344, age + " > 27"));
-        PieDataSet PieDataSet = new PieDataSet(PieChart, "");
-        PieDataSet.setColors(ColorTemplate.createColors(myColors));
-        PieDataSet.setValueTextColor(Color.WHITE);
-        PieDataSet.setValueTextSize(18f);
-        PieData PieData = new PieData(PieDataSet);
-        agePieCharts.setData(PieData);
-        agePieCharts.getDescription().setEnabled(false);
-        agePieCharts.setCenterText(ageDescription);
-        agePieCharts.setCenterTextSize(20);
-        agePieCharts.animateY(1500);
-    }
+//    void getAgeInfo() {
+//        ArrayList<PieEntry> PieChart = new ArrayList<>();
+//        PieChart.add(new PieEntry(1028, age + " < 18"));
+//        PieChart.add(new PieEntry(1741, "17 < " + age + " < 28"));
+//        PieChart.add(new PieEntry(344, age + " > 27"));
+//        PieDataSet PieDataSet = new PieDataSet(PieChart, "");
+//        PieDataSet.setColors(ColorTemplate.createColors(myColors));
+//        PieDataSet.setValueTextColor(Color.WHITE);
+//        PieDataSet.setValueTextSize(18f);
+//        PieData PieData = new PieData(PieDataSet);
+//        agePieCharts.setData(PieData);
+//        agePieCharts.getDescription().setEnabled(false);
+//        agePieCharts.setCenterText(ageDescription);
+//        agePieCharts.setCenterTextSize(20);
+//        agePieCharts.animateY(1500);
+//    }
     public void getEduInfo() {
         int edu1 = Integer.parseInt(shared_getData.getString("less_than_secondary", ""));
         int edu2 = Integer.parseInt(shared_getData.getString("secondary", ""));

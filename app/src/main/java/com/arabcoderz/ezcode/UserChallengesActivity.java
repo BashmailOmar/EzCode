@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -42,22 +43,22 @@ public class UserChallengesActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(),UserHomeActivity.class));
-                        overridePendingTransition(0,0);
+                        startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.news:
-                        startActivity(new Intent(getApplicationContext(),UserNewsActivity.class));
-                        overridePendingTransition(0,0);
+                        startActivity(new Intent(getApplicationContext(), UserNewsActivity.class));
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.challenges:
                         return true;
                     case R.id.articles:
-                        startActivity(new Intent(getApplicationContext(),UserArticlesActivity.class));
-                        overridePendingTransition(0,0);
+                        startActivity(new Intent(getApplicationContext(), UserArticlesActivity.class));
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.more:
-                        startActivity(new Intent(getApplicationContext(),UserMoreActivity.class));
-                        overridePendingTransition(0,0);
+                        startActivity(new Intent(getApplicationContext(), UserMoreActivity.class));
+                        overridePendingTransition(0, 0);
                         return true;
                 }
                 return false;
@@ -65,7 +66,7 @@ public class UserChallengesActivity extends AppCompatActivity {
         });
         recyclerView = findViewById(R.id.m_RecyclerView_Challenge);
         recyclerView.setHasFixedSize(true);
-        gridLayoutManager = new GridLayoutManager(this,1);
+        gridLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(gridLayoutManager);
         viewAdapterChallenges = new RecyclerViewAdapterChallenges(List_Challeng, this);
         recyclerView.setAdapter(viewAdapterChallenges);
@@ -73,12 +74,13 @@ public class UserChallengesActivity extends AppCompatActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 if (gridLayoutManager.findLastCompletelyVisibleItemPosition() == List_Challeng.size() - 1) {
-                    GetAllChallenges(List_Challeng.get(List_Challeng.size()-1).getId());
+                    GetAllChallenges(List_Challeng.get(List_Challeng.size() - 1).getId());
                 }
             }
         });
         GetAllChallenges(0);
     }//end onCreate
+
     private void GetAllChallenges(int limit) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
@@ -90,17 +92,17 @@ public class UserChallengesActivity extends AppCompatActivity {
                             JSONArray jsonArray = new JSONArray(response);
                             JSONObject jsonResponse = jsonArray.getJSONObject(0);
                             JSONArray jsonArray_usersS = jsonResponse.getJSONArray("show_challenges");
-
+                            String str = "challenge_title_en";
                             for (int i = 0; i < jsonArray_usersS.length(); i++) {
                                 JSONObject responsS = jsonArray_usersS.getJSONObject(i);
-
                                 int id = responsS.getInt("challenge_id");
-                                String title = responsS.getString("challenge_title_en");
+                                if (MainActivity.langStr.equals("ar")) str = "challenge_title_ar";
+                                String title = responsS.getString(str);
                                 String language = responsS.getString("challenge_programming_language");
                                 String level = responsS.getString("challenge_level");
                                 String points = responsS.getString("challenge_points");
 
-                                List_Challeng.add(new List_challenges(id, title,language,level,points));
+                                List_Challeng.add(new List_challenges(id, title, language, level, points));
                             }
                             viewAdapterChallenges.notifyDataSetChanged();
 

@@ -97,5 +97,7 @@
     <string name="logout">Are you sure you want to log out?</string>
     <string name="delete_my_article">Delete</string>
     <string name="edit_my_article">Edit</string>
+    <string name="send">Send</string>
+    <string name="write_answer">Write your answer</string>
 
 </resources>

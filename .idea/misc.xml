@@ -58,21 +58,23 @@
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_my_articles.xml" value="0.3269230769230769" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_rank.xml" value="0.18333333333333332" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_register.xml" value="0.25" />
-        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_splash.xml" value="0.33" />
+        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_splash.xml" value="0.25925925925925924" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_stats.xml" value="0.2601851851851852" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_terms_and_conditions.xml" value="0.249185667752443" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_top_ten.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_user_articles.xml" value="0.18518518518518517" />
+        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_user_challenges.xml" value="0.3227848101265823" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_user_home.xml" value="0.16203703703703703" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_user_more.xml" value="0.33" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_user_news.xml" value="0.33" />
+        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_view_context_challenges.xml" value="0.2611111111111111" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/articles_list_item.xml" value="0.384375" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/comment_card.xml" value="0.33" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/edu_list.xml" value="0.25164473684210525" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/progress_dialog.xml" value="0.3227848101265823" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/row_first_place.xml" value="0.3269230769230769" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/row_item_article.xml" value="0.33" />
-        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/row_item_challenges.xml" value="0.3984375" />
+        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/row_item_challenges.xml" value="0.25" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/row_item_news.xml" value="0.1" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/row_my_place.xml" value="0.3269230769230769" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/row_second_place.xml" value="0.3227848101265823" />

@@ -25,9 +25,9 @@ import org.json.JSONObject;
 
 public class ViewContextChallenges extends AppCompatActivity {
 
-    private TextView viewQuestion;
+    private TextView viewQuestion,viewQuestionTitle;
     private EditText userAnswer;
-    public static String answer,point,programming_language;
+    public static String answer, point, programming_language;
 
     private SharedPreferences shared_getData;
     private static final String KEY_PREF_NAME = "userData";
@@ -36,13 +36,17 @@ public class ViewContextChallenges extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_context_challenges);
-
+        findViewById(R.id.butBackSolveChallenges).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ViewContextChallenges.this, UserChallengesActivity.class));
+            }
+        });
         userAnswer = findViewById(R.id.enterAnswer);
         viewQuestion = findViewById(R.id.contextViewCha);
+        viewQuestionTitle = findViewById(R.id.titleInChallengeContext);
         Button checkAnswer = findViewById(R.id.checkBut);
-
         showQuestion(RecyclerViewAdapterChallenges.index);
-
         checkAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,7 +56,7 @@ public class ViewContextChallenges extends AppCompatActivity {
 
     } //  end showQuestion
 
-    public void showQuestion(int id){
+    public void showQuestion(int id) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 MainActivity.MainLink + "ViewContextChallenge.php?id=" + id,
@@ -63,15 +67,15 @@ public class ViewContextChallenges extends AppCompatActivity {
                             JSONArray jsonArray = new JSONArray(response);
                             JSONObject jsonResponse = jsonArray.getJSONObject(0);
                             JSONArray jsonArray_usersS = jsonResponse.getJSONArray("All_challenge");
-
+                            String str = "challenge_title_en";
                             for (int i = 0; i < jsonArray_usersS.length(); i++) {
-
                                 JSONObject responsS = jsonArray_usersS.getJSONObject(i);
-
+                                if (MainActivity.langStr.equals("ar")) str = "challenge_title_ar";
                                 String challenge_content = responsS.getString("challenge_content");
                                 answer = responsS.getString("challenge_answer");//  بأخذ المعلومات من صفحة php من نص sql
                                 point = responsS.getString("challenge_points");
-                                programming_language  = responsS.getString("challenge_programming_language");
+                                programming_language = responsS.getString("challenge_programming_language");
+                                viewQuestionTitle.setText(responsS.getString(str));
                                 viewQuestion.append(challenge_content);
                             }
 
@@ -90,17 +94,17 @@ public class ViewContextChallenges extends AppCompatActivity {
         queue.add(stringRequest);
     }// end showQuestion
 
-    private void checkAnswer(){
+    private void checkAnswer() {
         String user = userAnswer.getText().toString();
 
-        if (answer.equals(user)){
+        if (answer.equals(user)) {
             sendAnswer();
-        }else {
+        } else {
             Toast.makeText(this, "try again", Toast.LENGTH_LONG).show();
         }
     }//end checkAnswer
 
-    private void sendAnswer(){
+    private void sendAnswer() {
         int idChallenge = RecyclerViewAdapterChallenges.index;
         Response.Listener<String> responseLisener = new Response.Listener<String>() {
             @Override
@@ -123,9 +127,9 @@ public class ViewContextChallenges extends AppCompatActivity {
             }
         };
         shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE); // اسم الملف الذي يحتوي المعلومات
-        String userName = shared_getData.getString("enterUser",""); // استدعاء القيم عن طريقة المفتاح
-        String img = shared_getData.getString("enterImgCode","");
-        Data_send_challenge send_challenge = new Data_send_challenge(userName,idChallenge,programming_language,point,img,responseLisener); // ارسال القيم الى صفحة التواصل بين السيرفر و التطبيق
+        String userName = shared_getData.getString("username", ""); // استدعاء القيم عن طريقة المفتاح
+        String img = shared_getData.getString("imgCode", "");
+        Data_send_challenge send_challenge = new Data_send_challenge(userName, idChallenge, programming_language, point, img, responseLisener); // ارسال القيم الى صفحة التواصل بين السيرفر و التطبيق
         RequestQueue queue = Volley.newRequestQueue(ViewContextChallenges.this);
         queue.add(send_challenge);
     }//end sendAnswer

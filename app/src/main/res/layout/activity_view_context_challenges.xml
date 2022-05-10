@@ -1,45 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewContextChallenges"
-    android:background="@color/background_des">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:id="@+id/topBarChallenges"
-        android:background="@drawable/backgrund_articles_add"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="@string/solve_challenges"
-            android:textColor="@color/white"
-            android:textSize="22sp" />
-    </LinearLayout>
-
+    android:background="@color/background_des"
+    android:orientation="vertical"
+    tools:context=".ViewContextChallenges">
 
     <ScrollView
-        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
-        android:layout_below="@+id/topBarChallenges"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="center_horizontal"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/topBarChallenges"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/backgrund_articles_add"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/butBackSolveChallenges"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/back_btn_light" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/solve_challenges"
+                        android:textColor="@color/white"
+                        android:textSize="19sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/titleInChallengeContext"
+                    android:layout_width="380dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:background="@color/whito"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
 
             <ScrollView
                 android:layout_width="380dp"
@@ -50,38 +81,42 @@
 
                 <TextView
                     android:id="@+id/contextViewCha"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layoutDirection="ltr"
+                    android:padding="4dp"
+                    android:textAlignment="textStart"
                     android:textColor="@color/white"
                     android:textSize="22sp" />
             </ScrollView>
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginBottom="30dp"
                 android:orientation="horizontal">
-
                 <EditText
                     android:id="@+id/enterAnswer"
-                    android:layout_width="310dp"
-                    android:layout_height="55dp"
+                    android:layout_width="300dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/custom_edittext_underline"
                     android:ems="20"
-                    android:layout_marginLeft="5dp"
                     android:gravity="center"
-                    android:hint="Enter The Answer Here"
+                    android:hint="@string/write_answer"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:textSize="18sp" />
-
                 <Button
                     android:id="@+id/checkBut"
                     android:layout_width="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="10dp"
                     android:background="@drawable/custom_edittext_underline"
-                    android:text="Send" />
+                    android:text="@string/send" />
             </LinearLayout>
 
         </LinearLayout>
@@ -89,4 +124,4 @@
     </ScrollView>
 
 
-</RelativeLayout>
+</LinearLayout>
