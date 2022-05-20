@@ -8,6 +8,7 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".AccountActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,6 +25,7 @@
             app:srcCompat="@drawable/back_btn_light" />
 
     </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -282,10 +284,11 @@
                         android:id="@+id/password_account"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:cursorVisible="false"
                         android:background="@drawable/empty_field"
                         android:gravity="center_vertical"
                         android:hint="@string/password_example"
-                        android:inputType="textVisiblePassword"
+                        android:inputType="textWebPassword"
                         android:maxLength="16"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"

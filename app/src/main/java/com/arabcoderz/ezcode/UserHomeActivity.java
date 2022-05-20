@@ -28,17 +28,17 @@ import org.json.JSONObject;
 
 public class UserHomeActivity extends AppCompatActivity {
     static String newsUrl = MainLink + "newsHome.php";
-    static String challengesUrl = MainLink + "challenges.php";
+    static String challengesUrl = MainLink + "challengesHome.php";
     static String articlesUrl = MainLink + "articlesHome.php";
 
 //    private SharedPreferences shared_getData;
 //    private static String KEY_PREF_NAME = "userKEY";
 
     String link;
-    TextView firstNewsTextView, firstChallengesTitle, firstChallengesPoints, firstChallengesLevel, firstChallengesLanguage, homeUserName, articleTextViewWriter, articleTextViewDate, articleTextViewTitle, articleTextViewContent;
+    TextView firstNewsTextView, firstChallengesTitle, firstChallengesPoints, firstChallengesLevel, firstChallengesLanguage, articleTextViewWriter, articleTextViewDate, articleTextViewTitle, articleTextViewContent;
     ImageView NewsImageView;
     RequestQueue requestQueue;
-    int id;
+    int idArt,idChall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,11 +87,14 @@ public class UserHomeActivity extends AppCompatActivity {
                         try {
                             JSONArray jsonArray = response.getJSONArray("allchallenges");
                             JSONObject resp = jsonArray.getJSONObject(0);
-                            String title = resp.getString("challenge_title");
+                            String idd = resp.getString("challenge_id");
+                            idChall = Integer.valueOf(idd);
+                            String str = "challenge_title_en";
+                            if (MainActivity.langStr.equals("ar")) str = "challenge_title_ar";
                             String points = resp.getString("challenge_points");
                             String level = resp.getString("challenge_level");
-                            String language = resp.getString("challenge_language");
-                            firstChallengesTitle.setText(title);
+                            String language = resp.getString("challenge_programming_language");
+                            firstChallengesTitle.setText(resp.getString(str));
                             firstChallengesPoints.setText(points);
                             firstChallengesLevel.setText(level);
                             firstChallengesLanguage.setText(language);
@@ -109,7 +112,7 @@ public class UserHomeActivity extends AppCompatActivity {
                             JSONArray jsonArray = response.getJSONArray("allarticles");
                             JSONObject resp = jsonArray.getJSONObject(0);
                             String idd = resp.getString("article_id");
-                            id = Integer.valueOf(idd);
+                            idArt = Integer.valueOf(idd);
                             String writer = resp.getString("article_writer");
                             String date = resp.getString("article_date");
                             String title = resp.getString("article_title");
@@ -140,6 +143,15 @@ public class UserHomeActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
             }
         });
+
+        findViewById(R.id.challenge_card).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RecyclerViewAdapterChallenges.index = idChall;
+                startActivity(new Intent(UserHomeActivity.this, ViewContextChallenges.class));
+                overridePendingTransition(0, 0);
+            }
+        });
         findViewById(R.id.allChallengesCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,10 +159,11 @@ public class UserHomeActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
             }
         });
+
         findViewById(R.id.card_View_article).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArticlesRecyclerViewAdapter.articleId = id;
+                ArticlesRecyclerViewAdapter.articleId = idArt;
                 startActivity(new Intent(UserHomeActivity.this, ArticleContentActivity.class));
                 overridePendingTransition(0, 0);
             }

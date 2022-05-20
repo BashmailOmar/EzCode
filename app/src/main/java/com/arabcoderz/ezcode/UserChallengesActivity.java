@@ -82,7 +82,6 @@ public class UserChallengesActivity extends AppCompatActivity {
     }//end onCreate
 
     private void GetAllChallenges(int limit) {
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 MainActivity.MainLink + "ViewAllChallenges.php?limit=" + limit,
                 new Response.Listener<String>() {
@@ -101,12 +100,9 @@ public class UserChallengesActivity extends AppCompatActivity {
                                 String language = responsS.getString("challenge_programming_language");
                                 String level = responsS.getString("challenge_level");
                                 String points = responsS.getString("challenge_points");
-
                                 List_Challeng.add(new List_challenges(id, title, language, level, points));
                             }
                             viewAdapterChallenges.notifyDataSetChanged();
-
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -114,10 +110,8 @@ public class UserChallengesActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
             }
         });
-
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
         stringRequest.setShouldCache(false);

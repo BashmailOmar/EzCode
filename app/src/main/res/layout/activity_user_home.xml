@@ -170,6 +170,7 @@
                         app:rowCount="1">
 
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/challenge_card"
                             android:layout_width="364dp"
                             android:layout_height="100dp"
                             android:layout_margin="5dp"

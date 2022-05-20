@@ -103,22 +103,7 @@ public class StatsActivity extends AppCompatActivity {
         getGenderInfo();
         getCountryInfo();
     }
-//    void getAgeInfo() {
-//        ArrayList<PieEntry> PieChart = new ArrayList<>();
-//        PieChart.add(new PieEntry(1028, age + " < 18"));
-//        PieChart.add(new PieEntry(1741, "17 < " + age + " < 28"));
-//        PieChart.add(new PieEntry(344, age + " > 27"));
-//        PieDataSet PieDataSet = new PieDataSet(PieChart, "");
-//        PieDataSet.setColors(ColorTemplate.createColors(myColors));
-//        PieDataSet.setValueTextColor(Color.WHITE);
-//        PieDataSet.setValueTextSize(18f);
-//        PieData PieData = new PieData(PieDataSet);
-//        agePieCharts.setData(PieData);
-//        agePieCharts.getDescription().setEnabled(false);
-//        agePieCharts.setCenterText(ageDescription);
-//        agePieCharts.setCenterTextSize(20);
-//        agePieCharts.animateY(1500);
-//    }
+
     public void getEduInfo() {
         int edu1 = Integer.parseInt(shared_getData.getString("less_than_secondary", ""));
         int edu2 = Integer.parseInt(shared_getData.getString("secondary", ""));
@@ -141,6 +126,7 @@ public class StatsActivity extends AppCompatActivity {
         eduPieCharts.setCenterTextSize(20);
         eduPieCharts.animateY(2000);
     }
+
     void getGenderInfo() {
         int gen1 = Integer.parseInt(shared_getData.getString("male", ""));
         int gen2 = Integer.parseInt(shared_getData.getString("female", ""));
@@ -159,6 +145,7 @@ public class StatsActivity extends AppCompatActivity {
         genderPieCharts.setCenterTextSize(20);
         genderPieCharts.animateY(2500);
     }
+
     void getCountryInfo() {
         String conName1 = getCountryName(shared_getData.getString("firstcountry_name", ""));
         String conName2 = getCountryName(shared_getData.getString("secondcountry_name", ""));
@@ -190,6 +177,7 @@ public class StatsActivity extends AppCompatActivity {
         countryPieCharts.setCenterTextSize(20);
         countryPieCharts.animateY(3000);
     }
+
     String getCountryName(String countryName) {
         String finalCountryName = countryName;
         if (shared_getData.getString("language", "").equals("ar")) {
