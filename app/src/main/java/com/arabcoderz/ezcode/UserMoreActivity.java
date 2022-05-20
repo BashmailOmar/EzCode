@@ -1,5 +1,7 @@
 package com.arabcoderz.ezcode;
 
+import static com.arabcoderz.ezcode.MainActivity.MainLink;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,14 +21,18 @@ import android.util.DisplayMetrics;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
@@ -36,6 +42,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class UserMoreActivity extends AppCompatActivity {
+    static String deleteAccountURL = MainLink + "delete_account.php";
 
     private SharedPreferences shared_getData;
     private SharedPreferences.Editor editor;
@@ -43,7 +50,7 @@ public class UserMoreActivity extends AppCompatActivity {
     TextView langButtonTextMore, fullnameTextView, usernameTextView;
     ImageView avatarImage;
     private AlertDialog.Builder builder;
-    private String msg, yes, no;
+    private String msg, deleteMsg, yes, no;
 
     RequestQueue requestQueue;
 
@@ -62,14 +69,48 @@ public class UserMoreActivity extends AppCompatActivity {
         usernameTextView.setText(shared_getData.getString("username", ""));
         langButtonTextMore = findViewById(R.id.langButtonTextMore);
         if (MainActivity.langStr.equals("ar")) {
+            deleteMsg = "هل انت متأكد انك تريد حذف الحساب ؟";
             msg = "هل انت متأكد انك تريد تسجيل الخروج؟";
             yes = "نعم";
             no = "لا";
         } else {
+            deleteMsg = "Are you sure you want to delete your account?";
             msg = "Are you sure you want to log out?";
             yes = "Yes";
             no = "No";
         }
+        Toast.makeText(this, shared_getData.getString("id", ""), Toast.LENGTH_SHORT).show();
+        findViewById(R.id.deleteMyAccount).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                builder.setMessage(deleteMsg)
+                        .setCancelable(true)
+                        .setPositiveButton(yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                StringRequest stringRequest = new StringRequest(Request.Method.POST, deleteAccountURL,
+                                        response -> Toast.makeText(UserMoreActivity.this, "success", Toast.LENGTH_SHORT).show(),
+                                        error -> Toast.makeText(UserMoreActivity.this, "error", Toast.LENGTH_SHORT).show()) {
+                                    @Override
+                                    protected Map<String, String> getParams() throws AuthFailureError {
+                                        Map<String, String> parms = new HashMap<>();
+                                        String id = shared_getData.getString("id", "");
+                                        parms.put("something", id);
+                                        return parms;
+                                    }
+                                };
+                                requestQueue = Volley.newRequestQueue(UserMoreActivity.this);
+                                requestQueue.add(stringRequest);
+                                startActivity(new Intent(UserMoreActivity.this, MainActivity.class));
+                            }
+                        })
+                        .setNegativeButton(no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                            }
+                        }).show();
+            }
+        });
         findViewById(R.id.statsButtonMore).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -264,7 +305,7 @@ public class UserMoreActivity extends AppCompatActivity {
                         try {
                             editor = shared_getData.edit();
                             JSONArray jsonArray = response.getJSONArray("query");
-                            int allN=0;
+                            int allN = 0;
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject resp = jsonArray.getJSONObject(i);
 
