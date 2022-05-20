@@ -84,10 +84,10 @@ public class LoginActivity extends AppCompatActivity {
         etUsername.setText(shared_getData.getString("username", "")); // طريقة استدعاء القيمة عن طريقة المفتاح
         etPassword.setText(shared_getData.getString("password", ""));
 
-        if (shared_getData.getString("username", "").equals("")){
-
-        }else {
+        if (!shared_getData.getString("username", "").equals("")){
             Login();
+        }else {
+            Toast.makeText(LoginActivity.this, "enter username", Toast.LENGTH_SHORT).show();
         }
 
     }

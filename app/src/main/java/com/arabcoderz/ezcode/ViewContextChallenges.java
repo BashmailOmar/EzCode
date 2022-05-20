@@ -27,6 +27,7 @@ public class ViewContextChallenges extends AppCompatActivity {
 
     private TextView viewQuestion,viewQuestionTitle;
     private EditText userAnswer;
+    private Button checkAnswer;
     public static String answer, point, programming_language;
 
     private SharedPreferences shared_getData;
@@ -42,10 +43,13 @@ public class ViewContextChallenges extends AppCompatActivity {
                 startActivity(new Intent(ViewContextChallenges.this, UserChallengesActivity.class));
             }
         });
+
+
         userAnswer = findViewById(R.id.enterAnswer);
         viewQuestion = findViewById(R.id.contextViewCha);
         viewQuestionTitle = findViewById(R.id.titleInChallengeContext);
-        Button checkAnswer = findViewById(R.id.checkBut);
+        checkAnswer = findViewById(R.id.checkBut);
+
         showQuestion(RecyclerViewAdapterChallenges.index);
         checkAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,11 +100,13 @@ public class ViewContextChallenges extends AppCompatActivity {
 
     private void checkAnswer() {
         String user = userAnswer.getText().toString();
+        checkAnswer.setEnabled(false);
 
         if (answer.equals(user)) {
             sendAnswer();
         } else {
             Toast.makeText(this, "try again", Toast.LENGTH_LONG).show();
+            checkAnswer.setEnabled(true);
         }
     }//end checkAnswer
 

@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,8 +34,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -51,7 +50,7 @@ public class AccountActivity extends AppCompatActivity {
     private SharedPreferences shared_getData;
     private int pick = 100;
     private static final String KEY_PREF_NAME = "userData";
-    Timer timer;
+    private Button butUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +106,9 @@ public class AccountActivity extends AppCompatActivity {
         });
         shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
         String a = (shared_getData.getString("imgCode", "")); // طريقة استدعاء القيمة عن طريقة المفتاح
-        findViewById(R.id.updateAccountInfo).setOnClickListener(new View.OnClickListener() {
+
+        butUpdate = findViewById(R.id.updateAccountInfo);
+        butUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 builder.setMessage(msg)
@@ -135,40 +136,48 @@ public class AccountActivity extends AppCompatActivity {
 //        accountEdu.setAdapter(shared_getData.getString("education", ""));
 //        accountGender.setText(shared_getData.getString("gender", ""));
 //        accountCountry.setText(shared_getData.getString("country", ""));
-        accountPassword.setText(shared_getData.getString("password", ""));
+//        accountPassword.setText(shared_getData.getString("password", ""));
     }// end OnCreate
 
     private void update(){
-        Bitmap bitmap = ((BitmapDrawable) accountAvatar.getDrawable()).getBitmap(); //يخذ الصوره الموجوده داخل image_View
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(); // خاص بحفظ البيانات في نظام الجافا
-        bitmap.compress(Bitmap.CompressFormat.JPEG, pick, byteArrayOutputStream); // عمليت ضفط اقدر اتحكم في جودة الصور عن طريق تغير رقم 100 اذا قل الرقم كانت الصورة سيئة
-        newImg = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT); // تحويل الصوره الى نظام Base64 و String
+        String newPassword = accountPassword.getText().toString();
+        butUpdate.setEnabled(false);
+        if (shared_getData.getString("password","").equals(newPassword)){
+            Bitmap bitmap = ((BitmapDrawable) accountAvatar.getDrawable()).getBitmap(); //يخذ الصوره الموجوده داخل image_View
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(); // خاص بحفظ البيانات في نظام الجافا
+            bitmap.compress(Bitmap.CompressFormat.JPEG, pick, byteArrayOutputStream); // عمليت ضفط اقدر اتحكم في جودة الصور عن طريق تغير رقم 100 اذا قل الرقم كانت الصورة سيئة
+            newImg = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT); // تحويل الصوره الى نظام Base64 و String
 
-        Response.Listener<String> responseLisener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONArray jsonArray = new JSONArray(response);
-                    JSONObject jsonObject = jsonArray.getJSONObject(0);
-                    String success = jsonObject.getString("success");
-                    if (success.contains("Upd_ok")) {
-                        Toast.makeText(AccountActivity.this, "update successful", Toast.LENGTH_LONG).show();
-                    }else if (success.contains("Error")){
-                        Toast.makeText(AccountActivity.this, "update not successful", Toast.LENGTH_LONG).show();
+            Response.Listener<String> responseLisener = new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONArray jsonArray = new JSONArray(response);
+                        JSONObject jsonObject = jsonArray.getJSONObject(0);
+                        String success = jsonObject.getString("success");
+                        if (success.contains("Upd_ok")) {
+                            Toast.makeText(AccountActivity.this, "update successful", Toast.LENGTH_LONG).show();
+                        }else if (success.contains("Error")){
+                            Toast.makeText(AccountActivity.this, "update not successful", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
-            }
-        };
+            };
 
-        shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
-        String nameImg = (shared_getData.getString("imgCode", "")); // طريقة استدعاء القيمة عن طريقة المفتاح
+            shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
+            String nameImg = (shared_getData.getString("imgCode", "")); // طريقة استدعاء القيمة عن طريقة المفتاح
 
-        SendDateUpdate dataSend = new SendDateUpdate(newImg, nameImg, responseLisener); // ارسل البيانات
-        RequestQueue queue = Volley.newRequestQueue(AccountActivity.this);
-        queue.add(dataSend);
-
+            SendDateUpdate dataSend = new SendDateUpdate(newImg, nameImg, responseLisener); // ارسل البيانات
+            RequestQueue queue = Volley.newRequestQueue(AccountActivity.this);
+            queue.add(dataSend);
+            Intent intent = new Intent(AccountActivity.this, UserMoreActivity.class);
+            startActivity(intent);
+        }else {
+            Toast.makeText(AccountActivity.this, "password error", Toast.LENGTH_SHORT).show();
+            butUpdate.setEnabled(true);
+        }
     }
     //طلب اذن الوصول الى الصور
     public void permission_photo() {

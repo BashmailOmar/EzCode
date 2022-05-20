@@ -15,7 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +45,7 @@ public class ArticleContentActivity extends AppCompatActivity {
 
     private SharedPreferences shared_getData;
     private static final String KEY_PREF_NAME = "userData";
+    private ImageView sendComm;
 
     static TextView articleTextViewWriter, articleTextViewTitle, articleTextViewContent;
     EditText articleEditTextComment;
@@ -76,12 +79,15 @@ public class ArticleContentActivity extends AppCompatActivity {
                 startActivity(new Intent(ArticleContentActivity.this, UserArticlesActivity.class));
             }
         });
-        findViewById(R.id.sendCommentButton).setOnClickListener(new View.OnClickListener() {
+
+        sendComm = findViewById(R.id.sendCommentButton);
+        sendComm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendComments();
             }
         });
+
         findViewById(R.id.deleteMyArticle).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -165,35 +171,40 @@ public class ArticleContentActivity extends AppCompatActivity {
     }
 
     void sendComments() {
+        sendComm.setEnabled(false);
         strComment = articleEditTextComment.getText().toString();
         shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
         senderUsername = shared_getData.getString("username", "");
-        Response.Listener<String> responseLisener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONArray jsonArray = new JSONArray(response);
-                    JSONObject jsonObject = jsonArray.getJSONObject(0);
-                    String success = jsonObject.getString("success");
-
-                    if (success.contains("ok")) {
-                        Toast.makeText(ArticleContentActivity.this, "done", Toast.LENGTH_LONG).show(); //اظهار النص من صفحة php
-                        //SharedPreferences.Editor editor = shared_save.edit();
-                    } else {
-                        Toast.makeText(ArticleContentActivity.this, "error", Toast.LENGTH_SHORT).show();
+        if (strComment.isEmpty()){
+            new RegisterActivity().showError(articleEditTextComment,"comment is empty");
+        }else {
+            Response.Listener<String> responseLisener = new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONArray jsonArray = new JSONArray(response);
+                        JSONObject jsonObject = jsonArray.getJSONObject(0);
+                        String success = jsonObject.getString("success");
+                        if (success.contains("ok")) {
+                            Toast.makeText(ArticleContentActivity.this, "done", Toast.LENGTH_LONG).show(); //اظهار النص من صفحة php
+                            //SharedPreferences.Editor editor = shared_save.edit();
+                        } else {
+                            Toast.makeText(ArticleContentActivity.this, "error", Toast.LENGTH_SHORT).show();
+                            sendComm.setEnabled(true);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
-            }
-        };
-        SendComment send_comment = new SendComment(String.valueOf(ArticlesRecyclerViewAdapter.articleId), senderUsername, strComment, responseLisener);
-        RequestQueue queue = Volley.newRequestQueue(ArticleContentActivity.this);
-        queue.add(send_comment);
-        finish();
-        overridePendingTransition(0, 0);
-        startActivity(getIntent());
-        overridePendingTransition(0, 0);
+            };
+            SendComment send_comment = new SendComment(String.valueOf(ArticlesRecyclerViewAdapter.articleId), senderUsername, strComment, responseLisener);
+            RequestQueue queue = Volley.newRequestQueue(ArticleContentActivity.this);
+            queue.add(send_comment);
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(getIntent());
+            overridePendingTransition(0, 0);
+        }
     }
 
     void showComment() {

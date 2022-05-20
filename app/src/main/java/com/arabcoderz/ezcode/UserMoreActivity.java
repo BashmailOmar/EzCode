@@ -79,7 +79,6 @@ public class UserMoreActivity extends AppCompatActivity {
             yes = "Yes";
             no = "No";
         }
-        Toast.makeText(this, shared_getData.getString("id", ""), Toast.LENGTH_SHORT).show();
         findViewById(R.id.deleteMyAccount).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
