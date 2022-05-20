@@ -177,6 +177,7 @@ public class ArticleContentActivity extends AppCompatActivity {
         senderUsername = shared_getData.getString("username", "");
         if (strComment.isEmpty()){
             new RegisterActivity().showError(articleEditTextComment,"comment is empty");
+            sendComm.setEnabled(true);
         }else {
             Response.Listener<String> responseLisener = new Response.Listener<String>() {
                 @Override
