@@ -84,7 +84,7 @@ public class UserArticlesActivity extends AppCompatActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 if (gridLayoutManager.findLastCompletelyVisibleItemPosition() == listArticle.size() - 1) {
-                    getAllArticles(listArticle.get(listArticle.size() - 1).getId());
+                    getAllArticles(listArticle.get(listArticle.size() - 3).getId());
                 }
             }
         });

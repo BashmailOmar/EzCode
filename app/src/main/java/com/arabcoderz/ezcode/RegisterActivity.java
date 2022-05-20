@@ -7,7 +7,6 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -164,7 +163,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream); // عمليت ضفط اقدر اتحكم في جودة الصور عن طريق تغير رقم 100 اذا قل الرقم كانت الصورة سيئة
             encodimg = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT); // تحويل الصوره الى نظام Base64 و String
 
-//            send_data.setEnabled(false);
+           send_data.setEnabled(false);
 
             Response.Listener<String> responseLisener = new Response.Listener<String>() {
                 @Override
@@ -188,7 +187,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                             startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                         } else {
                             Toast.makeText(RegisterActivity.this, "عذرا حدث خطأ لم يتم إرسال البيانات", Toast.LENGTH_LONG).show();
-//                            send_data.setEnabled(true);
+                            send_data.setEnabled(true);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -203,9 +202,10 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     }
 
     //اظهار رسالة
-    private void showError(EditText input, String text) {
+    public RegisterActivity showError(EditText input, String text) {
         input.setError(text);
         input.requestFocus();
+        return null;
     }
 
     //طلب اذن الوصول الى الصور
