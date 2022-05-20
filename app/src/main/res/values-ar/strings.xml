@@ -97,5 +97,6 @@
     <string name="solve_challenges">التحديات</string>
     <string name="send">إرسال</string>
     <string name="write_answer">إكتب اجابتك</string>
+    <string name="delete_my_account">حذف الحساب</string>
 
 </resources>
