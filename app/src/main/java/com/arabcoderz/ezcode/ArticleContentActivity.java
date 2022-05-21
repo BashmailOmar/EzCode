@@ -186,6 +186,7 @@ public class ArticleContentActivity extends AppCompatActivity {
         }
         if (strComment.isEmpty() || strComment.length() < 3) {
             new RegisterActivity().showError(articleEditTextComment, commentMsg);
+            sendComm.setEnabled(true);
         } else {
             Response.Listener<String> responseLisener = new Response.Listener<String>() {
                 @Override

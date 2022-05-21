@@ -46,11 +46,12 @@ public class AccountActivity extends AppCompatActivity {
     private ArrayAdapter<CharSequence> genderAdapter;
     private AlertDialog.Builder builder;
     private EditText accountFullName, accountUsername, accountEmail, accountPassword;
-    private String msg,yes,no, newImg;
+    private String msg, yes, no, newImg;
     private SharedPreferences shared_getData;
     private int pick = 100;
     private static final String KEY_PREF_NAME = "userData";
     private Button butUpdate;
+    private String full_user_name, user_name, user_email, user_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,14 +89,14 @@ public class AccountActivity extends AppCompatActivity {
         accountCountry.setAdapter(countryAdapter);
         accountGender.setAdapter(genderAdapter);
 
-        if(MainActivity.langStr.equals("ar")){
-            msg="هل تريد تحديث الملف الشخصي الخاص بك؟";
-            yes="نعم";
-            no="لا";
-        }else{
-            msg="Do you want to update your profile?";
-            yes="Yes";
-            no="No";
+        if (MainActivity.langStr.equals("ar")) {
+            msg = "هل تريد تحديث الملف الشخصي الخاص بك؟";
+            yes = "نعم";
+            no = "لا";
+        } else {
+            msg = "Do you want to update your profile?";
+            yes = "Yes";
+            no = "No";
         }
 
         accountAvatar.setOnClickListener(new View.OnClickListener() {
@@ -126,59 +127,83 @@ public class AccountActivity extends AppCompatActivity {
                         }).show();
             }
         });
-
-//        //--------------------------------------*-------------------------------------*
+        //--------------------------------------*-------------------------------------*
         Picasso.get().load(MainActivity.MainLink + "avatar/" + shared_getData.getString("imgCode", "")).into(accountAvatar);
         accountFullName.setText(shared_getData.getString("fullname", ""));
         accountUsername.setText(shared_getData.getString("username", ""));
         accountEmail.setText(shared_getData.getString("email", ""));
         accountAge.setText(shared_getData.getString("birthday", ""));
-//        accountEdu.setAdapter(shared_getData.getString("education", ""));
-//        accountGender.setText(shared_getData.getString("gender", ""));
-//        accountCountry.setText(shared_getData.getString("country", ""));
-//        accountPassword.setText(shared_getData.getString("password", ""));
     }// end OnCreate
 
-    private void update(){
+    private void update() {
         String newPassword = accountPassword.getText().toString();
-        butUpdate.setEnabled(false);
-        if (shared_getData.getString("password","").equals(newPassword)){
-            Bitmap bitmap = ((BitmapDrawable) accountAvatar.getDrawable()).getBitmap(); //يخذ الصوره الموجوده داخل image_View
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(); // خاص بحفظ البيانات في نظام الجافا
-            bitmap.compress(Bitmap.CompressFormat.JPEG, pick, byteArrayOutputStream); // عمليت ضفط اقدر اتحكم في جودة الصور عن طريق تغير رقم 100 اذا قل الرقم كانت الصورة سيئة
-            newImg = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT); // تحويل الصوره الى نظام Base64 و String
+        full_user_name = accountFullName.getText().toString();
+        user_name = accountUsername.getText().toString().toLowerCase().trim();
+        user_email = accountEmail.getText().toString().trim();
+        String fullnameMsg, usernameMsg, emailMsg, passwordMsg, successUpdate, failUpdate;
+        if (shared_getData.getString("language", "").equals("ar")) {
+            fullnameMsg = "الرجاء كتابة اسمك الكامل";
+            usernameMsg = "اسم المستخدم يجب ان يتكون من 4 احرف على الاقل.\nايضا, يجب ان لايحتوي على :\n= + / | \" \' : ; \\";
+            emailMsg = "الرجاء كتابة البريد الالكتروني بشكل صحيح";
+            passwordMsg = "كلمة المرور خاطئة";
+            successUpdate = "تم تحديث البيانات بنجاح";
+            failUpdate = "حدث خطأ اثناء تحديث البيانات";
+        } else {
+            fullnameMsg = "Write your full name";
+            usernameMsg = "Username should be more than 3 characters\nAlso should not contain :\n! @ # $ % ^ & * ( )\n= + / | \" \' : ; \\";
+            emailMsg = "Write the correct email format";
+            passwordMsg = "Incorrect password";
+            successUpdate = "Data has been updated successfully";
+            failUpdate = "An error occurred while updating the data";
+        }
 
-            Response.Listener<String> responseLisener = new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONArray jsonArray = new JSONArray(response);
-                        JSONObject jsonObject = jsonArray.getJSONObject(0);
-                        String success = jsonObject.getString("success");
-                        if (success.contains("Upd_ok")) {
-                            Toast.makeText(AccountActivity.this, "update successful", Toast.LENGTH_LONG).show();
-                        }else if (success.contains("Error")){
-                            Toast.makeText(AccountActivity.this, "update not successful", Toast.LENGTH_LONG).show();
+        if (full_user_name.isEmpty()) {
+            new RegisterActivity().showError(accountFullName, fullnameMsg);
+        } else if (user_name.isEmpty() || user_name.length() < 3 || user_name.contains("!") || user_name.contains("@") || user_name.contains("#") || user_name.contains("$") || user_name.contains("%") || user_name.contains("^") || user_name.contains("&") || user_name.contains("*") || user_name.contains("(") || user_name.contains(")") || user_name.contains("=") || user_name.contains("+") || user_name.contains("/") || user_name.contains("|") || user_name.contains("\"") || user_name.contains("\'") || user_name.contains(";") || user_name.contains(":") || user_name.contains("\\")) {
+            new RegisterActivity().showError(accountUsername, usernameMsg);
+        } else if (user_email.isEmpty() || !user_email.contains("@") || !user_email.contains(".")) {
+            new RegisterActivity().showError(accountEmail, emailMsg);
+        } else {
+            if (shared_getData.getString("password", "").equals(newPassword)) {
+                butUpdate.setEnabled(false);
+                Bitmap bitmap = ((BitmapDrawable) accountAvatar.getDrawable()).getBitmap(); //يخذ الصوره الموجوده داخل image_View
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(); // خاص بحفظ البيانات في نظام الجافا
+                bitmap.compress(Bitmap.CompressFormat.JPEG, pick, byteArrayOutputStream); // عمليت ضفط اقدر اتحكم في جودة الصور عن طريق تغير رقم 100 اذا قل الرقم كانت الصورة سيئة
+                newImg = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT); // تحويل الصوره الى نظام Base64 و String
+
+                Response.Listener<String> responseLisener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            JSONObject jsonObject = jsonArray.getJSONObject(0);
+                            String success = jsonObject.getString("success");
+                            if (success.contains("Upd_ok")) {
+                                Toast.makeText(AccountActivity.this, successUpdate, Toast.LENGTH_LONG).show();
+                            } else if (success.contains("Error")) {
+                                Toast.makeText(AccountActivity.this, failUpdate, Toast.LENGTH_LONG).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
-                }
-            };
+                };
 
-            shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
-            String nameImg = (shared_getData.getString("imgCode", "")); // طريقة استدعاء القيمة عن طريقة المفتاح
+                shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
+                String nameImg = (shared_getData.getString("imgCode", "")); // طريقة استدعاء القيمة عن طريقة المفتاح
 
-            SendDateUpdate dataSend = new SendDateUpdate(newImg, nameImg, responseLisener); // ارسل البيانات
-            RequestQueue queue = Volley.newRequestQueue(AccountActivity.this);
-            queue.add(dataSend);
-            Intent intent = new Intent(AccountActivity.this, UserMoreActivity.class);
-            startActivity(intent);
-        }else {
-            Toast.makeText(AccountActivity.this, "password error", Toast.LENGTH_SHORT).show();
-            butUpdate.setEnabled(true);
+                SendDateUpdate dataSend = new SendDateUpdate(newImg, nameImg, responseLisener); // ارسل البيانات
+                RequestQueue queue = Volley.newRequestQueue(AccountActivity.this);
+                queue.add(dataSend);
+                Intent intent = new Intent(AccountActivity.this, UserMoreActivity.class);
+                startActivity(intent);
+            } else {
+                new RegisterActivity().showError(accountPassword, passwordMsg);
+                butUpdate.setEnabled(true);
+            }
         }
     }
+
     //طلب اذن الوصول الى الصور
     public void permission_photo() {
         //هل الصلاحية تم الحصول عليها ام لا
