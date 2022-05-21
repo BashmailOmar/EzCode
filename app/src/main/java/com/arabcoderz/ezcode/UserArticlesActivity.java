@@ -90,7 +90,10 @@ public class UserArticlesActivity extends AppCompatActivity {
         });
         getAllArticles(0);
     }//end onCreate
-
+    @Override
+    public void onBackPressed() {
+        return;
+    }
     void getAllArticles(int limit) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,

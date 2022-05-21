@@ -135,7 +135,10 @@ public class LoginActivity extends AppCompatActivity {
             queue.add(data_check);
         }
     }
-
+    @Override
+    public void onBackPressed() {
+        return;
+    }
     void GetUserInfo(String username) {
         String accountInfoUrl = MainActivity.MainLink + "account_info.php?username="+ username;
         requestQueue = Volley.newRequestQueue(this);

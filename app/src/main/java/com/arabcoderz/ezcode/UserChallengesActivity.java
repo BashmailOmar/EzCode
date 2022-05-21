@@ -80,7 +80,10 @@ public class UserChallengesActivity extends AppCompatActivity {
         });
         GetAllChallenges(0);
     }//end onCreate
-
+    @Override
+    public void onBackPressed() {
+        return;
+    }
     private void GetAllChallenges(int limit) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 MainActivity.MainLink + "ViewAllChallenges.php?limit=" + limit,

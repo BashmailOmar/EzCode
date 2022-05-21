@@ -208,4 +208,8 @@ public class UserHomeActivity extends AppCompatActivity {
         });
         //نهاية البار السفلي
     }
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 }

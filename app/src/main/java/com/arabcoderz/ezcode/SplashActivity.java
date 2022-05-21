@@ -46,7 +46,10 @@ public class SplashActivity extends AppCompatActivity {
         };
         thread.start();
     }
-
+    @Override
+    public void onBackPressed() {
+        return;
+    }
     void setApplicationLocale(String locale) {
         Resources resources = getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();

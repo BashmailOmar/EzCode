@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         shared_getData = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = shared_getData.edit();
         langStr = shared_getData.getString("language", "");
@@ -88,5 +89,8 @@ public class MainActivity extends AppCompatActivity {
         }
         resources.updateConfiguration(config, dm);
     }//هذي الميثود اللي نستخدمها عشان نغير لغة التطبيق
-
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 }

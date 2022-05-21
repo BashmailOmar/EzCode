@@ -19,4 +19,8 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 }

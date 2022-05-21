@@ -59,7 +59,10 @@ public class ViewContextChallenges extends AppCompatActivity {
         });
 
     } //  end showQuestion
-
+    @Override
+    public void onBackPressed() {
+        return;
+    }
     public void showQuestion(int id) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,

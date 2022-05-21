@@ -213,7 +213,10 @@ public class UserMoreActivity extends AppCompatActivity {
         getGenderInfo("account_gender");
         getCountryInfo("account_country");
     }
-
+    @Override
+    public void onBackPressed() {
+        return;
+    }
     void setApplicationLocale(String locale) {
         Resources resources = getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();

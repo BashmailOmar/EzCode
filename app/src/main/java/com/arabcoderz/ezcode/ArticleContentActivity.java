@@ -138,7 +138,10 @@ public class ArticleContentActivity extends AppCompatActivity {
         showComment();
         getContent();
     }
-
+    @Override
+    public void onBackPressed() {
+        return;
+    }
     void getContent() {
         JsonObjectRequest jsonObjectRequestArticles = new JsonObjectRequest(Request.Method.GET, contentURL, null,
                 new Response.Listener<JSONObject>() {

@@ -86,7 +86,10 @@ public class UserNewsActivity extends AppCompatActivity {
         });
         Get_All_News(0);
     }//end on Create
-
+    @Override
+    public void onBackPressed() {
+        return;
+    }
     private void Get_All_News(int limit) {
 
 //contextViewCha  enterAnswer   checkBut

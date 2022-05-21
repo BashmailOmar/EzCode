@@ -103,7 +103,10 @@ public class StatsActivity extends AppCompatActivity {
         getGenderInfo();
         getCountryInfo();
     }
-
+    @Override
+    public void onBackPressed() {
+        return;
+    }
     public void getEduInfo() {
         int edu1 = Integer.parseInt(shared_getData.getString("less_than_secondary", ""));
         int edu2 = Integer.parseInt(shared_getData.getString("secondary", ""));

@@ -127,7 +127,10 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             }
         });
     }//end onCreate
-
+    @Override
+    public void onBackPressed() {
+        return;
+    }
     private void Register() {
         full_user_name = Edit_full_name.getText().toString();
         user_name = Edit_user_Name.getText().toString().toLowerCase().trim();

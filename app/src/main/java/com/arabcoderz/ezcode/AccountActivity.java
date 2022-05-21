@@ -135,6 +135,11 @@ public class AccountActivity extends AppCompatActivity {
         accountAge.setText(shared_getData.getString("birthday", ""));
     }// end OnCreate
 
+    @Override
+    public void onBackPressed() {
+        return;
+    }
+
     private void update() {
         String newPassword = accountPassword.getText().toString();
         full_user_name = accountFullName.getText().toString();

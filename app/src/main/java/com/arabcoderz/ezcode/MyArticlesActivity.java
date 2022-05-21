@@ -64,7 +64,10 @@ public class MyArticlesActivity extends AppCompatActivity {
         });
         getAllArticles(0);
     }
-
+    @Override
+    public void onBackPressed() {
+        return;
+    }
     void getAllArticles(int limit) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,

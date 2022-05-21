@@ -84,7 +84,10 @@ public class RankActivity extends AppCompatActivity {
         });//عند الضغط على كلمة الكل نغير الرابط ونوع اللغه البرمجية ومن ثم نحدث الصفحه وتطلع معانا القائمه الجديده
         getAllUsers();
     }
-
+    @Override
+    public void onBackPressed() {
+        return;
+    }
     public void getAllUsers() {
         RequestQueue requestQueue;
         requestQueue = Volley.newRequestQueue(this);

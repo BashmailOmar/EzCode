@@ -49,7 +49,10 @@ public class addArticles extends AppCompatActivity {
             }
         });
     }
-
+    @Override
+    public void onBackPressed() {
+        return;
+    }
     private void newArticle() {
         Str_title = Edit_title.getText().toString();
         Str_content = Edit_content.getText().toString();

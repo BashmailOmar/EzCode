@@ -110,4 +110,8 @@ public class EditArticleContent extends AppCompatActivity {
         titleEditText.setText(ArticleContentActivity.articleTextViewTitle.getText());
         contentEditText.setText(ArticleContentActivity.articleTextViewContent.getText());
     }
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 }
