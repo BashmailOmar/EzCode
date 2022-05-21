@@ -17,8 +17,12 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +34,6 @@ public class EditArticleContent extends AppCompatActivity {
     EditText titleEditText, contentEditText;
     RequestQueue requestQueue;
     private AlertDialog.Builder builder;
-    String msg, yes, no;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,27 @@ public class EditArticleContent extends AppCompatActivity {
         setContentView(R.layout.activity_edit_article_content);
         shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
         builder = new AlertDialog.Builder(this);
+        String doneMsg, failMsg, msg, yes, no, titleMsg, contentMsg;
+        if (shared_getData.getString("language", "").equals("ar")) {
+            doneMsg = "تم التعديل بنجاح";
+            failMsg = "عذرا حدث خطأ اثناء التعديل";
+            msg = "هل انت متأكد انك تريد تعديل المقال؟";
+            yes = "نعم";
+            no = "لا";
+            titleMsg = "يجب ان يتكون العنوان 80 حرف على الاكثر";
+            contentMsg = "يجب ان يحتوي المقال 600 حرف على الاكثر";
+        } else {
+            doneMsg = "Edited successfully";
+            failMsg = "Sorry, an error occurred while editing";
+            msg = "Are you sure you want to edit the article?";
+            yes = "Yes";
+            no = "No";
+            titleMsg = "The address must be at most 80 characters";
+            contentMsg = "The article must contain at most 600 characters";
+        }
+
+        titleEditText = findViewById(R.id.edit_title_article);
+        contentEditText = findViewById(R.id.edit_article_content);
         findViewById(R.id.butBackContent).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,46 +71,42 @@ public class EditArticleContent extends AppCompatActivity {
         findViewById(R.id.editArticle).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                builder.setMessage(msg)
-                        .setCancelable(true)
-                        .setPositiveButton(yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                StringRequest stringRequest = new StringRequest(Request.Method.POST, editContentURL,
-                                        response -> Toast.makeText(EditArticleContent.this, "success", Toast.LENGTH_SHORT).show(),
-                                        error -> Toast.makeText(EditArticleContent.this, "error", Toast.LENGTH_SHORT).show()) {
-                                    @Override
-                                    protected Map<String, String> getParams() throws AuthFailureError {
-                                        Map<String, String> parms = new HashMap<>();
-                                        parms.put("articleId", String.valueOf(ArticlesRecyclerViewAdapter.articleId));
-                                        parms.put("articleTitle", titleEditText.getText().toString());
-                                        parms.put("articleContent", contentEditText.getText().toString());
-                                        return parms;
-                                    }
-                                };
-                                requestQueue = Volley.newRequestQueue(EditArticleContent.this);
-                                requestQueue.add(stringRequest);
-                                startActivity(new Intent(EditArticleContent.this, ArticleContentActivity.class));
-                            }
-                        })
-                        .setNegativeButton(no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                            }
-                        }).show();
+                if (titleEditText.getText().toString().isEmpty() || titleEditText.getText().toString().length() > 80) {
+                    new RegisterActivity().showError(titleEditText, titleMsg);
+                } else if (contentEditText.getText().toString().isEmpty() || contentEditText.getText().toString().length() > 600) {
+                    new RegisterActivity().showError(contentEditText, contentMsg);
+                } else {
+                    builder.setMessage(msg)
+                            .setCancelable(true)
+                            .setPositiveButton(yes, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    StringRequest stringRequest = new StringRequest(Request.Method.POST, editContentURL,
+                                            response -> Toast.makeText(EditArticleContent.this, doneMsg, Toast.LENGTH_SHORT).show(),
+                                            error -> Toast.makeText(EditArticleContent.this, failMsg, Toast.LENGTH_SHORT).show()) {
+                                        @Override
+                                        protected Map<String, String> getParams() throws AuthFailureError {
+                                            Map<String, String> parms = new HashMap<>();
+                                            parms.put("articleId", String.valueOf(ArticlesRecyclerViewAdapter.articleId));
+                                            parms.put("articleTitle", titleEditText.getText().toString());
+                                            parms.put("articleContent", contentEditText.getText().toString());
+                                            return parms;
+                                        }
+                                    };
+                                    requestQueue = Volley.newRequestQueue(EditArticleContent.this);
+                                    requestQueue.add(stringRequest);
+                                    startActivity(new Intent(EditArticleContent.this, ArticleContentActivity.class));
+                                }
+                            })
+                            .setNegativeButton(no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                }
+                            }).show();
+                }
             }
         });
-        titleEditText = findViewById(R.id.edit_title_article);
-        contentEditText = findViewById(R.id.edit_article_content);
-        if (MainActivity.langStr.equals("ar")) {
-            msg = "هل انت متأكد انك تريد تعديل المقال؟";
-            yes = "نعم";
-            no = "لا";
-        } else {
-            msg = "Are you sure you want to edit the article?";
-            yes = "Yes";
-            no = "No";
-        }
+
         titleEditText.setText(ArticleContentActivity.articleTextViewTitle.getText());
         contentEditText.setText(ArticleContentActivity.articleTextViewContent.getText());
     }

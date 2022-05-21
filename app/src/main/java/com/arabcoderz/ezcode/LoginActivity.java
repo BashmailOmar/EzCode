@@ -80,27 +80,33 @@ public class LoginActivity extends AppCompatActivity {
 
     private void AutoLogin() {
         shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
-
         etUsername.setText(shared_getData.getString("username", "")); // طريقة استدعاء القيمة عن طريقة المفتاح
         etPassword.setText(shared_getData.getString("password", ""));
-
         if (!shared_getData.getString("username", "").equals("")){
             Login();
-        }else {
-            Toast.makeText(LoginActivity.this, "enter username", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     void Login() {
-        username = etUsername.getText().toString().trim();
+        username = etUsername.getText().toString().toLowerCase().trim();
         password = etPassword.getText().toString().trim();
-
+        String successMsg, failMsg,enterUsername,enterPassword;
+        if (shared_getData.getString("language","").equals("ar")) {
+            successMsg = "تم تسجيل الدخول بنجاح";
+            failMsg = "اسم المستخدم او كلمة المرور خاطئة";
+            enterUsername="الرجاء ادخال اسم المستخدم";
+            enterPassword="الرجاء ادخال كلمة المرور";
+        } else {
+            successMsg = "You are logged in successfully";
+            failMsg = "Wrong username or password";
+            enterUsername="Please enter your username";
+            enterPassword="Please enter the password";
+        }
         if (username.isEmpty()) {
-            new RegisterActivity().showError(etUsername, "enter username");
+            new RegisterActivity().showError(etUsername, enterUsername);
         }
         else if (password.isEmpty()) {
-            new RegisterActivity().showError(etPassword, "enter password");
+            new RegisterActivity().showError(etPassword, enterPassword);
         } else {
             but_login.setEnabled(false);
             Response.Listener<String> respListener = new Response.Listener<String>() {
@@ -110,12 +116,12 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject jsonResponse = new JSONObject(response);
                         boolean success = jsonResponse.getBoolean("success");
                         if (success) {
-                            Toast.makeText(LoginActivity.this, "login success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, successMsg, Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
                             GetUserInfo(username);
                             startActivity(intent);
                         } else {
-                            Toast.makeText(LoginActivity.this, "username or password", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, failMsg, Toast.LENGTH_SHORT).show();
                             but_login.setEnabled(true);
                         }
                     } catch (JSONException e) {

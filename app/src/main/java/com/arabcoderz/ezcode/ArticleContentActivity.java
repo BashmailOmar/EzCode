@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -175,9 +174,19 @@ public class ArticleContentActivity extends AppCompatActivity {
         strComment = articleEditTextComment.getText().toString();
         shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
         senderUsername = shared_getData.getString("username", "");
-        if (strComment.isEmpty()){
-            new RegisterActivity().showError(articleEditTextComment,"comment is empty");
-        }else {
+        String artDoneMsg, artErrorMsg, commentMsg;
+        if (shared_getData.getString("language", "").equals("ar")) {
+            artDoneMsg = "تم الارسال بنجاح";
+            artErrorMsg = "عذرا حدث خطأ اثناء الارسال";
+            commentMsg = "يجب ان يتكون التعليق على 3 احرف على الاقل";
+        } else {
+            artDoneMsg = "sent successfully";
+            artErrorMsg = "Sorry, an error occurred while sending";
+            commentMsg = "Comments must be at least 3 characters long";
+        }
+        if (strComment.isEmpty() || strComment.length() < 3) {
+            new RegisterActivity().showError(articleEditTextComment, commentMsg);
+        } else {
             Response.Listener<String> responseLisener = new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -186,10 +195,10 @@ public class ArticleContentActivity extends AppCompatActivity {
                         JSONObject jsonObject = jsonArray.getJSONObject(0);
                         String success = jsonObject.getString("success");
                         if (success.contains("ok")) {
-                            Toast.makeText(ArticleContentActivity.this, "done", Toast.LENGTH_LONG).show(); //اظهار النص من صفحة php
+                            Toast.makeText(ArticleContentActivity.this, artDoneMsg, Toast.LENGTH_LONG).show(); //اظهار النص من صفحة php
                             //SharedPreferences.Editor editor = shared_save.edit();
                         } else {
-                            Toast.makeText(ArticleContentActivity.this, "error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ArticleContentActivity.this, artErrorMsg, Toast.LENGTH_SHORT).show();
                             sendComm.setEnabled(true);
                         }
                     } catch (Exception e) {
@@ -235,14 +244,14 @@ public class ArticleContentActivity extends AppCompatActivity {
     }
 
     void listAllItem() {
-        listAdpter lA = new listAdpter(listComments);
+        listAdapter lA = new listAdapter(listComments);
         listCommentView.setAdapter(lA);
     }
 
-    class listAdpter extends BaseAdapter {
+    class listAdapter extends BaseAdapter {
         ArrayList<ListComments> listA = new ArrayList<ListComments>();
 
-        public listAdpter(ArrayList<ListComments> listA) {
+        public listAdapter(ArrayList<ListComments> listA) {
             this.listA = listA;
         }
 

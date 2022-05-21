@@ -100,7 +100,11 @@ public class UserMoreActivity extends AppCompatActivity {
                                 };
                                 requestQueue = Volley.newRequestQueue(UserMoreActivity.this);
                                 requestQueue.add(stringRequest);
+                                editor = shared_getData.edit();
+                                editor.clear();
+                                editor.apply();
                                 startActivity(new Intent(UserMoreActivity.this, MainActivity.class));
+                                finish();
                             }
                         })
                         .setNegativeButton(no, new DialogInterface.OnClickListener() {

@@ -64,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
         avatar_user = findViewById(R.id.pick_avatar);
         avatar_user.setImageResource(R.drawable.def_avatar);
         Edit_full_name = findViewById(R.id.full_user_name);
@@ -130,7 +130,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
     private void Register() {
         full_user_name = Edit_full_name.getText().toString();
-        user_name = Edit_user_Name.getText().toString().trim();
+        user_name = Edit_user_Name.getText().toString().toLowerCase().trim();
         user_email = Edit_email.getText().toString().trim();
         user_password = Edit_password.getText().toString().trim();
         Confirm_password = Edit_Confirm_password.getText().toString().trim();
@@ -138,19 +138,35 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         edu = eduSpinner.getSelectedItem().toString();
         country = countrySpinner.getSelectedItem().toString();
         gender = genderSpinner.getSelectedItem().toString();
-
+        String fullnameMsg, usernameMsg, emailMsg, passwordMsg, conPasswordMsg, dateMsg;
+        if (shared_getData.getString("language","").equals("ar")) {
+            fullnameMsg = "الرجاء كتابة اسمك الكامل";
+            usernameMsg = "اسم المستخدم يجب ان يتكون من 4 احرف على الاقل.\nايضا, يجب ان لايحتوي على :\n= + / | \" \' : ; \\";
+            emailMsg = "الرجاء كتابة البريد الالكتروني بشكل صحيح";
+            passwordMsg = "يجب أن تكون كلمة المرور أكبر من 7 أحرف\n" +
+                    "يجب أن تحتوي أيضًا على واحد من (حرف كبير / حرف صغير / أرقام)";
+            conPasswordMsg = "يجب ان يتطابق مع كلمة المرور المدخله";
+            dateMsg = "اختر يوم ميلادك";
+        } else {
+            fullnameMsg = "Write your full name";
+            usernameMsg = "Username should be more than 3 characters\nAlso should not contain :\n! @ # $ % ^ & * ( )\n= + / | \" \' : ; \\";
+            emailMsg = "Write the correct email format";
+            passwordMsg = "Password should br grater than 7 characters\nAlso should consist of one of each (capital letter/ small letter/digits)";
+            conPasswordMsg = "The same password must be entered";
+            dateMsg = "Select your birthday";
+        }
         if (full_user_name.isEmpty()) {
-            showError(Edit_full_name, "write your full name");
-        } else if (user_name.isEmpty() || user_name.length() < 3) {
-            showError(Edit_user_Name, "Username more 3 characters");
-        } else if (user_email.isEmpty() || !user_email.contains("@")) {
-            showError(Edit_email, " write the email format");
-        } else if (user_password.isEmpty() || user_password.length() < 8) {
-            showError(Edit_password, "more than 8");
+            showError(Edit_full_name, fullnameMsg);
+        } else if (user_name.isEmpty() || user_name.length() < 3 || user_name.contains("!") || user_name.contains("@") || user_name.contains("#") || user_name.contains("$") || user_name.contains("%") || user_name.contains("^") || user_name.contains("&") || user_name.contains("*") || user_name.contains("(") || user_name.contains(")") || user_name.contains("=") || user_name.contains("+") || user_name.contains("/") || user_name.contains("|") || user_name.contains("\"") || user_name.contains("\'") || user_name.contains(";") || user_name.contains(":") || user_name.contains("\\")) {
+            showError(Edit_user_Name, usernameMsg);
+        } else if (user_email.isEmpty() || !user_email.contains("@") || !user_email.contains(".")) {
+            showError(Edit_email, emailMsg);
+        } else if (user_password.isEmpty() || user_password.length() < 8 || !(user_password.contains("A") || user_password.contains("B") || user_password.contains("C") || user_password.contains("D") || user_password.contains("E") || user_password.contains("F") || user_password.contains("G") || user_password.contains("H") || user_password.contains("I") || user_password.contains("J") || user_password.contains("K") || user_password.contains("L") || user_password.contains("M") || user_password.contains("N") || user_password.contains("O") || user_password.contains("P") || user_password.contains("Q") || user_password.contains("R") || user_password.contains("S") || user_password.contains("T") || user_password.contains("U") || user_password.contains("V") || user_password.contains("W") || user_password.contains("X") || user_password.contains("Y") || user_password.contains("Z")) || !(user_password.contains("a") || user_password.contains("b") || user_password.contains("c") || user_password.contains("d") || user_password.contains("e") || user_password.contains("f") || user_password.contains("g") || user_password.contains("h") || user_password.contains("i") || user_password.contains("j") || user_password.contains("k") || user_password.contains("l") || user_password.contains("m") || user_password.contains("n") || user_password.contains("o") || user_password.contains("p") || user_password.contains("q") || user_password.contains("r") || user_password.contains("s") || user_password.contains("t") || user_password.contains("u") || user_password.contains("v") || user_password.contains("w") || user_password.contains("x") || user_password.contains("y") || user_password.contains("z")) || !(user_password.contains("1") || user_password.contains("2") || user_password.contains("3") || user_password.contains("4") || user_password.contains("5") || user_password.contains("6") || user_password.contains("7") || user_password.contains("8") || user_password.contains("9"))) {
+            showError(Edit_password, passwordMsg);
         } else if (Confirm_password.isEmpty() || !Confirm_password.equals(user_password)) {
-            showError(Edit_Confirm_password, "The same password must be entered");
+            showError(Edit_Confirm_password, conPasswordMsg);
         } else if (date.isEmpty()) {
-            Toast.makeText(this, "put the date", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, dateMsg, Toast.LENGTH_LONG).show();
         } else if (edu.isEmpty()) {
             Toast.makeText(this, "*", Toast.LENGTH_LONG).show();
         } else if (country.isEmpty()) {
@@ -163,7 +179,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream); // عمليت ضفط اقدر اتحكم في جودة الصور عن طريق تغير رقم 100 اذا قل الرقم كانت الصورة سيئة
             encodimg = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT); // تحويل الصوره الى نظام Base64 و String
 
-           send_data.setEnabled(false);
+            send_data.setEnabled(false);
 
             Response.Listener<String> responseLisener = new Response.Listener<String>() {
                 @Override
@@ -194,7 +210,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                     }
                 }
             };
-            shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
+
             Send_Data_Register dataSend = new Send_Data_Register(full_user_name, user_name, user_email, user_password, encodimg, edu, country, gender, date, responseLisener); // ارسل البيانات
             RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
             queue.add(dataSend);
@@ -277,5 +293,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     }
 
     @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {}
+    public void onPointerCaptureChanged(boolean hasCapture) {
+    }
 }
