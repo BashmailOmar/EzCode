@@ -127,10 +127,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             }
         });
     }//end onCreate
-    @Override
-    public void onBackPressed() {
-        return;
-    }
+
     private void Register() {
         full_user_name = Edit_full_name.getText().toString();
         user_name = Edit_user_Name.getText().toString().toLowerCase().trim();
@@ -191,7 +188,15 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                         JSONArray jsonArray = new JSONArray(response);
                         JSONObject jsonObject = jsonArray.getJSONObject(0);
                         String success = jsonObject.getString("success");
-                        if (success.contains("pass")) {
+                        if (success.contains("equalsEmail")){
+                            Toast.makeText(RegisterActivity.this, "Email is exists", Toast.LENGTH_LONG).show(); //اظهار النص من صفحة php
+                            send_data.setEnabled(true);
+                        }
+                        else if(success.contains("equalsUserName")){
+                            Toast.makeText(RegisterActivity.this, "Username exists", Toast.LENGTH_LONG).show(); //اظهار النص من صفحة php
+                            send_data.setEnabled(true);
+                        }
+                        else if (success.contains("pass")) {
                             Toast.makeText(RegisterActivity.this, "تم تسجيلك بنجاح", Toast.LENGTH_LONG).show(); //اظهار النص من صفحة php
                             editor = shared_getData.edit();
                             editor.putString("username", user_name); // تخزين القيمة في مفتاح

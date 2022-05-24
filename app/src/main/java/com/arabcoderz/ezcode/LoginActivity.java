@@ -48,7 +48,6 @@ public class LoginActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.login_user_name);
         etPassword = findViewById(R.id.login_password);
 
-        AutoLogin();
 
         findViewById(R.id.backBtnLogin).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,20 +77,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }//onCreate
 
-    private void AutoLogin() {
-        shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
-        etUsername.setText(shared_getData.getString("username", "")); // طريقة استدعاء القيمة عن طريقة المفتاح
-        etPassword.setText(shared_getData.getString("password", ""));
-        if (!shared_getData.getString("username", "").equals("")){
-            Login();
-        }
-    }
 
     void Login() {
         username = etUsername.getText().toString().toLowerCase().trim();
         password = etPassword.getText().toString().trim();
         String successMsg, failMsg,enterUsername,enterPassword;
-        if (shared_getData.getString("language","").equals("ar")) {
+        if (MainActivity.langStr.equals("ar")) {
             successMsg = "تم تسجيل الدخول بنجاح";
             failMsg = "اسم المستخدم او كلمة المرور خاطئة";
             enterUsername="الرجاء ادخال اسم المستخدم";
