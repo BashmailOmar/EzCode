@@ -73,8 +73,8 @@ public class UserChallengesActivity extends AppCompatActivity {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (gridLayoutManager.findLastCompletelyVisibleItemPosition() == List_Challeng.size() - 1) {
-                    GetAllChallenges(List_Challeng.get(List_Challeng.size() - 1).getId());
+                if (gridLayoutManager.findLastCompletelyVisibleItemPosition() == List_Challeng.size()) {
+                    GetAllChallenges(List_Challeng.get(List_Challeng.size()).getId());
                 }
             }
         });

@@ -83,8 +83,8 @@ public class UserArticlesActivity extends AppCompatActivity {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (gridLayoutManager.findLastCompletelyVisibleItemPosition() == listArticle.size() - 1) {
-                    getAllArticles(listArticle.get(listArticle.size() - 3).getId());
+                if (gridLayoutManager.findLastCompletelyVisibleItemPosition() == listArticle.size()) {
+                    getAllArticles(listArticle.get(listArticle.size()).getId());
                 }
             }
         });

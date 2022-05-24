@@ -127,8 +127,10 @@ public class ViewContextChallenges extends AppCompatActivity {
                         Toast.makeText(ViewContextChallenges.this, "good answer", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(ViewContextChallenges.this, UserChallengesActivity.class);
                         startActivity(intent);
-                    } else if (success.contains("Error")) {
-                        Toast.makeText(ViewContextChallenges.this, "عذرا حدث خطأ لم يتم إرسال البيانات", Toast.LENGTH_SHORT).show();
+                    } else if (success.contains("equals")) {
+                        Toast.makeText(ViewContextChallenges.this, "تم حل السؤال", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(ViewContextChallenges.this, "error", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

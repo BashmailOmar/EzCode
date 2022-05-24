@@ -62,18 +62,18 @@ public class addArticles extends AppCompatActivity {
         if (shared_getData.getString("language", "").equals("ar")) {
             artDoneMsg = "تم الارسال بنجاح";
             artErrorMsg = "عذرا حدث خطأ اثناء الارسال";
-            titleMsg = "يجب ان يتكون العنوان 80 حرف على الاكثر";
-            contentMsg = "يجب ان يحتوي المقال 600 حرف على الاكثر";
+            titleMsg = "يجب ان يتكون العنوان 200 حرف على الاكثر";
+            contentMsg = "يجب ان يحتوي المقال 5000 حرف على الاكثر";
         } else {
             artDoneMsg = "sent succesfully";
             artErrorMsg = "Sorry, an error occurred while sending";
-            titleMsg = "The address must be at most 80 characters";
-            contentMsg = "The article must contain at most 600 characters";
+            titleMsg = "The address must be at most 200 characters";
+            contentMsg = "The article must contain at most 5000 characters";
         }
 
-        if (Str_title.isEmpty() || Str_title.length() > 80) {
+        if (Str_title.isEmpty() || Str_title.length() > 200) {
             new RegisterActivity().showError(Edit_title, titleMsg);
-        } else if (Str_content.isEmpty() || Str_content.length() > 600) {
+        } else if (Str_content.isEmpty() || Str_content.length() > 5000) {
             new RegisterActivity().showError(Edit_content, contentMsg);
         } else {
             Response.Listener<String> responseLisener = new Response.Listener<String>() {

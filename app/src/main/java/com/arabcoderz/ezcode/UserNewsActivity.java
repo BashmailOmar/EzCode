@@ -78,8 +78,8 @@ public class UserNewsActivity extends AppCompatActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 
-                if (gridLayoutManager.findLastCompletelyVisibleItemPosition() == listItems.size() - 1) {
-                    Get_All_News(listItems.get(listItems.size()-1).getId());
+                if (gridLayoutManager.findLastCompletelyVisibleItemPosition() == listItems.size()) {
+                    Get_All_News(listItems.get(listItems.size()).getId());
                 }
 
             }
