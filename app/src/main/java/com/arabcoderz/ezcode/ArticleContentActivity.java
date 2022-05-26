@@ -40,7 +40,7 @@ import java.util.Map;
 public class ArticleContentActivity extends AppCompatActivity {
     static String contentURL = MainLink + "articleContent.php";
     static String commentURL = MainLink + "showComments.php";
-    static String deleteArticleURL = MainLink + "delete_article.php";
+    static String deleteArticleURL = MainLink + "DeleteArticle.php";
 
     private SharedPreferences shared_getData;
     private static final String KEY_PREF_NAME = "userData";
@@ -101,7 +101,7 @@ public class ArticleContentActivity extends AppCompatActivity {
                                     @Override
                                     protected Map<String, String> getParams() throws AuthFailureError {
                                         Map<String, String> parms = new HashMap<>();
-                                        parms.put("something", String.valueOf(ArticlesRecyclerViewAdapter.articleId));
+                                        parms.put("something", String.valueOf(RecyclerViewAdapterArticles.articleId));
                                         return parms;
                                     }
                                 };
@@ -152,7 +152,7 @@ public class ArticleContentActivity extends AppCompatActivity {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject resp = jsonArray.getJSONObject(i);
                                 String id = resp.getString("article_id");
-                                if (ArticlesRecyclerViewAdapter.articleId == Integer.valueOf(id)) {
+                                if (RecyclerViewAdapterArticles.articleId == Integer.valueOf(id)) {
                                     String writer = resp.getString("article_writer");
                                     String title = resp.getString("article_title");
                                     String content = resp.getString("article_content");
@@ -210,7 +210,7 @@ public class ArticleContentActivity extends AppCompatActivity {
                     }
                 }
             };
-            SendComment send_comment = new SendComment(String.valueOf(ArticlesRecyclerViewAdapter.articleId), senderUsername, strComment, responseLisener);
+            SendComment send_comment = new SendComment(String.valueOf(RecyclerViewAdapterArticles.articleId), senderUsername, strComment, responseLisener);
             RequestQueue queue = Volley.newRequestQueue(ArticleContentActivity.this);
             queue.add(send_comment);
             finish();
@@ -230,7 +230,7 @@ public class ArticleContentActivity extends AppCompatActivity {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject resp = jsonArray.getJSONObject(i);
                                 String articleId = resp.getString("article_id");
-                                if (ArticlesRecyclerViewAdapter.articleId == Integer.valueOf(articleId)) {
+                                if (RecyclerViewAdapterArticles.articleId == Integer.valueOf(articleId)) {
                                     String writer = resp.getString("comment_writer");
                                     String date = resp.getString("comment_date");
                                     String content = resp.getString("comment_content");

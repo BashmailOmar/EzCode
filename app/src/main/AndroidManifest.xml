@@ -44,11 +44,11 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ViewContextChallenges"
+            android:name=".ChallengesContentActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".addArticles"
+            android:name=".AddArticles"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

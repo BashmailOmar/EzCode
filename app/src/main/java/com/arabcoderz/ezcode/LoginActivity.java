@@ -2,7 +2,6 @@ package com.arabcoderz.ezcode;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,21 +12,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText etUsername, etPassword;
@@ -121,9 +114,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
             };
-            data_check data_check = new data_check(username, password, respListener);
+            SendLogin SendLogin = new SendLogin(username, password, respListener);
             RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-            queue.add(data_check);
+            queue.add(SendLogin);
         }
     }
     @Override
@@ -131,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
         return;
     }
     void GetUserInfo(String username) {
-        String accountInfoUrl = MainActivity.MainLink + "account_info.php?username="+ username;
+        String accountInfoUrl = MainActivity.MainLink + "AccountGetInfo.php?username="+ username;
         requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, accountInfoUrl, null,
                 new Response.Listener<JSONObject>() {

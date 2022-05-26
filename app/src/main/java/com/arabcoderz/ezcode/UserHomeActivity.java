@@ -148,7 +148,7 @@ public class UserHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 RecyclerViewAdapterChallenges.index = idChall;
-                startActivity(new Intent(UserHomeActivity.this, ViewContextChallenges.class));
+                startActivity(new Intent(UserHomeActivity.this, ChallengesContentActivity.class));
                 overridePendingTransition(0, 0);
             }
         });
@@ -163,7 +163,7 @@ public class UserHomeActivity extends AppCompatActivity {
         findViewById(R.id.card_View_article).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArticlesRecyclerViewAdapter.articleId = idArt;
+                RecyclerViewAdapterArticles.articleId = idArt;
                 startActivity(new Intent(UserHomeActivity.this, ArticleContentActivity.class));
                 overridePendingTransition(0, 0);
             }

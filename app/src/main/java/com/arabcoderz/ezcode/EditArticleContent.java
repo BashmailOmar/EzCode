@@ -17,18 +17,14 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class EditArticleContent extends AppCompatActivity {
-    static String editContentURL = MainLink + "edit_article_content.php";
+    static String editContentURL = MainLink + "EditArticleContent.php";
     private SharedPreferences shared_getData;
     private static final String KEY_PREF_NAME = "userData";
     EditText titleEditText, contentEditText;
@@ -87,7 +83,7 @@ public class EditArticleContent extends AppCompatActivity {
                                         @Override
                                         protected Map<String, String> getParams() throws AuthFailureError {
                                             Map<String, String> parms = new HashMap<>();
-                                            parms.put("articleId", String.valueOf(ArticlesRecyclerViewAdapter.articleId));
+                                            parms.put("articleId", String.valueOf(RecyclerViewAdapterArticles.articleId));
                                             parms.put("articleTitle", titleEditText.getText().toString());
                                             parms.put("articleContent", contentEditText.getText().toString());
                                             return parms;

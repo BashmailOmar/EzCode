@@ -18,13 +18,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class RecyclerViewAdapterNews extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private int previousPosition = 0;
-    private List<List_Item> List_Item;
+    private List<ListNews> ListNews;
     private Context context;
 
-    public RecyclerViewAdapter(List<List_Item> list_Item, Context context) {
-        List_Item = list_Item;
+    public RecyclerViewAdapterNews(List<ListNews> list_News, Context context) {
+        ListNews = list_News;
         this.context = context;
     }
 
@@ -43,12 +43,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         MenuItemViewHolder menuItemHolder = (MenuItemViewHolder) holder;
-        menuItemHolder.textViewTitel.setText(List_Item.get(position).getTitle());
-        Picasso.get().load(List_Item.get(position).getImg_link()).into(menuItemHolder.imageView);
+        menuItemHolder.textViewTitel.setText(ListNews.get(position).getTitle());
+        Picasso.get().load(ListNews.get(position).getImg_link()).into(menuItemHolder.imageView);
         menuItemHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(List_Item.get(position).getLink()));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(ListNews.get(position).getLink()));
                 context.startActivity(intent);
             }
         });
@@ -65,7 +65,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return (null != List_Item ? List_Item.size() : 0);
+        return (null != ListNews ? ListNews.size() : 0);
     }
 
     protected class MenuItemViewHolder extends RecyclerView.ViewHolder {

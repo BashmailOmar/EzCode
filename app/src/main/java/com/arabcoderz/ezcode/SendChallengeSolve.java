@@ -7,13 +7,13 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Data_send_challenge extends StringRequest {
+public class SendChallengeSolve extends StringRequest {
 
-    private static final String url = MainActivity.MainLink + "send_data_challenge.php";
+    private static final String url = MainActivity.MainLink + "SendChallengeSolve.php";
     private Map<String, String> MapData;
 
 
-    public Data_send_challenge(String username, int idChallenge, String programming_language, String points, String imgCode, Response.Listener<String> listener) {
+    public SendChallengeSolve(String username, int idChallenge, String programming_language, String points, String imgCode, Response.Listener<String> listener) {
         super(Request.Method.POST, url, listener, null);
 
         MapData = new HashMap<>();

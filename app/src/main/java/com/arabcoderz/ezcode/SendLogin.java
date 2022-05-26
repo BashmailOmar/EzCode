@@ -6,14 +6,14 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class data_check extends StringRequest {
+public class SendLogin extends StringRequest {
 
 
-    private static final String url = MainActivity.MainLink + "login.php";
+    private static final String url = MainActivity.MainLink + "SendLogin.php";
     private Map<String, String> MapData; //
 
 
-    public data_check(String username, String password, Response.Listener<String> listener) {
+    public SendLogin(String username, String password, Response.Listener<String> listener) {
         super(Method.POST, url, listener, null);
 
         MapData = new HashMap<>();

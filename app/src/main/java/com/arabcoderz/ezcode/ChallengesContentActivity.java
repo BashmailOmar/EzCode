@@ -23,7 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ViewContextChallenges extends AppCompatActivity {
+public class ChallengesContentActivity extends AppCompatActivity {
 
     private TextView viewQuestion,viewQuestionTitle;
     private EditText userAnswer;
@@ -40,7 +40,7 @@ public class ViewContextChallenges extends AppCompatActivity {
         findViewById(R.id.butBackSolveChallenges).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ViewContextChallenges.this, UserChallengesActivity.class));
+                startActivity(new Intent(ChallengesContentActivity.this, UserChallengesActivity.class));
             }
         });
 
@@ -124,13 +124,13 @@ public class ViewContextChallenges extends AppCompatActivity {
                     String success = jsonObject.getString("success");
 
                     if (success.contains("Reg_ok")) {
-                        Toast.makeText(ViewContextChallenges.this, "good answer", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(ViewContextChallenges.this, UserChallengesActivity.class);
+                        Toast.makeText(ChallengesContentActivity.this, "good answer", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(ChallengesContentActivity.this, UserChallengesActivity.class);
                         startActivity(intent);
                     } else if (success.contains("equals")) {
-                        Toast.makeText(ViewContextChallenges.this, "تم حل السؤال", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChallengesContentActivity.this, "تم حل السؤال", Toast.LENGTH_SHORT).show();
                     }else{
-                        Toast.makeText(ViewContextChallenges.this, "error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChallengesContentActivity.this, "error", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -140,8 +140,8 @@ public class ViewContextChallenges extends AppCompatActivity {
         shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE); // اسم الملف الذي يحتوي المعلومات
         String userName = shared_getData.getString("username", ""); // استدعاء القيم عن طريقة المفتاح
         String img = shared_getData.getString("imgCode", "");
-        Data_send_challenge send_challenge = new Data_send_challenge(userName, idChallenge, programming_language, point, img, responseLisener); // ارسال القيم الى صفحة التواصل بين السيرفر و التطبيق
-        RequestQueue queue = Volley.newRequestQueue(ViewContextChallenges.this);
+        SendChallengeSolve send_challenge = new SendChallengeSolve(userName, idChallenge, programming_language, point, img, responseLisener); // ارسال القيم الى صفحة التواصل بين السيرفر و التطبيق
+        RequestQueue queue = Volley.newRequestQueue(ChallengesContentActivity.this);
         queue.add(send_challenge);
     }//end sendAnswer
 }

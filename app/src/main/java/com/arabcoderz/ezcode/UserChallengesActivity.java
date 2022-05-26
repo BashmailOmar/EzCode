@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,7 +28,7 @@ public class UserChallengesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerViewAdapterChallenges viewAdapterChallenges;
-    private List<List_challenges> List_Challeng = new ArrayList<>();
+    private List<ListChallenges> List_Challeng = new ArrayList<>();
     private GridLayoutManager gridLayoutManager;
 
     @Override
@@ -103,7 +102,7 @@ public class UserChallengesActivity extends AppCompatActivity {
                                 String language = responsS.getString("challenge_programming_language");
                                 String level = responsS.getString("challenge_level");
                                 String points = responsS.getString("challenge_points");
-                                List_Challeng.add(new List_challenges(id, title, language, level, points));
+                                List_Challeng.add(new ListChallenges(id, title, language, level, points));
                             }
                             viewAdapterChallenges.notifyDataSetChanged();
                         } catch (JSONException e) {

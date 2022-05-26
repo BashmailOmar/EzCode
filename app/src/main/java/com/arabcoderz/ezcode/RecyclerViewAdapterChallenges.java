@@ -3,37 +3,25 @@ package com.arabcoderz.ezcode;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
-import com.squareup.picasso.Picasso;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 
 public class RecyclerViewAdapterChallenges extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private int previousPosition = 0;
-    private List<List_challenges> List_Context;
+    private List<ListChallenges> List_Context;
     public static Context context;
     public static int index;
 
-    public RecyclerViewAdapterChallenges(List<List_challenges> list_Context, Context context) {
+    public RecyclerViewAdapterChallenges(List<ListChallenges> list_Context, Context context) {
         List_Context = list_Context;
         this.context = context;
     }
@@ -60,7 +48,7 @@ public class RecyclerViewAdapterChallenges extends RecyclerView.Adapter<Recycler
             @Override
             public void onClick(View view) {
 
-                context.startActivity(new Intent(context,ViewContextChallenges.class));
+                context.startActivity(new Intent(context, ChallengesContentActivity.class));
                 index = List_Context.get(position).getId();
             }
         });

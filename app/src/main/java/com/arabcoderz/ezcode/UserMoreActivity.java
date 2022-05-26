@@ -42,7 +42,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class UserMoreActivity extends AppCompatActivity {
-    static String deleteAccountURL = MainLink + "delete_account.php";
+    static String deleteAccountURL = MainLink + "DeleteAccount.php";
 
     private SharedPreferences shared_getData;
     private SharedPreferences.Editor editor;
@@ -64,9 +64,9 @@ public class UserMoreActivity extends AppCompatActivity {
         fullnameTextView = findViewById(R.id.fullnameMorePage);
         usernameTextView = findViewById(R.id.usernameMorePage);
         avatarImage = findViewById(R.id.avatar_in_account);
-        Picasso.get().load(MainActivity.MainLink + "avatar/" + shared_getData.getString("imgCode", "")).into(avatarImage);
         fullnameTextView.setText(shared_getData.getString("fullname", ""));
         usernameTextView.setText(shared_getData.getString("username", ""));
+        Picasso.get().load(MainActivity.MainLink + "avatar/" + shared_getData.getString("imgCode", "")).into(avatarImage);
         langButtonTextMore = findViewById(R.id.langButtonTextMore);
         if (MainActivity.langStr.equals("ar")) {
             deleteMsg = "هل انت متأكد انك تريد حذف الحساب ؟";
@@ -93,8 +93,7 @@ public class UserMoreActivity extends AppCompatActivity {
                                     @Override
                                     protected Map<String, String> getParams() throws AuthFailureError {
                                         Map<String, String> parms = new HashMap<>();
-                                        String id = shared_getData.getString("id", "");
-                                        parms.put("something", id);
+                                        parms.put("something", shared_getData.getString("id", ""));
                                         return parms;
                                     }
                                 };
@@ -103,7 +102,6 @@ public class UserMoreActivity extends AppCompatActivity {
                                 editor = shared_getData.edit();
                                 editor.clear();
                                 editor.apply();
-                                startActivity(new Intent(UserMoreActivity.this, MainActivity.class));
                                 finish();
                             }
                         })
@@ -302,7 +300,7 @@ public class UserMoreActivity extends AppCompatActivity {
     }
 
     void getCountryInfo(String something) {
-        String url = MainActivity.MainLink + "country_stats.php?something=" + something;
+        String url = MainActivity.MainLink + "CountryStats.php?something=" + something;
         requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {

@@ -28,8 +28,8 @@ import java.util.List;
 public class UserArticlesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private ArticlesRecyclerViewAdapter recyclerView_dAdapter;
-    public List<List_Article> listArticle = new ArrayList<>();
+    private RecyclerViewAdapterArticles recyclerView_dAdapter;
+    public List<ListArticle> listArticle = new ArrayList<>();
     private GridLayoutManager gridLayoutManager;
 
     @Override
@@ -39,7 +39,7 @@ public class UserArticlesActivity extends AppCompatActivity {
         findViewById(R.id.But_add_articles).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UserArticlesActivity.this, addArticles.class));
+                startActivity(new Intent(UserArticlesActivity.this, AddArticles.class));
             }
         });// end addArticlesUser >> setOnClickListener
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationBar);
@@ -77,7 +77,7 @@ public class UserArticlesActivity extends AppCompatActivity {
         gridLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        recyclerView_dAdapter = new ArticlesRecyclerViewAdapter(listArticle, this);
+        recyclerView_dAdapter = new RecyclerViewAdapterArticles(listArticle, this);
         recyclerView.setAdapter(recyclerView_dAdapter);
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -97,7 +97,7 @@ public class UserArticlesActivity extends AppCompatActivity {
     void getAllArticles(int limit) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                MainActivity.MainLink + "articles.php?limit=" + limit,
+                MainActivity.MainLink + "ViewAllArticles.php?limit=" + limit,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -113,7 +113,7 @@ public class UserArticlesActivity extends AppCompatActivity {
                                 String content = responsS.getString("article_content");
                                 String writer = responsS.getString("article_writer");
                                 String date = responsS.getString("article_date");
-                                listArticle.add(new List_Article(id, title, content, writer, date));
+                                listArticle.add(new ListArticle(id, title, content, writer, date));
                             }
                             recyclerView_dAdapter.notifyDataSetChanged();
 

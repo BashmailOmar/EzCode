@@ -16,10 +16,9 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-public class addArticles extends AppCompatActivity {
+public class AddArticles extends AppCompatActivity {
 
     private EditText Edit_title, Edit_content;
     private Button But_add_article;
@@ -45,7 +44,7 @@ public class addArticles extends AppCompatActivity {
         findViewById(R.id.butBackArticles).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(addArticles.this, UserArticlesActivity.class));
+                startActivity(new Intent(AddArticles.this, UserArticlesActivity.class));
             }
         });
     }
@@ -85,20 +84,20 @@ public class addArticles extends AppCompatActivity {
                         String success = jsonObject.getString("success");
 
                         if (success.contains("ok")) {
-                            Toast.makeText(addArticles.this, artDoneMsg, Toast.LENGTH_LONG).show(); //اظهار النص من صفحة php
+                            Toast.makeText(AddArticles.this, artDoneMsg, Toast.LENGTH_LONG).show(); //اظهار النص من صفحة php
                             //SharedPreferences.Editor editor = shared_save.edit();
                         } else {
-                            Toast.makeText(addArticles.this, artErrorMsg, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddArticles.this, artErrorMsg, Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             };
-            send_articles send_articles = new send_articles(Str_title, Str_content, userName, responseLisener);
-            RequestQueue queue = Volley.newRequestQueue(addArticles.this);
-            queue.add(send_articles);
-            startActivity(new Intent(addArticles.this, UserArticlesActivity.class));
+            SendArticles SendArticles = new SendArticles(Str_title, Str_content, userName, responseLisener);
+            RequestQueue queue = Volley.newRequestQueue(AddArticles.this);
+            queue.add(SendArticles);
+            startActivity(new Intent(AddArticles.this, UserArticlesActivity.class));
         }
 
     }

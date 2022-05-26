@@ -1,13 +1,13 @@
 package com.arabcoderz.ezcode;
 
-public class List_challenges {
+public class ListChallenges {
     private int id;
     private String challenge_title;
     private String challenge_programming_language;
     private String challenge_level;
     private String challenge_points;
 
-    public List_challenges(int id, String challenge_title,String challenge_programming_language, String challenge_level, String challenge_points) {
+    public ListChallenges(int id, String challenge_title, String challenge_programming_language, String challenge_level, String challenge_points) {
         this.id = id;
         this.challenge_title = challenge_title;
         this.challenge_programming_language = challenge_programming_language;

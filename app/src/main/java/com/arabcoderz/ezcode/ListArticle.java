@@ -1,13 +1,13 @@
 package com.arabcoderz.ezcode;
 
-public class List_Article {
+public class ListArticle {
     private int id;
     private String title;
     private String content;
     private String writer;
     private String article_date;
 
-    public List_Article(int id, String title, String content, String writer, String article_date) {
+    public ListArticle(int id, String title, String content, String writer, String article_date) {
         this.id = id;
         this.title = title;
         this.content = content;

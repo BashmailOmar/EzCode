@@ -26,8 +26,8 @@ import java.util.List;
 
 public class MyArticlesActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private ArticlesRecyclerViewAdapter recyclerView_dAdapter;
-    public List<List_Article> listArticle = new ArrayList<>();
+    private RecyclerViewAdapterArticles recyclerView_dAdapter;
+    public List<ListArticle> listArticle = new ArrayList<>();
     private GridLayoutManager gridLayoutManager;
     private SharedPreferences shared_getData;
     private static String KEY_PREF_NAME = "userData";
@@ -51,7 +51,7 @@ public class MyArticlesActivity extends AppCompatActivity {
         gridLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        recyclerView_dAdapter = new ArticlesRecyclerViewAdapter(listArticle, this);
+        recyclerView_dAdapter = new RecyclerViewAdapterArticles(listArticle, this);
         recyclerView.setAdapter(recyclerView_dAdapter);
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -71,7 +71,7 @@ public class MyArticlesActivity extends AppCompatActivity {
     void getAllArticles(int limit) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                MainActivity.MainLink + "articles.php?limit=" + limit,
+                MainActivity.MainLink + "ViewAllArticles.php?limit=" + limit,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -87,7 +87,7 @@ public class MyArticlesActivity extends AppCompatActivity {
                                 String writer = responsS.getString("article_writer");
                                 String date = responsS.getString("article_date");
                                 if(shared_getData.getString("username", "").equals(writer)) {
-                                    listArticle.add(new List_Article(id, title, content, writer, date));
+                                    listArticle.add(new ListArticle(id, title, content, writer, date));
                                 }
                             }
                             recyclerView_dAdapter.notifyDataSetChanged();

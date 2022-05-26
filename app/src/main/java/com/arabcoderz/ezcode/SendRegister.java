@@ -7,14 +7,14 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Send_Data_Register extends StringRequest {
+public class SendRegister extends StringRequest {
 
-    private  static final String url = MainActivity.MainLink + "register.php";
+    private  static final String url = MainActivity.MainLink + "SendRegister.php";
     private Map<String, String> MapData; // متغير لإرسال البيانات
 
-    public Send_Data_Register(String full_user_name, String user_name,String email,
-                              String password,String ImgCode,String edu,String country,String gender,String date,
-                              Response.Listener<String> listener){
+    public SendRegister(String full_user_name, String user_name, String email,
+                        String password, String ImgCode, String edu, String country, String gender, String date,
+                        Response.Listener<String> listener){
         super(Request.Method.POST,url,listener,null);
         MapData = new HashMap<>();
         MapData.put("full_user_name",full_user_name);

@@ -27,8 +27,8 @@ import java.util.List;
 public class UserNewsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private RecyclerViewAdapter recyclerView_dAdapter;
-    private List<List_Item> listItems = new ArrayList<>();
+    private RecyclerViewAdapterNews recyclerView_dAdapter;
+    private List<ListNews> listItems = new ArrayList<>();
     private GridLayoutManager gridLayoutManager;
 
     @Override
@@ -71,7 +71,7 @@ public class UserNewsActivity extends AppCompatActivity {
         gridLayoutManager = new GridLayoutManager(this,1);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        recyclerView_dAdapter = new RecyclerViewAdapter(listItems, this);
+        recyclerView_dAdapter = new RecyclerViewAdapterNews(listItems, this);
         recyclerView.setAdapter(recyclerView_dAdapter);
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -108,7 +108,7 @@ public class UserNewsActivity extends AppCompatActivity {
                                 String title = responsS.getString("news_title");
                                 String link = responsS.getString("news_link");
                                 String img_link = responsS.getString("news_image");
-                                listItems.add(new List_Item(id, title,link ,img_link));
+                                listItems.add(new ListNews(id, title,link ,img_link));
                             }
                             recyclerView_dAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {

@@ -3,7 +3,6 @@ package com.arabcoderz.ezcode;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +12,14 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
-public class ArticlesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class RecyclerViewAdapterArticles extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private int previousPosition = 0;
-    private List<List_Article> List_Article;
+    private List<ListArticle> ListArticle;
     private Context context;
     static public int articleId;
 
-    public ArticlesRecyclerViewAdapter(List<List_Article> list_article, Context context) {
-        List_Article = list_article;
+    public RecyclerViewAdapterArticles(List<ListArticle> list_article, Context context) {
+        ListArticle = list_article;
         this.context = context;
     }
 
@@ -41,15 +40,15 @@ public class ArticlesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     public void onBindViewHolder(RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         MenuItemViewHolder menuItemHolder = (MenuItemViewHolder) holder;
-        menuItemHolder.textViewWriter.setText(List_Article.get(position).getWriter());
-        menuItemHolder.textViewDate.setText(List_Article.get(position).getDate());
-        menuItemHolder.textViewTitle.setText(List_Article.get(position).getTitle());
-        menuItemHolder.textViewContent.setText(List_Article.get(position).getContent());
+        menuItemHolder.textViewWriter.setText(ListArticle.get(position).getWriter());
+        menuItemHolder.textViewDate.setText(ListArticle.get(position).getDate());
+        menuItemHolder.textViewTitle.setText(ListArticle.get(position).getTitle());
+        menuItemHolder.textViewContent.setText(ListArticle.get(position).getContent());
         menuItemHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //here we will navigate to the article content page
-                articleId = List_Article.get(position).getId();
+                articleId = ListArticle.get(position).getId();
                 context.startActivity(new Intent(context, ArticleContentActivity.class));
             }
         });//----------------------------------------------------------------------------------------
@@ -63,7 +62,7 @@ public class ArticlesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public int getItemCount() {
-        return (null != List_Article ? List_Article.size() : 0);
+        return (null != ListArticle ? ListArticle.size() : 0);
     }
 
     protected class MenuItemViewHolder extends RecyclerView.ViewHolder {

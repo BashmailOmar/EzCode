@@ -1,13 +1,13 @@
 package com.arabcoderz.ezcode;
 
-public class List_Item {
+public class ListNews {
     private int id;
-    private String title; //articles value nad // news value
-    private String link;  // news value
-    private String img_link;  // news value and //articles value
+    private String title;
+    private String link;
+    private String img_link;
 
 
-    public List_Item(int id, String title, String link, String img_link) {
+    public ListNews(int id, String title, String link, String img_link) {
         this.id = id;
         this.title = title;
         this.link = link;
