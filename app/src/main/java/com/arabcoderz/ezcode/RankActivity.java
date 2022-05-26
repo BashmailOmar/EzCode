@@ -86,7 +86,8 @@ public class RankActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        return;
+        Intent intent = new Intent(RankActivity.this, UserMoreActivity.class);
+        startActivity(intent);
     }
     public void getAllUsers() {
         RequestQueue requestQueue;

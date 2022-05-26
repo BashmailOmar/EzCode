@@ -50,7 +50,8 @@ public class AddArticles extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        return;
+        Intent intent = new Intent(AddArticles.this, UserArticlesActivity.class);
+        startActivity(intent);
     }
     private void newArticle() {
         Str_title = Edit_title.getText().toString();

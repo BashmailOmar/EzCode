@@ -108,6 +108,7 @@ public class EditArticleContent extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        return;
+        Intent intent = new Intent(EditArticleContent.this, MyArticlesActivity.class);
+        startActivity(intent);
     }
 }

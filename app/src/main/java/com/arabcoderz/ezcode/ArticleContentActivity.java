@@ -140,7 +140,8 @@ public class ArticleContentActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        return;
+        Intent intent = new Intent(ArticleContentActivity.this, UserArticlesActivity.class);
+        startActivity(intent);
     }
     void getContent() {
         JsonObjectRequest jsonObjectRequestArticles = new JsonObjectRequest(Request.Method.GET, contentURL, null,

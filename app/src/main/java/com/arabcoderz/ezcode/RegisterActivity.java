@@ -303,4 +303,9 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
     }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
 }

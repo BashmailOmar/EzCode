@@ -76,9 +76,6 @@ public class AccountActivity extends AppCompatActivity {
         accountCountry = findViewById(R.id.countrySpinner_account);
         accountPassword = findViewById(R.id.password_account);
         builder = new AlertDialog.Builder(this);
-
-        Toast.makeText(AccountActivity.this, shared_getData.getString("imgCode", ""), Toast.LENGTH_LONG).show();
-
         eduAdapter = ArrayAdapter.createFromResource(this, R.array.edu_list, android.R.layout.simple_spinner_item);
         countryAdapter = ArrayAdapter.createFromResource(this, R.array.country_list, android.R.layout.simple_spinner_item);
         genderAdapter = ArrayAdapter.createFromResource(this, R.array.gender_list, android.R.layout.simple_spinner_item);
@@ -139,7 +136,8 @@ public class AccountActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        return;
+        Intent intent = new Intent(AccountActivity.this, UserMoreActivity.class);
+        startActivity(intent);
     }
 
     private void update() {

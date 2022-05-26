@@ -119,10 +119,6 @@ public class LoginActivity extends AppCompatActivity {
             queue.add(SendLogin);
         }
     }
-    @Override
-    public void onBackPressed() {
-        return;
-    }
     void GetUserInfo(String username) {
         String accountInfoUrl = MainActivity.MainLink + "AccountGetInfo.php?username="+ username;
         requestQueue = Volley.newRequestQueue(this);
@@ -157,4 +153,10 @@ public class LoginActivity extends AppCompatActivity {
                 }, error -> Log.e("VOLLEY", "ERROR"));//جلب بيانات المقالات
         requestQueue.add(jsonObjectRequest);
     }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
 }

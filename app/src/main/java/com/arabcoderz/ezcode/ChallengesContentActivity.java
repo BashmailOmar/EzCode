@@ -61,7 +61,8 @@ public class ChallengesContentActivity extends AppCompatActivity {
     } //  end showQuestion
     @Override
     public void onBackPressed() {
-        return;
+        Intent intent = new Intent(ChallengesContentActivity.this, UserChallengesActivity.class);
+        startActivity(intent);
     }
     public void showQuestion(int id) {
 

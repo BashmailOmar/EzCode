@@ -66,7 +66,8 @@ public class MyArticlesActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        return;
+        Intent intent = new Intent(MyArticlesActivity.this, UserMoreActivity.class);
+        startActivity(intent);
     }
     void getAllArticles(int limit) {
 
