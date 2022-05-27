@@ -39,15 +39,11 @@ import java.util.Calendar;
 
 public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private Spinner eduSpinner, countrySpinner, genderSpinner;
-    private ArrayAdapter<CharSequence> eduAdapter;
-    private ArrayAdapter<CharSequence> countryAdapter;
-    private ArrayAdapter<CharSequence> genderAdapter;
 
     private SharedPreferences shared_getData;
     private SharedPreferences.Editor editor;
     private static final String KEY_PREF_NAME = "userData";
 
-    private int pick = 100;
     private ImageView avatar_user;
     private EditText Edit_full_name, Edit_user_Name, Edit_email, Edit_password, Edit_Confirm_password;
     private TextView Text_select_Date;
@@ -78,9 +74,9 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         countrySpinner = findViewById(R.id.countrySpinner);
         genderSpinner = findViewById(R.id.genderSpinner);
 
-        eduAdapter = ArrayAdapter.createFromResource(this, R.array.edu_list, android.R.layout.simple_spinner_item);
-        countryAdapter = ArrayAdapter.createFromResource(this, R.array.country_list, android.R.layout.simple_spinner_item);
-        genderAdapter = ArrayAdapter.createFromResource(this, R.array.gender_list, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> eduAdapter = ArrayAdapter.createFromResource(this, R.array.edu_list, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> countryAdapter = ArrayAdapter.createFromResource(this, R.array.country_list, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this, R.array.gender_list, android.R.layout.simple_spinner_item);
 
         eduAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -138,7 +134,9 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         edu = eduSpinner.getSelectedItem().toString();
         country = countrySpinner.getSelectedItem().toString();
         gender = genderSpinner.getSelectedItem().toString();
+
         String fullnameMsg, usernameMsg, emailMsg, passwordMsg, conPasswordMsg, dateMsg;
+
         if (shared_getData.getString("language","").equals("ar")) {
             fullnameMsg = "الرجاء كتابة اسمك الكامل";
             usernameMsg = "اسم المستخدم يجب ان يتكون من 4 احرف على الاقل.\nايضا, يجب ان لايحتوي على :\n= + / | \" \' : ; \\";
@@ -176,7 +174,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         } else {
             Bitmap bitmap = ((BitmapDrawable) avatar_user.getDrawable()).getBitmap(); //يخذ الصوره الموجوده داخل image_View
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(); // خاص بحفظ البيانات في نظام الجافا
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream); // عمليت ضفط اقدر اتحكم في جودة الصور عن طريق تغير رقم 100 اذا قل الرقم كانت الصورة سيئة
+            bitmap.compress(Bitmap.CompressFormat.JPEG, MainActivity.pickImage, byteArrayOutputStream); // عمليت ضفط اقدر اتحكم في جودة الصور عن طريق تغير رقم 100 اذا قل الرقم كانت الصورة سيئة
             encodimg = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT); // تحويل الصوره الى نظام Base64 و String
 
             send_data.setEnabled(false);
@@ -267,7 +265,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "title"), pick);
+        startActivityForResult(Intent.createChooser(intent, "title"), MainActivity.pickImage);
     }
 
     // وضع الصوره في الاطار الفريم

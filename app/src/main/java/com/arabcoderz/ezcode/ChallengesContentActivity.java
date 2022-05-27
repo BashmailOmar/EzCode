@@ -30,7 +30,6 @@ public class ChallengesContentActivity extends AppCompatActivity {
     private Button checkAnswer;
     public static String answer, point, programming_language;
 
-    private SharedPreferences shared_getData;
     private static final String KEY_PREF_NAME = "userData";
 
     @Override
@@ -138,7 +137,7 @@ public class ChallengesContentActivity extends AppCompatActivity {
                 }
             }
         };
-        shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE); // اسم الملف الذي يحتوي المعلومات
+        SharedPreferences shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE); // اسم الملف الذي يحتوي المعلومات
         String userName = shared_getData.getString("username", ""); // استدعاء القيم عن طريقة المفتاح
         String img = shared_getData.getString("imgCode", "");
         SendChallengeSolve send_challenge = new SendChallengeSolve(userName, idChallenge, programming_language, point, img, responseLisener); // ارسال القيم الى صفحة التواصل بين السيرفر و التطبيق

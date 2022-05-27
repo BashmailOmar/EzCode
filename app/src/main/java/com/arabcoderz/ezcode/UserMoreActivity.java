@@ -3,6 +3,7 @@ package com.arabcoderz.ezcode;
 import static com.arabcoderz.ezcode.MainActivity.MainLink;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +11,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -41,14 +43,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class UserMoreActivity extends AppCompatActivity {
-    static String deleteAccountURL = MainLink + "DeleteAccount.php";
 
     private SharedPreferences shared_getData;
     private SharedPreferences.Editor editor;
-    private static String KEY_PREF_NAME = "userData";
     TextView langButtonTextMore, fullnameTextView, usernameTextView;
-    ImageView avatarImage;
+    CircleImageView avatarImage;
     private AlertDialog.Builder builder;
     private String msg, deleteMsg, yes, no;
 
@@ -58,16 +60,24 @@ public class UserMoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_more);
+
+        String KEY_PREF_NAME = "userData";
         shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
+
         builder = new AlertDialog.Builder(this);
         editor = shared_getData.edit();
+
         fullnameTextView = findViewById(R.id.fullnameMorePage);
-        usernameTextView = findViewById(R.id.usernameMorePage);
-        avatarImage = findViewById(R.id.avatar_in_account);
         fullnameTextView.setText(shared_getData.getString("fullname", ""));
+
+        usernameTextView = findViewById(R.id.usernameMorePage);
         usernameTextView.setText(shared_getData.getString("username", ""));
+
+        avatarImage = findViewById(R.id.avatar_in_account);
         Picasso.get().load(MainActivity.MainLink + "avatar/" + shared_getData.getString("imgCode", "")).into(avatarImage);
+
         langButtonTextMore = findViewById(R.id.langButtonTextMore);
+
         if (MainActivity.langStr.equals("ar")) {
             deleteMsg = "هل انت متأكد انك تريد حذف الحساب ؟";
             msg = "هل انت متأكد انك تريد تسجيل الخروج؟";
@@ -79,46 +89,49 @@ public class UserMoreActivity extends AppCompatActivity {
             yes = "Yes";
             no = "No";
         }
-        findViewById(R.id.deleteMyAccount).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                builder.setMessage(deleteMsg)
-                        .setCancelable(true)
-                        .setPositiveButton(yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                StringRequest stringRequest = new StringRequest(Request.Method.POST, deleteAccountURL,
-                                        response -> Toast.makeText(UserMoreActivity.this, "success", Toast.LENGTH_SHORT).show(),
-                                        error -> Toast.makeText(UserMoreActivity.this, "error", Toast.LENGTH_SHORT).show()) {
-                                    @Override
-                                    protected Map<String, String> getParams() throws AuthFailureError {
-                                        Map<String, String> parms = new HashMap<>();
-                                        parms.put("something", shared_getData.getString("id", ""));
-                                        return parms;
-                                    }
-                                };
-                                requestQueue = Volley.newRequestQueue(UserMoreActivity.this);
-                                requestQueue.add(stringRequest);
-                                editor = shared_getData.edit();
-                                editor.clear();
-                                editor.apply();
-                                finish();
-                            }
-                        })
-                        .setNegativeButton(no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                            }
-                        }).show();
-            }
-        });
-        findViewById(R.id.statsButtonMore).setOnClickListener(new View.OnClickListener() {
+
+//        findViewById(R.id.deleteMyAccount).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                builder.setMessage(deleteMsg)
+//                        .setCancelable(true)
+//                        .setPositiveButton(yes, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                StringRequest stringRequest = new StringRequest(Request.Method.POST, MainLink + "DeleteAccount.php",
+//                                        response -> Toast.makeText(UserMoreActivity.this, "success", Toast.LENGTH_SHORT).show(),
+//                                        error -> Toast.makeText(UserMoreActivity.this, "error", Toast.LENGTH_SHORT).show()) {
+//                                    @Override
+//                                    protected Map<String, String> getParams() throws AuthFailureError {
+//                                        Map<String, String> parms = new HashMap<>();
+//                                        parms.put("something", shared_getData.getString("id", ""));
+//                                        return parms;
+//                                    }
+//                                };
+//                                requestQueue = Volley.newRequestQueue(UserMoreActivity.this);
+//                                requestQueue.add(stringRequest);
+//                                editor = shared_getData.edit();
+//                                editor.clear();
+//                                editor.apply();
+//                                finish();
+//                            }
+//                        })
+//                        .setNegativeButton(no, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                            }
+//                        }).show();
+//            }
+//        });
+
+        findViewById(R.id.statsButtonMore).setOnClickListener(new View.OnClickListener() { // إحصائيات
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(UserMoreActivity.this, StatsActivity.class));
             }
         });
-        findViewById(R.id.But_LogOut).setOnClickListener(new View.OnClickListener() {
+
+        findViewById(R.id.But_LogOut).setOnClickListener(new View.OnClickListener() { // زر الخروج
             @Override
             public void onClick(View view) {
                 builder.setMessage(msg)
@@ -130,8 +143,7 @@ public class UserMoreActivity extends AppCompatActivity {
                                 editor.clear();
                                 editor.apply();
                                 Toast.makeText(UserMoreActivity.this, "logout success", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(UserMoreActivity.this, MainActivity.class);
-                                startActivity(intent);
+                                startActivity(new Intent(UserMoreActivity.this, MainActivity.class));
                                 finish();
                             }
                         })
@@ -142,13 +154,15 @@ public class UserMoreActivity extends AppCompatActivity {
                         }).show();
             }
         });
-        findViewById(R.id.myArticles).setOnClickListener(new View.OnClickListener() {
+
+        findViewById(R.id.myArticles).setOnClickListener(new View.OnClickListener() { // مقالاتي
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(UserMoreActivity.this, MyArticlesActivity.class));
             }
         });
-        findViewById(R.id.langButtonMore).setOnClickListener(new View.OnClickListener() {
+
+        findViewById(R.id.langButtonMore).setOnClickListener(new View.OnClickListener() { // تغير اللغة
             @Override
             public void onClick(View view) {
                 if (langButtonTextMore.getText().toString().equals("ENGLISH")) {
@@ -165,20 +179,22 @@ public class UserMoreActivity extends AppCompatActivity {
                 startActivity(getIntent());
                 overridePendingTransition(0, 5);
             }
-
         });
-        findViewById(R.id.rankButtonMore).setOnClickListener(new View.OnClickListener() {
+
+        findViewById(R.id.rankButtonMore).setOnClickListener(new View.OnClickListener() { // زر التصنيف
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(UserMoreActivity.this, RankActivity.class));
             }
         });
+
         findViewById(R.id.accountButtonMore).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(UserMoreActivity.this, AccountActivity.class));
             }
         });
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationBar);
         bottomNavigationView.setSelectedItemId(R.id.more);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -210,12 +226,9 @@ public class UserMoreActivity extends AppCompatActivity {
         getEducationInfo("account_education");
         getGenderInfo("account_gender");
         getCountryInfo("account_country");
-    }
-    @Override
-    public void onBackPressed() {
-        return;
-    }
-    void setApplicationLocale(String locale) {
+    } // end onCreate
+
+    void setApplicationLocale(String locale) {//هذي الميثود اللي نستخدمها عشان نغير لغة التطبيق
         Resources resources = getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();
         Configuration config = resources.getConfiguration();
@@ -225,7 +238,7 @@ public class UserMoreActivity extends AppCompatActivity {
             config.locale = new Locale(locale.toLowerCase());
         }
         resources.updateConfiguration(config, dm);
-    }//هذي الميثود اللي نستخدمها عشان نغير لغة التطبيق
+    }
 
     void getEducationInfo(String something) {
         String url = MainActivity.MainLink + "stats.php?something=" + something;
@@ -347,4 +360,17 @@ public class UserMoreActivity extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {// وضع الصوره في الاطار الفريم
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == RESULT_OK) {
+            Uri uri = data.getData();
+            avatarImage.setImageURI(uri); // وضع الصورة في الفريم
+        }
+    }
+
+    @Override
+    public void onBackPressed() {// تعطيل زر الرجوع حق الجوال
+        return;
+    }
 }

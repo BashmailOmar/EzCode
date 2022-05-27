@@ -39,57 +39,61 @@ public class RankActivity extends AppCompatActivity {
     ListView listPlaces;
     ArrayList<ListPlaces> listUsers = new ArrayList<>();
     private SharedPreferences shared_getData;
-    private static String KEY_PREF_NAME = "userData";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rank);
+        String KEY_PREF_NAME = "userData";
         shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
+
         findViewById(R.id.backBtnRank).setOnClickListener(view -> {
             startActivity(new Intent(RankActivity.this, UserMoreActivity.class));
             url = null;
         });
-        if (url == null) {
+
+        if (url == null) {//نتحقق من الرابط ان لم تكن لديه قيمه ف نعطيه القيمه الظاهره امامك لجلب مراكز المستخدمين
             url = MainActivity.MainLink + "all_places.php";
-        }//نتحقق من الرابط ان لم تكن لديه قيمه ف نعطيه القيمه الظاهره امامك لجلب مراكز المستخدمين
+        }
+
         listPlaces = (ListView) findViewById(R.id.placesListRank);
-        findViewById(R.id.javaBtnInTopBarRank).setOnClickListener(view -> {
+
+        findViewById(R.id.javaBtnInTopBarRank).setOnClickListener(view -> { //عند الضغط على كلمة جافا نغير الرابط ونوع اللغه البرمجية ومن ثم نحدث الصفحه وتطلع معانا القائمة الجديده
             url = MainActivity.MainLink + "java_places.php";
             finish();
             overridePendingTransition(0, 0);
             startActivity(getIntent());
             overridePendingTransition(0, 0);
-        });//عند الضغط على كلمة جافا نغير الرابط ونوع اللغه البرمجية ومن ثم نحدث الصفحه وتطلع معانا القائمة الجديده
-        findViewById(R.id.pythonBtnInTopBarRank).setOnClickListener(view -> {
+        });
+
+        findViewById(R.id.pythonBtnInTopBarRank).setOnClickListener(view -> {//عند الضغط على كلمة بايثون نغير الرابط ونوع اللغه البرمجية ومن ثم نحدث الصفحه وتطلع معانا القائمه الجديده
             url = MainActivity.MainLink + "python_places.php";
             finish();
             overridePendingTransition(0, 0);
             startActivity(getIntent());
             overridePendingTransition(0, 0);
-        });//عند الضغط على كلمة بايثون نغير الرابط ونوع اللغه البرمجية ومن ثم نحدث الصفحه وتطلع معانا القائمه الجديده
-        findViewById(R.id.jsBtnInTopBarRank).setOnClickListener(view -> {
+        });
+
+        findViewById(R.id.jsBtnInTopBarRank).setOnClickListener(view -> {//عند الضغط على كلمة جافاسكريبت نغير الرابط ونوع اللغه البرمجية ومن ثم نحدث الصفحه وتطلع معانا القائمة الجديده
             url = MainActivity.MainLink + "js_places.php";
             finish();
             overridePendingTransition(0, 0);
             startActivity(getIntent());
             overridePendingTransition(0, 0);
-        });//عند الضغط على كلمة جافاسكريبت نغير الرابط ونوع اللغه البرمجية ومن ثم نحدث الصفحه وتطلع معانا القائمة الجديده
-        findViewById(R.id.allBtnInTopBarRank).setOnClickListener(view -> {
+        });
+
+        findViewById(R.id.allBtnInTopBarRank).setOnClickListener(view -> {//عند الضغط على كلمة الكل نغير الرابط ونوع اللغه البرمجية ومن ثم نحدث الصفحه وتطلع معانا القائمه الجديده
             url = MainActivity.MainLink + "all_places.php";
             finish();
             overridePendingTransition(0, 0);
             startActivity(getIntent());
             overridePendingTransition(0, 0);
-        });//عند الضغط على كلمة الكل نغير الرابط ونوع اللغه البرمجية ومن ثم نحدث الصفحه وتطلع معانا القائمه الجديده
+        });
+
         getAllUsers();
-    }
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(RankActivity.this, UserMoreActivity.class);
-        startActivity(intent);
-    }
-    public void getAllUsers() {
+    }// onCreate
+
+    public void getAllUsers() { // عرض تصنيف المستخدمين
         RequestQueue requestQueue;
         requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -168,5 +172,10 @@ public class RankActivity extends AppCompatActivity {
             Picasso.get().load(MainActivity.MainLink + "avatar/" + listA.get(position).img).into(img);
             return view;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(RankActivity.this, UserMoreActivity.class));
     }
 }

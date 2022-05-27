@@ -21,16 +21,16 @@ public class MainActivity extends AppCompatActivity {
     Button langButton;
     static String langStr = "";
     public static String MainLink = "https://ezcode404.000webhostapp.com/"; //192.168.8.100  //192.168.1.13
-    private SharedPreferences shared_getData;
     private SharedPreferences.Editor editor;
     public static final String SHARED_PREF_NAME = "userData";
+    public static final int pickImage  = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        shared_getData = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences shared_getData = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = shared_getData.edit();
         langStr = shared_getData.getString("language", "");
         CheckInternetConnection cic = new CheckInternetConnection(getApplicationContext());

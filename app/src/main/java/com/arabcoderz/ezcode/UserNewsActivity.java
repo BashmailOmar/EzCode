@@ -26,9 +26,8 @@ import java.util.List;
 
 public class UserNewsActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
     private RecyclerViewAdapterNews recyclerView_dAdapter;
-    private List<ListNews> listItems = new ArrayList<>();
+    private final List<ListNews> listItems = new ArrayList<>();
     private GridLayoutManager gridLayoutManager;
 
     @Override
@@ -65,7 +64,7 @@ public class UserNewsActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView = findViewById(R.id.news_RecyclerView);
+        RecyclerView recyclerView = findViewById(R.id.news_RecyclerView);
         recyclerView.setHasFixedSize(true);
 
         gridLayoutManager = new GridLayoutManager(this,1);
@@ -86,13 +85,8 @@ public class UserNewsActivity extends AppCompatActivity {
         });
         Get_All_News(0);
     }//end on Create
-    @Override
-    public void onBackPressed() {
-        return;
-    }
-    private void Get_All_News(int limit) {
 
-//contextViewCha  enterAnswer   checkBut
+    private void Get_All_News(int limit) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 MainActivity.MainLink + "news.php?limit=" + limit,
                 new Response.Listener<String>() {
@@ -126,108 +120,9 @@ public class UserNewsActivity extends AppCompatActivity {
         queue.add(stringRequest);
         stringRequest.setShouldCache(false);
     }
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
- <LinearLayout
-        android:id="@+id/LayoutContextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/topBarChallenges"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/contextViewCha"
-            android:textColor="@color/white"
-            android:textSize="22sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/LayoutAnswer"
-        android:layout_width="373dp"
-        android:layout_height="76dp"
-        android:layout_below="@+id/LayoutContextView"
-        android:layout_marginLeft="19dp"
-        android:background="@drawable/backgrund_solve_challenges"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/enterAnswer"
-            android:layout_width="380dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="#99C4C4C4"
-            android:gravity="center"
-            android:hint="Enter The Answer Here"
-            android:textColor="@color/white"
-            android:textColorHighlight="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="18sp" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/checkBut"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/LayoutAnswer"
-        android:layout_margin="40dp"
-        android:text="Send The Answer" />
-
-
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/LayoutText"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal">
-            <EditText
-                android:id="@+id/enterAnswer"
-                android:layout_width="310dp"
-                android:layout_height="55dp"
-                android:background="@drawable/custom_edittext_underline"
-                android:ems="20"
-                android:layout_marginLeft="5dp"
-                android:gravity="center"
-                android:hint="Enter The Answer Here"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="18sp" />
-
-            <Button
-                android:id="@+id/checkBut"
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext_underline"
-                android:text="Send" />
-        </LinearLayout>
- */

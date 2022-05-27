@@ -25,17 +25,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyArticlesActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
     private RecyclerViewAdapterArticles recyclerView_dAdapter;
     public List<ListArticle> listArticle = new ArrayList<>();
     private GridLayoutManager gridLayoutManager;
     private SharedPreferences shared_getData;
-    private static String KEY_PREF_NAME = "userData";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_articles);
+
+        String KEY_PREF_NAME = "userData";
         shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
 
         findViewById(R.id.backBtnMyArticles).setOnClickListener(new View.OnClickListener() {
@@ -45,7 +45,7 @@ public class MyArticlesActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView = findViewById(R.id.myArticlesRecyclerView);
+        RecyclerView recyclerView = findViewById(R.id.myArticlesRecyclerView);
         recyclerView.setHasFixedSize(true);
 
         gridLayoutManager = new GridLayoutManager(this, 1);
@@ -64,11 +64,7 @@ public class MyArticlesActivity extends AppCompatActivity {
         });
         getAllArticles(0);
     }
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(MyArticlesActivity.this, UserMoreActivity.class);
-        startActivity(intent);
-    }
+
     void getAllArticles(int limit) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
@@ -106,5 +102,9 @@ public class MyArticlesActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
         stringRequest.setShouldCache(false);
+    }
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(MyArticlesActivity.this, UserMoreActivity.class));
     }
 }

@@ -26,9 +26,8 @@ import java.util.List;
 
 public class UserChallengesActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
     private RecyclerViewAdapterChallenges viewAdapterChallenges;
-    private List<ListChallenges> List_Challeng = new ArrayList<>();
+    private final List<ListChallenges> List_Challeng = new ArrayList<>();
     private GridLayoutManager gridLayoutManager;
 
     @Override
@@ -63,7 +62,7 @@ public class UserChallengesActivity extends AppCompatActivity {
                 return false;
             }
         });
-        recyclerView = findViewById(R.id.m_RecyclerView_Challenge);
+        RecyclerView recyclerView = findViewById(R.id.m_RecyclerView_Challenge);
         recyclerView.setHasFixedSize(true);
         gridLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(gridLayoutManager);

@@ -120,12 +120,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:background="@color/content_color"
                     android:ems="18"
-                    android:textAlignment="center"
-                    android:background="@drawable/article_content_background"
                     android:gravity="center"
                     android:maxLines="50"
                     android:minLines="10"
+                    android:textAlignment="center"
                     android:textColor="@color/whito"
                     android:textSize="17sp" />
             </LinearLayout>

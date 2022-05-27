@@ -38,48 +38,55 @@ import java.io.ByteArrayOutputStream;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AccountActivity extends AppCompatActivity {
+
     private CircleImageView accountAvatar;
-    private TextView accountAge;
-    private Spinner accountEdu, accountGender, accountCountry;
-    private ArrayAdapter<CharSequence> eduAdapter;
-    private ArrayAdapter<CharSequence> countryAdapter;
-    private ArrayAdapter<CharSequence> genderAdapter;
     private AlertDialog.Builder builder;
     private EditText accountFullName, accountUsername, accountEmail, accountPassword;
-    private String msg, yes, no, newImg;
+
+    private String msg;
+    private String yes;
+    private String no;
+
+
     private SharedPreferences shared_getData;
-    private int pick = 100;
     private static final String KEY_PREF_NAME = "userData";
     private Button butUpdate;
-    private String full_user_name, user_name, user_email, user_password;
+    //نهاية تعريف القيمة  (end value definition)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
-        shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);
 
-        findViewById(R.id.backBtnAccount).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.backBtnAccount).setOnClickListener(new View.OnClickListener() { // الرجوع للخلف عن طريقة الزر
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(AccountActivity.this, UserMoreActivity.class));
             }
         });
 
+        shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
+
+        //نعريف الحقول و ربطه
         accountAvatar = findViewById(R.id.pick_avatar_account);
         accountFullName = findViewById(R.id.full_user_name_account);
         accountUsername = findViewById(R.id.user_name_account);
         accountEmail = findViewById(R.id.emil_account);
-        accountAge = findViewById(R.id.Select_date_account);
-        accountEdu = findViewById(R.id.eduSpinner_account);
-        accountGender = findViewById(R.id.genderSpinner_account);
-        accountCountry = findViewById(R.id.countrySpinner_account);
+
+        TextView accountAge = findViewById(R.id.Select_date_account);
+        Spinner accountEdu = findViewById(R.id.eduSpinner_account);
+        Spinner accountGender = findViewById(R.id.genderSpinner_account);
+        Spinner accountCountry = findViewById(R.id.countrySpinner_account);
+
         accountPassword = findViewById(R.id.password_account);
         builder = new AlertDialog.Builder(this);
-        eduAdapter = ArrayAdapter.createFromResource(this, R.array.edu_list, android.R.layout.simple_spinner_item);
-        countryAdapter = ArrayAdapter.createFromResource(this, R.array.country_list, android.R.layout.simple_spinner_item);
-        genderAdapter = ArrayAdapter.createFromResource(this, R.array.gender_list, android.R.layout.simple_spinner_item);
 
+        // اضافة شرح
+        ArrayAdapter<CharSequence> eduAdapter = ArrayAdapter.createFromResource(this, R.array.edu_list, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> countryAdapter = ArrayAdapter.createFromResource(this, R.array.country_list, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this, R.array.gender_list, android.R.layout.simple_spinner_item);
+
+        // اضافة شرح
         eduAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -88,6 +95,7 @@ public class AccountActivity extends AppCompatActivity {
         accountCountry.setAdapter(countryAdapter);
         accountGender.setAdapter(genderAdapter);
 
+        // شرط التحقق من لغة التطبيق
         if (MainActivity.langStr.equals("ar")) {
             msg = "هل تريد تحديث الملف الشخصي الخاص بك؟";
             yes = "نعم";
@@ -98,17 +106,15 @@ public class AccountActivity extends AppCompatActivity {
             no = "No";
         }
 
-        accountAvatar.setOnClickListener(new View.OnClickListener() {
+        accountAvatar.setOnClickListener(new View.OnClickListener() { // التحقق من اعطاء صلحيت الوصول الى الصور
             @Override
             public void onClick(View view) {
                 permission_photo();
             }
         });
-        shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
-        String a = (shared_getData.getString("imgCode", "")); // طريقة استدعاء القيمة عن طريقة المفتاح
 
         butUpdate = findViewById(R.id.updateAccountInfo);
-        butUpdate.setOnClickListener(new View.OnClickListener() {
+        butUpdate.setOnClickListener(new View.OnClickListener() { // زر تحديث البيانات
             @Override
             public void onClick(View view) {
                 builder.setMessage(msg)
@@ -134,19 +140,40 @@ public class AccountActivity extends AppCompatActivity {
         accountAge.setText(shared_getData.getString("birthday", ""));
     }// end OnCreate
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(AccountActivity.this, UserMoreActivity.class);
-        startActivity(intent);
-    }
+    public void permission_photo() {//طلب اذن الوصول الى الصور
+        if (ActivityCompat.checkSelfPermission(AccountActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) { //هل الصلاحية تم الحصول عليها ام لا
+            String[] Permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}; // الصلاحية لم يتم الحصول عليها
+            ActivityCompat.requestPermissions(AccountActivity.this, Permissions, 0);
+        } else {
+            photo_viewer();
+        }
+    }//end permission_photo
 
-    private void update() {
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(AccountActivity.this, "تم اعطاء الصلاحية", Toast.LENGTH_LONG).show();
+                    photo_viewer();
+                } else {
+                    Toast.makeText(AccountActivity.this, "لا توجد صلاحية الدخول للصور", Toast.LENGTH_LONG).show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }// end onRequestPermissionsResult
+
+    private void update() { // تحديث البيانات
         String newPassword = accountPassword.getText().toString();
-        full_user_name = accountFullName.getText().toString();
-        user_name = accountUsername.getText().toString().toLowerCase().trim();
-        user_email = accountEmail.getText().toString().trim();
+        String full_user_name = accountFullName.getText().toString();
+        String user_name = accountUsername.getText().toString().toLowerCase().trim();
+        String user_email = accountEmail.getText().toString().trim();
         String fullnameMsg, usernameMsg, emailMsg, passwordMsg, successUpdate, failUpdate;
-        if (shared_getData.getString("language", "").equals("ar")) {
+
+        if (shared_getData.getString("language", "").equals("ar")) { // التحقق من لغة التطبيق
             fullnameMsg = "الرجاء كتابة اسمك الكامل";
             usernameMsg = "اسم المستخدم يجب ان يتكون من 4 احرف على الاقل.\nايضا, يجب ان لايحتوي على :\n= + / | \" \' : ; \\";
             emailMsg = "الرجاء كتابة البريد الالكتروني بشكل صحيح";
@@ -162,6 +189,7 @@ public class AccountActivity extends AppCompatActivity {
             failUpdate = "An error occurred while updating the data";
         }
 
+        // التحقق من تحقيق الشروط المطلوبه
         if (full_user_name.isEmpty()) {
             new RegisterActivity().showError(accountFullName, fullnameMsg);
         } else if (user_name.isEmpty() || user_name.length() < 3 || user_name.contains("!") || user_name.contains("@") || user_name.contains("#") || user_name.contains("$") || user_name.contains("%") || user_name.contains("^") || user_name.contains("&") || user_name.contains("*") || user_name.contains("(") || user_name.contains(")") || user_name.contains("=") || user_name.contains("+") || user_name.contains("/") || user_name.contains("|") || user_name.contains("\"") || user_name.contains("\'") || user_name.contains(";") || user_name.contains(":") || user_name.contains("\\")) {
@@ -169,23 +197,23 @@ public class AccountActivity extends AppCompatActivity {
         } else if (user_email.isEmpty() || !user_email.contains("@") || !user_email.contains(".")) {
             new RegisterActivity().showError(accountEmail, emailMsg);
         } else {
-            if (shared_getData.getString("password", "").equals(newPassword)) {
-                butUpdate.setEnabled(false);
-                Bitmap bitmap = ((BitmapDrawable) accountAvatar.getDrawable()).getBitmap(); //يخذ الصوره الموجوده داخل image_View
+            if (shared_getData.getString("password", "").equals(newPassword)) { // اذا كان يساوي نفس كلة السر يتم ارسال البيانات
+                butUpdate.setEnabled(false); // اغلاق الزر التحديث
+                Bitmap bitmap = ((BitmapDrawable) accountAvatar.getDrawable()).getBitmap(); //يخذ الصوره الموجوده داخل accountAvatar
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(); // خاص بحفظ البيانات في نظام الجافا
-                bitmap.compress(Bitmap.CompressFormat.JPEG, pick, byteArrayOutputStream); // عمليت ضفط اقدر اتحكم في جودة الصور عن طريق تغير رقم 100 اذا قل الرقم كانت الصورة سيئة
-                newImg = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT); // تحويل الصوره الى نظام Base64 و String
+                bitmap.compress(Bitmap.CompressFormat.JPEG,MainActivity.pickImage , byteArrayOutputStream); // عمليت ضفط اقدر اتحكم في جودة الصور عن طريق تغير رقم pick اذا قل الرقم كانت الصورة سيئة
+                String newImg = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT); // تحويل الصوره الى نظام Base64 و String
 
-                Response.Listener<String> responseLisener = new Response.Listener<String>() {
+                Response.Listener<String> responseLisener = new Response.Listener<String>() { // ارسال البيانات عن طريق جيسون و التحقق اذا تم العملة التحديث او لا
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONArray jsonArray = new JSONArray(response);
                             JSONObject jsonObject = jsonArray.getJSONObject(0);
                             String success = jsonObject.getString("success");
-                            if (success.contains("Upd_ok")) {
+                            if (success.contains("Upd_ok")) { // تم عملية التحديث
                                 Toast.makeText(AccountActivity.this, successUpdate, Toast.LENGTH_LONG).show();
-                            } else if (success.contains("Error")) {
+                            } else if (success.contains("Error")) {// لم تتم عملية التحديث
                                 Toast.makeText(AccountActivity.this, failUpdate, Toast.LENGTH_LONG).show();
                             }
                         } catch (Exception e) {
@@ -193,67 +221,35 @@ public class AccountActivity extends AppCompatActivity {
                         }
                     }
                 };
-
-                shared_getData = getSharedPreferences(KEY_PREF_NAME, Context.MODE_PRIVATE);// اسم الملف الذي يحتوي المعلومات (KEY_PREF_NAME)
-                String nameImg = (shared_getData.getString("imgCode", "")); // طريقة استدعاء القيمة عن طريقة المفتاح
-
-                SendDateUpdate dataSend = new SendDateUpdate(newImg, nameImg, responseLisener); // ارسل البيانات
+                SendDateUpdate dataSend = new SendDateUpdate(newImg, shared_getData.getString("imgCode", ""), responseLisener); // ارسل البيانات
                 RequestQueue queue = Volley.newRequestQueue(AccountActivity.this);
                 queue.add(dataSend);
-                Intent intent = new Intent(AccountActivity.this, UserMoreActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(AccountActivity.this, UserMoreActivity.class));
             } else {
-                new RegisterActivity().showError(accountPassword, passwordMsg);
-                butUpdate.setEnabled(true);
+                new RegisterActivity().showError(accountPassword, passwordMsg); // اظهار رسالة الحطأ
+                butUpdate.setEnabled(true); // اعادة تشغيل الزر
             }
         }
-    }
+    }// end update
 
-    //طلب اذن الوصول الى الصور
-    public void permission_photo() {
-        //هل الصلاحية تم الحصول عليها ام لا
-        if (ActivityCompat.checkSelfPermission(AccountActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            // الصلاحية لم يتم الحصول عليها
-            String[] Permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
-            ActivityCompat.requestPermissions(AccountActivity.this, Permissions, 0);
-        } else {
-            photo_viewer();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        switch (requestCode) {
-            case 1:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(AccountActivity.this, "تم اعطاء الصلاحية", Toast.LENGTH_LONG).show();
-                    photo_viewer();
-                } else {
-                    Toast.makeText(AccountActivity.this, "لا توجد صلاحية الدخول للصور", Toast.LENGTH_LONG).show();
-                }
-                break;
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
-
-    // طريقة فتح مستعرض الصور
-    public void photo_viewer() {
+    public void photo_viewer() {// طريقة فتح مستعرض الصور
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "title"), pick);
-    }
+        startActivityForResult(Intent.createChooser(intent, "title"), MainActivity.pickImage);
+    }//end photo_viewer
 
-    // وضع الصوره في الاطار الفريم
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) { // وضع الصوره في الاطار الفريم
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100 && resultCode == RESULT_OK) {
             Uri uri = data.getData();
             accountAvatar.setImageURI(uri); // وضع الصورة في الفريم
         }
-    }
+    }//end onActivityResult
+
+    @Override
+    public void onBackPressed() { // زر الرجوع من الجوال
+        startActivity(new Intent(AccountActivity.this, UserMoreActivity.class));
+    }//end onBackPressed
 }
