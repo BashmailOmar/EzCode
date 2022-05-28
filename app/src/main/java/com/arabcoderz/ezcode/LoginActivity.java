@@ -1,6 +1,7 @@
 package com.arabcoderz.ezcode;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -45,19 +46,23 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.backBtnLogin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
+                overridePendingTransition(0, 0);
+//                startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
         });
         findViewById(R.id.dontHaveAccount).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                overridePendingTransition(0, 0);
             }
         });
         findViewById(R.id.forgetPassword).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                overridePendingTransition(0, 0);
             }
         });
 

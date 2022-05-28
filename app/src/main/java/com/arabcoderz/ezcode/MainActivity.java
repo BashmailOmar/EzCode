@@ -33,10 +33,12 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences shared_getData = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = shared_getData.edit();
         langStr = shared_getData.getString("language", "");
-        CheckInternetConnection cic = new CheckInternetConnection(getApplicationContext());
-        if (!cic.isConnectingToInternet()) {
+
+
+        if (!new CheckInternetConnection(getApplicationContext()).isConnectingToInternet()) {
             Toast.makeText(MainActivity.this, "Not Connected to Internet", Toast.LENGTH_SHORT).show();
         }//هنا استدعينا الميثود اللي تحقق من اتصال التطبيق بالانترنت وراح تظهر رساله اذا لم يكن هنالك اتصال بالانترنت
+
         findViewById(R.id.loginBtnMainPage).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("language", langStr);
                 editor.apply();
                 finish();
-                overridePendingTransition(5, 0);
+                overridePendingTransition(0, 0);
                 startActivity(getIntent());
                 overridePendingTransition(0, 5);
             }//هنا راح نغير اللغه بعدين نسوي اعادة انشاء الاكتفتي عشان يبان التغيير اللي سويناه حق اللغه

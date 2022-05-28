@@ -108,10 +108,10 @@ public class StatsActivity extends AppCompatActivity {
         return;
     }
     public void getEduInfo() {
-        int edu1 = Integer.parseInt(shared_getData.getString("less_than_secondary", ""));
-        int edu2 = Integer.parseInt(shared_getData.getString("secondary", ""));
-        int edu3 = Integer.parseInt(shared_getData.getString("intermediate_diploma", ""));
-        int edu4 = Integer.parseInt(shared_getData.getString("bachelor_and_above", ""));
+        int edu1 = Integer.parseInt(shared_getData.getString("less_than_secondary", "1"));
+        int edu2 = Integer.parseInt(shared_getData.getString("secondary", "1"));
+        int edu3 = Integer.parseInt(shared_getData.getString("intermediate_diploma", "1"));
+        int edu4 = Integer.parseInt(shared_getData.getString("bachelor_and_above", "1"));
 
         ArrayList<PieEntry> PieChart = new ArrayList<>();
         PieChart.add(new PieEntry(edu1, eduLv1));

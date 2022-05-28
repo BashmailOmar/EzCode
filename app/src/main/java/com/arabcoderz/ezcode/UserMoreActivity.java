@@ -52,7 +52,7 @@ public class UserMoreActivity extends AppCompatActivity {
     TextView langButtonTextMore, fullnameTextView, usernameTextView;
     CircleImageView avatarImage;
     private AlertDialog.Builder builder;
-    private String msg, deleteMsg, yes, no;
+    private String msg, deleteMsg, yes, no, logout, langMore;
 
     RequestQueue requestQueue;
 
@@ -83,11 +83,13 @@ public class UserMoreActivity extends AppCompatActivity {
             msg = "هل انت متأكد انك تريد تسجيل الخروج؟";
             yes = "نعم";
             no = "لا";
+            logout = "تم تسجيل الخروج بنجاح";
         } else {
             deleteMsg = "Are you sure you want to delete your account?";
             msg = "Are you sure you want to log out?";
             yes = "Yes";
             no = "No";
+            logout = "logout success";
         }
 
 //        findViewById(R.id.deleteMyAccount).setOnClickListener(new View.OnClickListener() {
@@ -139,10 +141,13 @@ public class UserMoreActivity extends AppCompatActivity {
                         .setPositiveButton(yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                langMore = MainActivity.langStr;
                                 editor = shared_getData.edit();
                                 editor.clear();
                                 editor.apply();
-                                Toast.makeText(UserMoreActivity.this, "logout success", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(UserMoreActivity.this, logout, Toast.LENGTH_SHORT).show();
+                                editor.putString("language", langMore);
+                                editor.apply();
                                 startActivity(new Intent(UserMoreActivity.this, MainActivity.class));
                                 finish();
                             }

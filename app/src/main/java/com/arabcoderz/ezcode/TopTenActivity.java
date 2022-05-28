@@ -30,7 +30,6 @@ public class TopTenActivity extends AppCompatActivity {
     static String url;
     //تم وضعها ستاتك لكي نستطيع تثبيت تغير القيمه بعد تحديث الصفحه
     public String place;
-    RequestQueue requestQueue;
     ListView listPlaces;
     ArrayList<ListPlaces> listUsers = new ArrayList<>();
 
@@ -44,7 +43,8 @@ public class TopTenActivity extends AppCompatActivity {
         //نتحقق من نوع اللغه ان لم تكن لديها قيمه ف نعطيها القيمه الظاهره امامك لجلب مراكز المستخدمين
         listPlaces = (ListView) findViewById(R.id.placesListTopTen);
         findViewById(R.id.backBtnTopTen).setOnClickListener(view -> {
-            startActivity(new Intent(TopTenActivity.this, MainActivity.class));
+            finish();
+            overridePendingTransition(0, 0);
             url = null;
         });
         findViewById(R.id.javaBtnInTopBar).setOnClickListener(view -> {
@@ -103,7 +103,6 @@ public class TopTenActivity extends AppCompatActivity {
                 }, error -> Log.e("VOLLEY", "ERROR"));
         requestQueue.add(jsonObjectRequest);
     }
-
     public void listAllItem() {
         listAdpter lA = new listAdpter(listUsers);
         listPlaces.setAdapter(lA);
