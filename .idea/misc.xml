@@ -12,6 +12,7 @@
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/backgrund_articles_add.xml" value="0.2505" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/bg_round.xml" value="0.1975" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/coustom_top_bar.xml" value="0.2618421052631579" />
+        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/dark_btn.xml" value="0.244" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/empty_field.xml" value="0.221" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/ic_article.xml" value="0.2425" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.194" />
@@ -50,6 +51,7 @@
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_account.xml" value="0.33" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_add_articles.xml" value="0.33" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_article_content.xml" value="0.33" />
+        <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_change_password.xml" value="0.3984375" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_edit_article_content.xml" value="0.3269230769230769" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_login.xml" value="0.3269230769230769" />
         <entry key="..\:/Users/Omar/AndroidStudioProjects/EzCode/app/src/main/res/layout/activity_main.xml" value="0.3227848101265823" />

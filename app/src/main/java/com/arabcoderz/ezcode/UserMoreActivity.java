@@ -52,7 +52,7 @@ public class UserMoreActivity extends AppCompatActivity {
     TextView langButtonTextMore, fullnameTextView, usernameTextView;
     CircleImageView avatarImage;
     private AlertDialog.Builder builder;
-    private String msg, deleteMsg, yes, no, logout, langMore;
+    String soon,msg, yes, no, logout, langMore;
 
     RequestQueue requestQueue;
 
@@ -79,19 +79,27 @@ public class UserMoreActivity extends AppCompatActivity {
         langButtonTextMore = findViewById(R.id.langButtonTextMore);
 
         if (MainActivity.langStr.equals("ar")) {
-            deleteMsg = "هل انت متأكد انك تريد حذف الحساب ؟";
+//            deleteMsg = "هل انت متأكد انك تريد حذف الحساب ؟";
             msg = "هل انت متأكد انك تريد تسجيل الخروج؟";
             yes = "نعم";
             no = "لا";
             logout = "تم تسجيل الخروج بنجاح";
+            soon="ستتم اتاحة هذه الخدمة قريبا";
         } else {
-            deleteMsg = "Are you sure you want to delete your account?";
+//            deleteMsg = "Are you sure you want to delete your account?";
             msg = "Are you sure you want to log out?";
             yes = "Yes";
             no = "No";
             logout = "logout success";
+            soon="This service will be available soon";
         }
-
+        findViewById(R.id.deleteMyAccount).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                startActivity(new Intent(AccountActivity.this, ChangePasswordActivity.class));
+                Toast.makeText(UserMoreActivity.this, soon, Toast.LENGTH_SHORT).show();
+            }
+        });
 //        findViewById(R.id.deleteMyAccount).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {

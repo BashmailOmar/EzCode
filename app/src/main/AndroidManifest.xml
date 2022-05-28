@@ -17,6 +17,9 @@
         android:theme="@style/Theme.EzCode"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".EditArticleContent"
             android:exported="false" />
         <activity

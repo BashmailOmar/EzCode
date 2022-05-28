@@ -57,6 +57,19 @@ public class AccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+        String soon;
+        if (MainActivity.langStr.equals("ar")){
+            soon="ستتم اتاحة هذه الخدمة قريبا";
+        }else{
+            soon="This service will be available soon";
+        }
+        findViewById(R.id.changePasswordMore).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                startActivity(new Intent(AccountActivity.this, ChangePasswordActivity.class));
+                Toast.makeText(AccountActivity.this, soon, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         findViewById(R.id.backBtnAccount).setOnClickListener(new View.OnClickListener() { // الرجوع للخلف عن طريقة الزر
             @Override
@@ -201,7 +214,7 @@ public class AccountActivity extends AppCompatActivity {
                 butUpdate.setEnabled(false); // اغلاق الزر التحديث
                 Bitmap bitmap = ((BitmapDrawable) accountAvatar.getDrawable()).getBitmap(); //يخذ الصوره الموجوده داخل accountAvatar
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(); // خاص بحفظ البيانات في نظام الجافا
-                bitmap.compress(Bitmap.CompressFormat.JPEG,MainActivity.pickImage , byteArrayOutputStream); // عمليت ضفط اقدر اتحكم في جودة الصور عن طريق تغير رقم pick اذا قل الرقم كانت الصورة سيئة
+                bitmap.compress(Bitmap.CompressFormat.JPEG, MainActivity.pickImage, byteArrayOutputStream); // عمليت ضفط اقدر اتحكم في جودة الصور عن طريق تغير رقم pick اذا قل الرقم كانت الصورة سيئة
                 String newImg = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT); // تحويل الصوره الى نظام Base64 و String
 
                 Response.Listener<String> responseLisener = new Response.Listener<String>() { // ارسال البيانات عن طريق جيسون و التحقق اذا تم العملة التحديث او لا

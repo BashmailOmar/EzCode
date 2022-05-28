@@ -100,5 +100,6 @@
     <string name="send">Send</string>
     <string name="write_answer">Write your answer</string>
     <string name="delete_my_account">Delete Account</string>
+    <string name="change_password">Change Password</string>
 
 </resources>

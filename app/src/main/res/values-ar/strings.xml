@@ -98,5 +98,6 @@
     <string name="send">إرسال</string>
     <string name="write_answer">إكتب اجابتك</string>
     <string name="delete_my_account">حذف الحساب</string>
+    <string name="change_password">تغيير كلمة المرور</string>
 
 </resources>
