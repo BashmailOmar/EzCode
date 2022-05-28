@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="Created with\n\t\t\t\t Love"
+        android:text="Created by \nX7H-Team"
         android:textColor="@color/dark_blue"
         android:textSize="18sp"
         android:textStyle="bold"
