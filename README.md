@@ -2,7 +2,7 @@
   Hello everyone welcome to EzCode readme
   
   
-  You can follw us:
+  You can follow us:
   -- BashmailOmar
   -- Nitrous1320
 
